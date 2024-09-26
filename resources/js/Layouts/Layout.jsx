@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
 import Logo from "./logo/CBILogoWhite";
-
+import Dropdown from "../Pages/Home/Components/Dropdown";
 const Layout = ({ children, categories }) => {
     return (
         <div className="min-h-screen flex flex-col">
@@ -34,9 +34,13 @@ const Layout = ({ children, categories }) => {
                     </div>
                     <div className="hidden md:flex space-x-4">
                         {categories.filter(category => category.is_visible_on_nav).map((category) => (
-                            <Link key={category.id} href={`/category/${category.slug}`} className="text-white hover:text-gray-400">
-                                {category.name}
-                            </Link>
+                            category.children && category.children.length > 0 ? (
+                                <Dropdown key={category.id} category={category} />
+                            ) : (
+                                <Link key={category.id} href={`/category/${category.slug}`} className="text-white hover:text-gray-400">
+                                    {category.name}
+                                </Link>
+                            )
                         ))}
                     </div>
                 </div>

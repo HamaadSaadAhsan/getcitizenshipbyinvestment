@@ -12,7 +12,7 @@ class HomeController extends Controller
     // Index Page
     public function index(){
 
-        $categories = Category::all();
+        $categories = Category::with('children')->get();
         $featuredNews = News::where('is_featured', true)->first();
         $topStories = News::where('is_featured', false)->inRandomOrder()->take(5)->get();
 
