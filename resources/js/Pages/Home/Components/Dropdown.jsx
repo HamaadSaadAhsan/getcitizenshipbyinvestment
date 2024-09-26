@@ -10,7 +10,7 @@ const Dropdown = ({ category }) => {
 
     return (
         <div className="relative">
-            <button onClick={toggleDropdown} className="flex items-center">
+            <button onClick={toggleDropdown} className="flex items-center p-4">
                 <span className="mr-2">{category.name}</span>
                 <svg
                     className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
@@ -32,7 +32,9 @@ const Dropdown = ({ category }) => {
                     <Link
                         key={child.id}
                         href={`/category/${child.slug}`}
-                        className="block px-4 py-2 text-gray-800 hover:bg-gray-200 transition duration-200"
+                        className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 transition duration-200 ${
+                            window.location.pathname === `/category/${child.category}` ? 'border-b-4 border-black' : ''
+                        }`}
                     >
                         {child.name}
                     </Link>
