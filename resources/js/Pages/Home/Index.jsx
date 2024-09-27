@@ -2,18 +2,16 @@ import React from "react";
 import { Head, Link } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
 import Dropdown from "./Components/Dropdown";
+import { description } from './../Auth/Login';
 
-const Home = ({ featuredNews, topStories, categories }) => {
+const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
     return (
         <Layout categories={categories}>
-
-            <Head title="Home"/>
+            <Head title="Home" />
 
             <div className="px-6">
                 <article className="block">
-                    <section
-                        class="sc-2448c165-1 gvnjGp"
-                    >
+                    <section class="sc-2448c165-1 gvnjGp">
                         <div
                             data-testid="vermont-section"
                             class="sc-2448c165-2 eMVRpx"
@@ -30,192 +28,67 @@ const Home = ({ featuredNews, topStories, categories }) => {
                                         data-testid="first-grid"
                                         class="sc-93223220-0 sc-e70150c3-1 gPmTJa fNRFwC"
                                     >
-                                        <div data-testid="edinburgh-card">
-                                            <div data-testid="anchor-inner-wrapper">
-                                                <a
-                                                    href="https://www.bbc.com/news/live/cwyl3prj39wt"
-                                                    data-testid="external-anchor"
-                                                    target="_self"
-                                                    class="sc-2e6baa30-0 gILusN"
-                                                >
-                                                    <div
-                                                        data-testid="edinburgh-live"
-                                                        class="sc-b8778340-0 kFuHJG"
+                                        {citizenshipPosts.map((post) => (
+                                            <div data-testid="edinburgh-card">
+                                                <div data-testid="anchor-inner-wrapper">
+                                                    <a
+                                                        href=""
+                                                        data-testid="external-anchor"
+                                                        target="_self"
+                                                        class="sc-2e6baa30-0 gILusN"
                                                     >
                                                         <div
-                                                            data-testid="card-media-wrapper"
-                                                            class="sc-b8778340-1 jvzsLx"
+                                                            data-testid="edinburgh-live"
+                                                            class="sc-b8778340-0 kFuHJG"
                                                         >
                                                             <div
-                                                                data-testid="card-media"
-                                                                class="sc-b8778340-2 kUyIkJ"
+                                                                data-testid="card-media-wrapper"
+                                                                class="sc-b8778340-1 jvzsLx"
                                                             >
-                                                                <div class="sc-a34861b-1 jxzoZC">
-                                                                    <img
-                                                                        sizes="96vw"
-                                                                        srcset="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 240w,https://ichef.bbci.co.uk/ace/standard/320/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 320w,https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 480w,https://ichef.bbci.co.uk/ace/standard/640/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 640w,https://ichef.bbci.co.uk/ace/standard/800/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 800w,https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 1024w,https://ichef.bbci.co.uk/ace/standard/1536/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 1536w"
-                                                                        src="https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp"
-                                                                        loading="lazy"
-                                                                        alt="New York City Mayor Eric Adams speaks to the press outside his official residence Gracie Mansion"
-                                                                        class="sc-a34861b-0 efFcac"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            data-testid="card-text-wrapper"
-                                                            class="sc-b8778340-3 gxEarx"
-                                                        >
-                                                            <div class="sc-4fedabc7-1 kbvCmj">
-                                                                <div class="sc-4fedabc7-0 kZtaAl">
-                                                                    <div class="sc-4d9540e7-1 sc-4fedabc7-2 kjJkQD cXvgVW">
-                                                                        <svg
-                                                                            width="32"
-                                                                            height="32"
-                                                                            viewBox="0 0 32 32"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            data-testid="live-icon-svg-styled"
-                                                                            class="sc-d00e3bf7-0 exnLpe sc-1097f7fe-0 jmthjj"
-                                                                        >
-                                                                            <path
-                                                                                id="outer"
-                                                                                d="M13.3922 31.3913C6.25751 30.2611 0.846472 24.5392 0.0835577 17.3057C-0.410924 12.714 1.3127 7.95289 4.63278 4.61868C12.2761 -3.01046 25.1467 -0.891255 29.922 8.78645C32.6204 14.2257 31.9988 20.5268 28.2972 25.4293C24.8924 29.922 19.0151 32.2672 13.3922 31.3913ZM19.0858 28.6505C20.329 28.3255 22.2363 27.4778 23.2394 26.7856C24.2142 26.1215 25.8955 24.4686 26.616 23.4655C27.4213 22.3352 28.2972 20.4986 28.6787 19.0999C29.1167 17.4611 29.1167 14.0986 28.6787 12.4597C28.0288 10.0721 26.7573 7.96702 24.963 6.22927C23.6774 5.01426 22.9003 4.4774 21.3745 3.75687C19.3683 2.81029 18.3087 2.59837 15.7939 2.59837C13.2791 2.59837 12.2195 2.81029 10.2134 3.75687C8.68753 4.4774 7.91049 5.01426 6.62484 6.22927C4.83058 7.96702 3.57318 10.0721 2.90916 12.488C2.4712 14.0703 2.4712 17.4893 2.90916 19.0717C3.57318 21.4876 4.83058 23.5926 6.62484 25.3304C8.15067 26.7856 9.35155 27.5344 11.386 28.2973C13.5193 29.1026 16.7829 29.258 19.0858 28.6505Z"
-                                                                            ></path>
-                                                                            <path
-                                                                                id="inner"
-                                                                                d="M13.8318 24.0437C10.5541 23.2949 7.94042 20.6671 7.24815 17.3894C6.42872 13.5042 8.40665 9.57661 12.0658 7.83886C16.2901 5.84681 21.4327 7.72584 23.4389 12.0066C25.6287 16.683 23.1422 22.2918 18.1974 23.8459C16.9965 24.2274 15.0186 24.3122 13.8318 24.0437Z"
-                                                                            ></path>
-                                                                        </svg>
-                                                                        <span class="sc-4fedabc7-4 hjkPtM">
-                                                                            LIVE
-                                                                        </span>
-                                                                    </div>
-                                                                    <h2
-                                                                        data-testid="card-headline"
-                                                                        class="sc-4fedabc7-3 zTZri"
-                                                                    >
-                                                                        NYC
-                                                                        Mayor
-                                                                        Eric
-                                                                        Adams
-                                                                        charged
-                                                                        with
-                                                                        wire
-                                                                        fraud
-                                                                        and
-                                                                        bribery
-                                                                    </h2>
-                                                                </div>
-                                                            </div>
-                                                            <p
-                                                                data-testid="card-description"
-                                                                class="sc-b8778340-4 kYtujW"
-                                                            >
-                                                                "I look forward
-                                                                to defending
-                                                                myself," Adams
-                                                                says after he's
-                                                                charged with
-                                                                five counts,
-                                                                including
-                                                                soliciting
-                                                                foreign campaign
-                                                                donations.
-                                                            </p>
-                                                            <div class="sc-4e537b1-0 gtLVrL"></div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div data-testid="edinburgh-card">
-                                            <div data-testid="anchor-inner-wrapper">
-                                                <a
-                                                    href="/news/articles/c80rkv0k4j8o"
-                                                    data-testid="internal-link"
-                                                    class="sc-2e6baa30-0 gILusN"
-                                                >
-                                                    <div
-                                                        data-testid="edinburgh-article"
-                                                        class="sc-b8778340-0 huzxDy"
-                                                    >
-                                                        <div
-                                                            data-testid="card-media-wrapper"
-                                                            class="sc-b8778340-1 jvzsLx"
-                                                        >
-                                                            <div
-                                                                data-testid="card-media"
-                                                                class="sc-b8778340-2 kUyIkJ"
-                                                            >
-                                                                <div class="sc-a34861b-1 jxzoZC">
-                                                                    <img
-                                                                        sizes="96vw"
-                                                                        srcset="https://ichef.bbci.co.uk/news/240/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 240w,https://ichef.bbci.co.uk/news/320/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 320w,https://ichef.bbci.co.uk/news/480/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 480w,https://ichef.bbci.co.uk/news/640/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 640w,https://ichef.bbci.co.uk/news/800/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 800w,https://ichef.bbci.co.uk/news/1024/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 1024w,https://ichef.bbci.co.uk/news/1536/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 1536w"
-                                                                        src="https://ichef.bbci.co.uk/news/480/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp"
-                                                                        loading="lazy"
-                                                                        alt="President Volodymyr Zelensky signs ammunition while visiting the Scranton Army Ammunition Plant (SCAAP) in Scranton, Pennsylvania, USA, on 23 September 2024"
-                                                                        class="sc-a34861b-0 efFcac"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            data-testid="card-text-wrapper"
-                                                            class="sc-b8778340-3 gxEarx"
-                                                        >
-                                                            <div class="sc-4fedabc7-1 kbvCmj">
-                                                                <div class="sc-4fedabc7-0 kZtaAl">
-                                                                    <h2
-                                                                        data-testid="card-headline"
-                                                                        class="sc-4fedabc7-3 zTZri"
-                                                                    >
-                                                                        Escalating
-                                                                        Trump
-                                                                        row
-                                                                        looms
-                                                                        over
-                                                                        Zelensky's
-                                                                        US visit
-                                                                    </h2>
-                                                                </div>
-                                                            </div>
-                                                            <p
-                                                                data-testid="card-description"
-                                                                class="sc-b8778340-4 kYtujW"
-                                                            >
-                                                                Republicans
-                                                                accused Zelensky
-                                                                of election
-                                                                interference,
-                                                                after he visited
-                                                                an arms factory
-                                                                with top
-                                                                Democrats.
-                                                            </p>
-                                                            <div class="sc-4e537b1-0 gtLVrL">
-                                                                <span
-                                                                    data-testid="card-metadata-lastupdated"
-                                                                    class="sc-4e537b1-1 dsUUMv"
-                                                                >
-                                                                    20 hrs ago
-                                                                </span>
                                                                 <div
-                                                                    data-testid="card-metadata-separator"
-                                                                    class="sc-4e537b1-3 lmDmEx"
-                                                                ></div>
-                                                                <span
-                                                                    data-testid="card-metadata-tag"
-                                                                    class="sc-4e537b1-2 eRsxHt"
+                                                                    data-testid="card-media"
+                                                                    class="sc-b8778340-2 kUyIkJ"
                                                                 >
-                                                                    US &amp;
-                                                                    Canada
-                                                                </span>
+                                                                    <div class="sc-a34861b-1 jxzoZC">
+                                                                        <img
+                                                                            sizes="96vw"
+                                                                            srcset={route('storage.images', post.image) + ' 240w,'+ route('storage.images', post.image) + ' 320w,'+ route('storage.images', post.image) + ' 480w,'+ route('storage.images', post.image) + ' 640w,'+ route('storage.images', post.image) + ' 800w,'+ route('storage.images', post.image) + ' 1024w,'+ route('storage.images', post.image) + ' 1536'}
+                                                                            src={route('storage.images', post.image)}
+                                                                            loading="lazy"
+                                                                            alt={post.title}
+                                                                            class="sc-a34861b-0 efFcac"
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                data-testid="card-text-wrapper"
+                                                                class="sc-b8778340-3 gxEarx"
+                                                            >
+                                                                <div class="sc-4fedabc7-1 kbvCmj">
+                                                                    <div class="sc-4fedabc7-0 kZtaAl">
+
+                                                                        <h2
+                                                                            data-testid="card-headline"
+                                                                            class="sc-4fedabc7-3 zTZri"
+                                                                        >
+                                                                            {post.title}
+                                                                        </h2>
+                                                                    </div>
+                                                                </div>
+                                                                <p
+                                                                    data-testid="card-description"
+                                                                    class="sc-b8778340-4 kYtujW"
+                                                                >
+                                                                    {post.description}
+                                                                </p>
+                                                                <div class="sc-4e537b1-0 gtLVrL"></div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        ))}
                                     </div>
                                     <div
                                         data-testid="first-grid-narrow"

@@ -20,11 +20,9 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/Components/ui/card";
-import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import {
     Form,
@@ -43,7 +41,6 @@ import {
     SelectValue,
 } from "@/Components/ui/select";
 import { Textarea } from "@/Components/ui/textarea";
-import { ToggleGroup, ToggleGroupItem } from "@/Components/ui/toggle-group";
 import {
     Tooltip,
     TooltipContent,
@@ -51,9 +48,10 @@ import {
     TooltipTrigger,
 } from "@/Components/ui/tooltip";
 
-const Create = ({ categories }) => {
-    const [quillContent, setQuillContent] = useState("");
+const Create = ({ categories, post, image }) => {
+    const [quillContent, setQuillContent] = useState(post.content ?? "");
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(image ?? null);
 
     const FormSchema = z.object({
         title: z
@@ -65,7 +63,7 @@ const Create = ({ categories }) => {
         category: z.string({
             required_error: "Please select a Post Category",
         }),
-        status: z.string().min(1, "Status is required")
+        status: z.string().min(1, "Status is required"),
     });
 
     const modules = {
@@ -87,11 +85,18 @@ const Create = ({ categories }) => {
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            title: "",
-            description: "",
-            content: "",
-            category: "",
-            status: "draft",
+            title: post.title ?? "",
+            description: post.description ?? "",
+            content: post.content ?? "",
+            category: post.category.name ?? "",
+            status: post.status ?? "draft",
+        },
+    });
+
+    const imageForm = useForm({
+        resolver: zodResolver(FormSchema),
+        defaultValues: {
+            image: post.image ?? null,
         },
     });
 
@@ -99,6 +104,8 @@ const Create = ({ categories }) => {
 
     useEffect(() => {
         if (quill) {
+            quill.root.innerHTML = post.content ?? "";
+            setQuillContent(post.content ?? "");
             quill.on("text-change", () => {
                 const content = quill.root.innerHTML;
                 setQuillContent(content);
@@ -116,25 +123,49 @@ const Create = ({ categories }) => {
     };
 
     function onSubmit(values) {
-        router.post(route("admin.posts.store"), values, {
+        router.patch(route("admin.posts.update", post.id), values, {
             onStart: handleFormProcessing,
             onFinish: handleFormProcessed,
             onError: (errors) => {
-                if (errors.title) form.setError("title", {
-                    message: errors.title
-                });
-                if (errors.description) form.setError("description", {
-                    message: errors.description
-                });
-                if (errors.content) form.setError("content", {
-                    message: errors.content
-                });
-                if (errors.category) form.setError("category", {
-                    message: errors.category
-                });
-                if (errors.status) form.setError("status", {
-                    message: errors.status
-                });
+                if (errors.title)
+                    form.setError("title", {
+                        message: errors.title,
+                    });
+                if (errors.description)
+                    form.setError("description", {
+                        message: errors.description,
+                    });
+                if (errors.content)
+                    form.setError("content", {
+                        message: errors.content,
+                    });
+                if (errors.category)
+                    form.setError("category", {
+                        message: errors.category,
+                    });
+                if (errors.status)
+                    form.setError("status", {
+                        message: errors.status,
+                    });
+            },
+        });
+    }
+
+    const updateImage = () => {
+
+        const formData = new FormData();
+        formData.append("image", imageForm.getValues("image"));
+
+        console.log([...formData.entries()].forEach(i => console.log(i)))
+
+        router.post(route("admin.posts.image.update", post.id), formData, {
+            onStart: handleFormProcessing,
+            onFinish: handleFormProcessed,
+            onError: (errors) => {
+                if (errors.image)
+                    imageForm.setError("image", {
+                        message: errors.image,
+                    });
             }
         });
     }
@@ -188,9 +219,9 @@ const Create = ({ categories }) => {
                             </h1>
                             <Badge
                                 variant="outline"
-                                className="ml-auto sm:ml-0"
+                                className="ml-auto sm:ml-0 capitalize"
                             >
-                                Draft
+                                {post.status ?? "Draft"}
                             </Badge>
                             <div className="hidden items-center gap-2 md:ml-auto md:flex">
                                 <Button variant="outline" size="sm">
@@ -399,7 +430,7 @@ const Create = ({ categories }) => {
                                                                         Draft
                                                                     </SelectItem>
                                                                     <SelectItem value="published">
-                                                                        Active
+                                                                        Published
                                                                     </SelectItem>
                                                                     <SelectItem value="archived">
                                                                         Archived
@@ -418,34 +449,128 @@ const Create = ({ categories }) => {
                                     x-chunk="dashboard-07-chunk-4"
                                 >
                                     <CardHeader>
-                                        <CardTitle>Product Image</CardTitle>
+                                        <CardTitle>Post Image</CardTitle>
                                         <CardDescription>
                                             Upload featured image for this post.
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="grid gap-2">
-                                            <img
-                                                alt="Product image"
-                                                className="aspect-square w-full rounded-md object-cover"
-                                                height="300"
-                                                src="/placeholder.svg"
-                                                width="300"
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => {
+                                                    const file =
+                                                        e.target.files[0];
+                                                    if (file) {
+                                                        const reader =
+                                                            new FileReader();
+                                                        reader.onloadend =
+                                                            () => {
+                                                                setSelectedImage(
+                                                                    reader.result
+                                                                ); // Set the selected image
+
+                                                                imageForm.setValue("image", e.target.files[0]);
+                                                            };
+                                                        reader.readAsDataURL(
+                                                            file
+                                                        );
+                                                    }
+                                                }}
+                                                className="hidden"
+                                                id="file-upload"
                                             />
+                                            {!selectedImage ? (
+                                                <img
+                                                    alt="Post image"
+                                                    className="aspect-square w-full rounded-md object-cover"
+                                                    height="300"
+                                                    src="/placeholder.svg"
+                                                    width="300"
+                                                />
+                                            ) : (
+                                                <img
+                                                    onClick={!isLoading ? (e) =>
+                                                        document
+                                                            .getElementById(
+                                                                "file-upload"
+                                                            )
+                                                            .click()
+                                                    : undefined}
+                                                    alt="Post image"
+                                                    className={`aspect-square w-full rounded-md object-cover ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                                    height="300"
+                                                    src={selectedImage}
+                                                    width="300"
+                                                />
+                                            )}
                                             <div className="grid grid-cols-1">
                                                 <TooltipProvider>
                                                     <Tooltip>
                                                         <TooltipTrigger asChild>
-                                                            <button className="flex aspect-square w-full h-10 items-center justify-center rounded-md border border-dashed">
-                                                                <UploadIcon className="h-4 w-4 text-muted-foreground" />
-                                                                <span className="sr-only">
-                                                                    Upload
-                                                                </span>
-                                                            </button>
+                                                            {!selectedImage ? (
+                                                                <Button
+                                                                    type="button"
+                                                                    variant="outline"
+                                                                    size="sm"
+                                                                    className="w-full"
+                                                                    htmlFor="file-upload"
+                                                                    disabled={isLoading}
+                                                                    onClick={(
+                                                                        e
+                                                                    ) =>
+                                                                        document
+                                                                            .getElementById(
+                                                                                "file-upload"
+                                                                            )
+                                                                            .click()
+                                                                    }
+                                                                >
+                                                                    <UploadIcon className="h-4 w-4 mr-2" />
+                                                                    Upload Image
+                                                                </Button>
+                                                            ) : (
+                                                                <>
+                                                                    <Button
+                                                                        type="button"
+                                                                        variant="outline"
+                                                                        size="sm"
+                                                                        className="w-full"
+                                                                        htmlFor="file-upload"
+                                                                        onClick={(
+                                                                            e
+                                                                        ) =>
+                                                                            document
+                                                                                .getElementById(
+                                                                                    "file-upload"
+                                                                                )
+                                                                                .click()
+                                                                        }
+                                                                        disabled={isLoading}
+                                                                    >
+                                                                        <UploadIcon className="h-4 w-4 mr-2" />
+                                                                        Change
+                                                                        Image
+                                                                    </Button>
+
+                                                                    <Button className="mt-2" type="button" onClick={updateImage} disabled={isLoading}>
+                                                                        {isLoading ? (
+                                                                                <>
+                                                                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                                                                                    Saving
+                                                                                </>
+                                                                            ) : (
+                                                                                <>Save Image</>
+                                                                        )}
+                                                                    </Button>
+                                                                </>
+                                                            )}
                                                         </TooltipTrigger>
                                                         <TooltipContent side="bottom">
-                                                            Click to upload
-                                                            image
+                                                            {!selectedImage
+                                                                ? "Click to upload image"
+                                                                : "Click to change image"}
                                                         </TooltipContent>
                                                     </Tooltip>
                                                 </TooltipProvider>

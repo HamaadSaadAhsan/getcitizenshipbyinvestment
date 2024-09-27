@@ -4,12 +4,14 @@ import {
     ArrowUpIcon,
     CircleCheckIcon,
     CircleIcon,
-    CircleXIcon,
-    CircleHelpIcon,
-    TimerIcon,
+    CircleXIcon
   } from "lucide-react"
 
   export const labels = [
+    {
+      value: "news",
+      label: "News",
+    },
     {
       value: "bug",
       label: "Bug",
@@ -26,28 +28,19 @@ import {
 
   export const statuses = [
     {
-      value: "backlog",
-      label: "Backlog",
-      icon: CircleHelpIcon,
-    },
-    {
-      value: "todo",
-      label: "Todo",
+      value: "draft",
+      label: "Draft",
       icon: CircleIcon,
     },
+
     {
-      value: "in progress",
-      label: "In Progress",
-      icon: TimerIcon,
-    },
-    {
-      value: "done",
-      label: "Done",
+      value: "active",
+      label: "Published",
       icon: CircleCheckIcon,
     },
     {
-      value: "canceled",
-      label: "Canceled",
+      value: "archived",
+      label: "Archived",
       icon: CircleXIcon,
     },
   ]

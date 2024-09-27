@@ -11,11 +11,10 @@ import {
 import { Head, Link } from "@inertiajs/react";
 import PostsDataTable from "./Components/PostsDataTable";
 import { columns } from "./Components/Columns.jsx";
-import tasks from "./data/tasks.json"; // Adjust the path as necessary
 import { Button } from "@/Components/ui/button";
-import { File, PlusCircleIcon } from "lucide-react";
+import { PlusCircleIcon } from "lucide-react";
 
-const Index = () => {
+const Index = ({posts}) => {
     return (
         <AuthenticatedLayout
             header={
@@ -32,7 +31,7 @@ const Index = () => {
                         <CardHeader className="px-7">
                             <CardTitle>
                                 <div className="flex items-center">
-                                    <div>Possts</div>
+                                    <div>Posts</div>
                                     <div className="ml-auto flex items-center gap-2">
                                         <Link href={route('admin.posts.create')}>
                                             <Button
@@ -53,7 +52,7 @@ const Index = () => {
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <PostsDataTable columns={columns} data={tasks} />
+                            <PostsDataTable columns={columns} data={posts} />
                         </CardContent>
                     </Card>
                 </div>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -207,7 +208,6 @@ body{
 }
 
 .hjkPtM {
-    font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
@@ -252,7 +252,6 @@ body{
 
 .zTZri {
     color: rgb(32, 34, 36);
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
@@ -263,7 +262,6 @@ body{
 
 .kYtujW {
     color: rgb(32, 34, 36);
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
@@ -365,7 +363,6 @@ body{
     width: 3em;
 }
 .hjkPtM {
-    font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
@@ -375,7 +372,6 @@ body{
     text-decoration: none !important;
 }
 .kGKNqV {
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
@@ -504,7 +500,6 @@ body{
 }
 
 .dWoXdj {
-    font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
     font-size: 28px;
     line-height: 32px;
@@ -515,7 +510,6 @@ body{
 }
 .eVkEgC {
     color: rgb(32, 34, 36);
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 28px;
     line-height: 32px;
@@ -525,7 +519,6 @@ body{
     overflow-wrap: anywhere;
 }
 .eZxCk {
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
@@ -583,7 +576,6 @@ body{
 
 .hKDzsS {
     color: rgb(32, 34, 36);
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
@@ -630,7 +622,6 @@ body{
     width: 100%;
 }
 .gpCoKv {
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
@@ -652,7 +643,6 @@ body{
 }
 .zTZri {
     color: rgb(32, 34, 36);
-    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
@@ -662,7 +652,6 @@ body{
 }
 
 .dsUUMv {
-    font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
@@ -680,7 +669,6 @@ body{
 }
 .eRsxHt {
     color: rgb(84, 86, 88);
-    font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
@@ -875,7 +863,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .hjkPtM {
-        font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
@@ -887,7 +874,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .zTZri {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 500;
         font-size: 18px;
         line-height: 22px;
@@ -899,7 +885,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .kYtujW {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
@@ -1096,7 +1081,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .hjkPtM {
-        font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
         font-weight: 700;
         font-size: 18px;
         line-height: 22px;
@@ -1241,7 +1225,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .dWoXdj {
-        font-family: "BBC Reith Sans", Helvetica, Arial, sans-serif;
         font-weight: 700;
         font-size: 24px;
         line-height: 28px;
@@ -1255,7 +1238,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .eVkEgC {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 500;
         font-size: 24px;
         line-height: 28px;
@@ -1267,7 +1249,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .eVkEgC {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 500;
         font-size: 24px;
         line-height: 28px;
@@ -1281,7 +1262,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .eZxCk {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
@@ -1308,7 +1288,6 @@ body{
 
 @media screen and (max-width: 599px) {
     .hKDzsS {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 500;
         font-size: 16px;
         line-height: 20px;
@@ -1449,7 +1428,6 @@ hr {
 
 @media screen and (max-width: 599px) {
     .gpCoKv {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 400;
         font-size: 14px;
         line-height: 18px;
@@ -1485,7 +1463,6 @@ hr {
 
 @media screen and (max-width: 599px) {
     .zTZri {
-        font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
         font-weight: 500;
         font-size: 18px;
         line-height: 22px;
