@@ -1,11 +1,14 @@
 import React from "react";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
 import Dropdown from "./Components/Dropdown";
 
 const Home = ({ featuredNews, topStories, categories }) => {
     return (
         <Layout categories={categories}>
+
+            <Head title="Home"/>
+
             <div className="px-6">
                 <article className="block">
                     <section
