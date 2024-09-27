@@ -7,7 +7,7 @@ function CBILogoWhite() {
             id="Layer_1"
             data-name="Layer 1"
             viewBox="0 0 2078.21 557.62"
-            width={200}
+            className="w-20 md:w-[100] lg:w-[200px]"
         >
             <defs>
                 <style>{`.cls-1{fill:#62aa57;}.cls-2{fill:#fff;}`}</style>

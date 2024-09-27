@@ -39,9 +39,9 @@ const Layout = ({ children, categories }) => {
             </header>
 
             <section className="bg-white border-b border-gray-200">
-                <nav className="flex items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav className="hidden md:flex lg:flex items-center justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {categories.map((category) => (
-                        <ul className="flex space-x-4 hover:bg-gray-300 hover:text-black">
+                        <ul key={category.id} className="flex space-x-4 hover:bg-gray-300 hover:text-black">
                             {category.children &&
                             category.children.length > 0 ? (
                                 <Dropdown category={category} />

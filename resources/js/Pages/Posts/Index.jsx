@@ -24,8 +24,9 @@ const Index = () => {
         >
             <Head title="Posts" />
 
-            <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-12">
-                <Card>
+            <div className="grid auto-cols-max items-start">
+                <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <Card className="sm:col-span-2">
                     <CardHeader className="px-7">
                         <CardTitle>Posts</CardTitle>
                         <CardDescription>
@@ -36,6 +37,7 @@ const Index = () => {
                        <PostsDataTable columns={columns} data={tasks}/>
                     </CardContent>
                 </Card>
+            </div>
             </div>
         </AuthenticatedLayout>
     );
