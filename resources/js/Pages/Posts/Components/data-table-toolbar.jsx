@@ -30,10 +30,10 @@ export function DataTableToolbar({
             options={statuses}
           />
         )}
-        {table.getColumn("priority") && (
+        {table.getColumn("category") && (
           <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
+            column={table.getColumn("category")}
+            title="Category"
             options={priorities}
           />
         )}

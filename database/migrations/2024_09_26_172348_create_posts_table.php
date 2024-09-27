@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->string('slug');
+            $table->string('image')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->datetime('published_at')->nullable();
+            $table->integer('views')->default(0);
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
+            $table->integer('comments')->default(0);
+            $table->integer('shares')->default(0);
+            $table->string('status')->default('draft');
             $table->timestamps();
         });
     }
