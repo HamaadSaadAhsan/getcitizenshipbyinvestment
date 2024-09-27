@@ -69,7 +69,7 @@ const Layout = ({ children, categories }) => {
                 <div className="container mx-auto px-4">
                     {/* Add footer content here */}
                     <p className="text-center">
-                        &copy; 2024 BBC. All rights reserved.
+                        &copy; 2024 <a target="_blank" href="https://saadahsan.com">Saad Ahsan</a>. All rights reserved.
                     </p>
                 </div>
             </footer>
