@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,6 +46,8 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/Components/ui/tooltip";
+
+import QuillEditor from "@/Components/QuillEditor";
 
 const Create = ({ categories, post, image }) => {
     const [quillContent, setQuillContent] = useState(post.content ?? "");
