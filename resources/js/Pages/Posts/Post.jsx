@@ -295,7 +295,7 @@ const Create = ({ categories, post, image }) => {
                                                                 <div className="border rounded-md quill-shadcn">
                                                                     <QuillEditor
                                                                         ref={quillRef}
-                                                                        defaultValue={quillContent}
+                                                                        defaultValue={post.content ?? ""}
                                                                         onSelectionChange={handleEditorChange}
                                                                         onTextChange={handleEditorChange}
                                                                         className="min-h-[200px]"

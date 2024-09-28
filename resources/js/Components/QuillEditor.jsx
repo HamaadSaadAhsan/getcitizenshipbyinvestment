@@ -37,10 +37,7 @@ const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange 
           theme: 'snow',
           modules: {
             toolbar: {
-                container: toolbarOptions,
-                // handlers: {
-                //   image: handleUploadImage,
-                // },
+                container: toolbarOptions
               },
           }
         });
@@ -65,18 +62,6 @@ const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange 
         };
     }, [ref]);
 
-
-//   const module = useMemo(
-//     () => ({
-//       toolbar: {
-//         container: toolbarOptions,
-//         handlers: {
-//           image: handleUploadImage,
-//         },
-//       },
-//     }),
-//     []
-//   );
 
   const storeImageInPublicStorage = async (file) => {
     const formData = new FormData();
