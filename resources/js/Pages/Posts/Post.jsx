@@ -4,7 +4,6 @@ import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import {
     BreadcrumbItem,
@@ -53,6 +52,9 @@ const Create = ({ categories, post, image }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [selectedImage, setSelectedImage] = useState(image ?? null);
 
+    // Use a ref to access the quill instance directly
+    const quillRef = useRef();
+
     const FormSchema = z.object({
         title: z
             .string()
@@ -66,21 +68,6 @@ const Create = ({ categories, post, image }) => {
         status: z.string().min(1, "Status is required"),
     });
 
-    const modules = {
-        toolbar: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ["bold", "italic", "underline", "strike"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ script: "sub" }, { script: "super" }],
-            [{ indent: "-1" }, { indent: "+1" }],
-            [{ direction: "rtl" }],
-            [{ color: [] }, { background: [] }],
-            [{ font: [] }],
-            [{ align: [] }],
-            ["link", "image", "video"],
-            ["clean"],
-        ],
-    };
 
     const form = useForm({
         resolver: zodResolver(FormSchema),
@@ -100,20 +87,6 @@ const Create = ({ categories, post, image }) => {
         },
     });
 
-    const { quill, quillRef } = useQuill({ modules });
-
-    useEffect(() => {
-        if (quill) {
-            quill.root.innerHTML = post.content ?? "";
-            setQuillContent(post.content ?? "");
-            quill.on("text-change", () => {
-                const content = quill.root.innerHTML;
-                setQuillContent(content);
-                form.setValue("content", content, { shouldValidate: true });
-            });
-        }
-    }, [quill]);
-
     const handleFormProcessing = (response) => {
         setIsLoading(true);
     };
@@ -121,6 +94,12 @@ const Create = ({ categories, post, image }) => {
     const handleFormProcessed = (response) => {
         setIsLoading(false);
     };
+
+    const handleEditorChange = (content) => {
+        setQuillContent(quillRef.current.getSemanticHTML());
+        form.setValue("content", quillRef.current.getSemanticHTML(), { shouldValidate: true });
+    }
+
 
     function onSubmit(values) {
         router.patch(route("admin.posts.update", post.id), values, {
@@ -155,8 +134,6 @@ const Create = ({ categories, post, image }) => {
 
         const formData = new FormData();
         formData.append("image", imageForm.getValues("image"));
-
-        console.log([...formData.entries()].forEach(i => console.log(i)))
 
         router.post(route("admin.posts.image.update", post.id), formData, {
             onStart: handleFormProcessing,
@@ -314,10 +291,11 @@ const Create = ({ categories, post, image }) => {
                                                             </FormLabel>
                                                             <FormControl>
                                                                 <div className="border rounded-md quill-shadcn">
-                                                                    <div
-                                                                        ref={
-                                                                            quillRef
-                                                                        }
+                                                                    <QuillEditor
+                                                                        ref={quillRef}
+                                                                        defaultValue=""
+                                                                        onSelectionChange={handleEditorChange}
+                                                                        onTextChange={handleEditorChange}
                                                                         className="min-h-[200px]"
                                                                     />
                                                                 </div>
@@ -396,7 +374,7 @@ const Create = ({ categories, post, image }) => {
 
                                 <Card x-chunk="dashboard-07-chunk-3">
                                     <CardHeader>
-                                        <CardTitle>Product Status</CardTitle>
+                                        <CardTitle>Post Status</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="grid gap-6">
@@ -497,7 +475,7 @@ const Create = ({ categories, post, image }) => {
                                                                 "file-upload"
                                                             )
                                                             .click()
-                                                    : undefined}
+                                                        : undefined}
                                                     alt="Post image"
                                                     className={`aspect-square w-full rounded-md object-cover ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                                     height="300"
@@ -556,12 +534,12 @@ const Create = ({ categories, post, image }) => {
 
                                                                     <Button className="mt-2" type="button" onClick={updateImage} disabled={isLoading}>
                                                                         {isLoading ? (
-                                                                                <>
-                                                                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
-                                                                                    Saving
-                                                                                </>
-                                                                            ) : (
-                                                                                <>Save Image</>
+                                                                            <>
+                                                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                                                                                Saving
+                                                                            </>
+                                                                        ) : (
+                                                                            <>Save Image</>
                                                                         )}
                                                                     </Button>
                                                                 </>
@@ -584,7 +562,7 @@ const Create = ({ categories, post, image }) => {
                             <Button variant="outline" size="sm">
                                 Discard
                             </Button>
-                            <Button size="sm">Save Product</Button>
+                            <Button size="sm">Save Post</Button>
                         </div>
                     </div>
                 </form>

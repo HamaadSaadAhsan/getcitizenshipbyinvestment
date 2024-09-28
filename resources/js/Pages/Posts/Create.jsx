@@ -72,22 +72,6 @@ const Create = ({ categories }) => {
         status: z.string().min(1, "Status is required")
     });
 
-    // const modules = {
-    //     toolbar: [
-    //         [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    //         ["bold", "italic", "underline", "strike"],
-    //         [{ list: "ordered" }, { list: "bullet" }],
-    //         [{ script: "sub" }, { script: "super" }],
-    //         [{ indent: "-1" }, { indent: "+1" }],
-    //         [{ direction: "rtl" }],
-    //         [{ color: [] }, { background: [] }],
-    //         [{ font: [] }],
-    //         [{ align: [] }],
-    //         ["link", "image", "video"],
-    //         ["clean"],
-    //     ],
-    // };
-
     const form = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -98,16 +82,6 @@ const Create = ({ categories }) => {
             status: "draft",
         },
     });
-
-    // useEffect(() => {
-    //     if (quill) {
-    //         quill.on("text-change", () => {
-    //             const content = quill.root.innerHTML;
-    //             setQuillContent(content);
-    //             form.setValue("content", content, { shouldValidate: true });
-    //         });
-    //     }
-    // }, [quill]);
 
     const handleFormProcessing = (response) => {
         setIsLoading(true);
@@ -426,7 +400,7 @@ const Create = ({ categories }) => {
                                     x-chunk="dashboard-07-chunk-4"
                                 >
                                     <CardHeader>
-                                        <CardTitle>Product Image</CardTitle>
+                                        <CardTitle>Post Image</CardTitle>
                                         <CardDescription>
                                             Upload featured image for this post.
                                         </CardDescription>
@@ -434,7 +408,7 @@ const Create = ({ categories }) => {
                                     <CardContent>
                                         <div className="grid gap-2">
                                             <img
-                                                alt="Product image"
+                                                alt="Post image"
                                                 className="aspect-square w-full rounded-md object-cover"
                                                 height="300"
                                                 src="/placeholder.svg"
