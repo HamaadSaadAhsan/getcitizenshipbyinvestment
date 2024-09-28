@@ -24,7 +24,7 @@ const QuillEditor = ({ form, name }) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      import('react-quill').then((QuillModule) => {
+      import('react-quilljs').then((QuillModule) => {
         setReactQuill(() => QuillModule.default);
       });
     }
