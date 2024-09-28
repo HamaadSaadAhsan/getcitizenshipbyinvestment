@@ -1,7 +1,7 @@
-import { useMemo, useRef, useState, useEffect } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
-import { Controller } from 'react-hook-form';
-import axios from 'axios';
+
 
 const toolbarOptions = [
   [{ font: [] }],
@@ -16,79 +16,67 @@ const toolbarOptions = [
   ['clean'],
 ];
 
-const QuillEditor = ({ form, name }) => {
-  const { setValue } = form;
-  const { control } = form;
-  const quillRef = useRef(null);
-  const [ReactQuill, setReactQuill] = useState(null);
+const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange }, ref) => {
+    const containerRef = useRef(null);
+    const defaultValueRef = useRef(defaultValue);
+    const onTextChangeRef = useRef(onTextChange);
+    const onSelectionChangeRef = useRef(onSelectionChange);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      import('react-quilljs').then((QuillModule) => {
-        setReactQuill(() => QuillModule.default);
-      });
-    }
-
-    // New MutationObserver to handle DOM changes
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {});
+    useLayoutEffect(() => {
+        onTextChangeRef.current = onTextChange;
+        onSelectionChangeRef.current = onSelectionChange;
     });
+  
 
-    // Observe the editor's container
-    const editorContainer = quillRef.current?.getEditor()?.container;
-    if (editorContainer) {
-      observer.observe(editorContainer, { childList: true, subtree: true });
-    }
-
-    // Cleanup observer on unmount
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  // handle upload image and insert to editor
-  const handleUploadImage = async () => {
-    const quill = quillRef.current?.getEditor();
-
-    if (quill) {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'file');
-      input.click();
-
-      input.onchange = async () => {
-        const file = input.files[0];
-        if (/^image\//.test(file.type)) {
-          const res = await storeImageInPublicStorage(file);
-          const range = quill.getSelection(true);
-          if (range) {
-            quill.insertEmbed(range.index, 'image', res.data.url);
-          } else {
-            quill.clipboard.dangerouslyPasteHTML(
-              quill.getLength(),
-              `<img src="${res.data[0].url}" alt=""/>`
-            );
+    useEffect(() => {
+        const container = containerRef.current;
+        const editorContainer = container.appendChild(
+          container.ownerDocument.createElement('div'),
+        );
+        const quill = new Quill(editorContainer, {
+          theme: 'snow',
+          modules: {
+            toolbar: {
+                container: toolbarOptions,
+                // handlers: {
+                //   image: handleUploadImage,
+                // },
+              },
           }
+        });
+  
+        ref.current = quill;
+  
+        if (defaultValueRef.current) {
+          quill.setContents(defaultValueRef.current);
         }
-      };
-    }
-  };
+  
+        quill.on(Quill.events.TEXT_CHANGE, (...args) => {
+          onTextChangeRef.current?.(...args);
+        });
+  
+        quill.on(Quill.events.SELECTION_CHANGE, (...args) => {
+          onSelectionChangeRef.current?.(...args);
+        });
+  
+        return () => {
+          ref.current = null;
+          container.innerHTML = '';
+        };
+    }, [ref]);
 
-  // handle change editor
-  const handleChange = (html) => {
-    setValue(name, html);
-  };
 
-  const module = useMemo(
-    () => ({
-      toolbar: {
-        container: toolbarOptions,
-        handlers: {
-          image: handleUploadImage,
-        },
-      },
-    }),
-    []
-  );
+//   const module = useMemo(
+//     () => ({
+//       toolbar: {
+//         container: toolbarOptions,
+//         handlers: {
+//           image: handleUploadImage,
+//         },
+//       },
+//     }),
+//     []
+//   );
 
   const storeImageInPublicStorage = async (file) => {
     const formData = new FormData();
@@ -100,34 +88,12 @@ const QuillEditor = ({ form, name }) => {
       throw new Error('Image upload failed');
     }
 
-    console.log(response)
-
     return response;
   };
 
-  return (
-    <Controller
-      name={name || ''}
-      control={control}
-      render={() => {
-        if (typeof window !== 'undefined' && ReactQuill) {
-          const Quill = ReactQuill; // Save a reference to ReactQuill
+  return <div ref={containerRef}></div>;
+});
 
-          return (
-            <Quill
-              ref={quillRef}
-              value={form.watch(name)}
-              theme='snow'
-              modules={module}
-              onChange={handleChange}
-              placeholder='Write something awesome...'
-            />
-          );
-        }
-        return null;
-      }}
-    />
-  );
-};
+QuillEditor.displayName = 'QuillEditor';
 
 export default QuillEditor;

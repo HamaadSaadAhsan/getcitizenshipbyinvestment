@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +23,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/Components/ui/card";
-import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import {
     Form,
@@ -42,18 +41,23 @@ import {
     SelectValue,
 } from "@/Components/ui/select";
 import { Textarea } from "@/Components/ui/textarea";
-import { ToggleGroup, ToggleGroupItem } from "@/Components/ui/toggle-group";
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from "@/Components/ui/tooltip";
+import Quill from "quill";
+
+const Delta = Quill.import('delta');
 import QuillEditor from "@/Components/QuillEditor";
 
 const Create = ({ categories }) => {
     const [quillContent, setQuillContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    // Use a ref to access the quill instance directly
+    const quillRef = useRef();
 
     const FormSchema = z.object({
         title: z
@@ -95,8 +99,6 @@ const Create = ({ categories }) => {
         },
     });
 
-    const { quill, quillRef } = useRef();
-
     // useEffect(() => {
     //     if (quill) {
     //         quill.on("text-change", () => {
@@ -114,6 +116,11 @@ const Create = ({ categories }) => {
     const handleFormProcessed = (response) => {
         setIsLoading(false);
     };
+
+    const handleEditorChange = (content) => {
+        setQuillContent(quillRef.current.getSemanticHTML());
+        form.setValue("content", quillRef.current.getSemanticHTML(), { shouldValidate: true });
+    }
 
     function onSubmit(values) {
         router.post(route("admin.posts.store"), values, {
@@ -283,7 +290,13 @@ const Create = ({ categories }) => {
                                                             </FormLabel>
                                                             <FormControl>
                                                                 <div className="border rounded-md quill-shadcn">
-                                                                    <QuillEditor form={form} name="content" className="min-h-[200px]"/>
+                                                                    <QuillEditor
+                                                                        ref={quillRef}
+                                                                        defaultValue=""
+                                                                        onSelectionChange={handleEditorChange}
+                                                                        onTextChange={handleEditorChange}
+                                                                        className="min-h-[200px]"
+                                                                    />
                                                                 </div>
                                                             </FormControl>
                                                             <FormDescription>
