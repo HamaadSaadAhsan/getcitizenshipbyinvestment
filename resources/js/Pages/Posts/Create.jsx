@@ -4,7 +4,6 @@ import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import {
     BreadcrumbItem,
