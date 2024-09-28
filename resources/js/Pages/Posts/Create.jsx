@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,6 +50,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/Components/ui/tooltip";
+import QuillEditor from "@/Components/QuillEditor";
 
 const Create = ({ categories }) => {
     const [quillContent, setQuillContent] = useState("");
@@ -68,21 +69,21 @@ const Create = ({ categories }) => {
         status: z.string().min(1, "Status is required")
     });
 
-    const modules = {
-        toolbar: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ["bold", "italic", "underline", "strike"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ script: "sub" }, { script: "super" }],
-            [{ indent: "-1" }, { indent: "+1" }],
-            [{ direction: "rtl" }],
-            [{ color: [] }, { background: [] }],
-            [{ font: [] }],
-            [{ align: [] }],
-            ["link", "image", "video"],
-            ["clean"],
-        ],
-    };
+    // const modules = {
+    //     toolbar: [
+    //         [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    //         ["bold", "italic", "underline", "strike"],
+    //         [{ list: "ordered" }, { list: "bullet" }],
+    //         [{ script: "sub" }, { script: "super" }],
+    //         [{ indent: "-1" }, { indent: "+1" }],
+    //         [{ direction: "rtl" }],
+    //         [{ color: [] }, { background: [] }],
+    //         [{ font: [] }],
+    //         [{ align: [] }],
+    //         ["link", "image", "video"],
+    //         ["clean"],
+    //     ],
+    // };
 
     const form = useForm({
         resolver: zodResolver(FormSchema),
@@ -95,17 +96,17 @@ const Create = ({ categories }) => {
         },
     });
 
-    const { quill, quillRef } = useQuill({ modules });
+    const { quill, quillRef } = useRef();
 
-    useEffect(() => {
-        if (quill) {
-            quill.on("text-change", () => {
-                const content = quill.root.innerHTML;
-                setQuillContent(content);
-                form.setValue("content", content, { shouldValidate: true });
-            });
-        }
-    }, [quill]);
+    // useEffect(() => {
+    //     if (quill) {
+    //         quill.on("text-change", () => {
+    //             const content = quill.root.innerHTML;
+    //             setQuillContent(content);
+    //             form.setValue("content", content, { shouldValidate: true });
+    //         });
+    //     }
+    // }, [quill]);
 
     const handleFormProcessing = (response) => {
         setIsLoading(true);
@@ -283,12 +284,7 @@ const Create = ({ categories }) => {
                                                             </FormLabel>
                                                             <FormControl>
                                                                 <div className="border rounded-md quill-shadcn">
-                                                                    <div
-                                                                        ref={
-                                                                            quillRef
-                                                                        }
-                                                                        className="min-h-[200px]"
-                                                                    />
+                                                                    <QuillEditor form={form} name="content" className="min-h-[200px]"/>
                                                                 </div>
                                                             </FormControl>
                                                             <FormDescription>

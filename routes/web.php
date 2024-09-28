@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -22,6 +23,8 @@ Route::middleware(['auth'])->prefix('/admin')->group(function() {
     Route::get('posts/{post}', [PostController::class, 'show'])->name('admin.posts.show');
     Route::patch('posts/{post}', [PostController::class, 'update'])->name('admin.posts.update');
     Route::post('posts/{post}/image', [PostController::class, 'updateImage'])->name('admin.posts.image.update');
+
+    Route::post('image/upload', [ImageController::class, 'upload'])->name('image.upload');
 });
 
 Route::get('/storage/images/{filename}', function ($filename) {
