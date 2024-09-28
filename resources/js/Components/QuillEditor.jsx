@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 
@@ -17,6 +17,7 @@ const toolbarOptions = [
 ];
 
 const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange }, ref) => {
+    console.log(defaultValue)
     const containerRef = useRef(null);
     const defaultValueRef = useRef(defaultValue);
     const onTextChangeRef = useRef(onTextChange);
@@ -27,7 +28,6 @@ const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange 
         onSelectionChangeRef.current = onSelectionChange;
     });
   
-
     useEffect(() => {
         const container = containerRef.current;
         const editorContainer = container.appendChild(
@@ -46,6 +46,7 @@ const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange 
   
         if (defaultValueRef.current) {
           quill.setContents(defaultValueRef.current);
+          ref.current.root.innerHTML = defaultValueRef.current;
         }
   
         quill.on(Quill.events.TEXT_CHANGE, (...args) => {

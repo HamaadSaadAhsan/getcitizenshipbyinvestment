@@ -67,10 +67,24 @@ class PostController extends Controller
 
     public function show(Post $post){
         $categories = Category::where('parent_id', 0)->select(['id', 'name'])->get();
+        $image = $post->image ? route('storage.images', ['filename' => $post->image]) : '';
+        $post = [
+            'id' => $post->id,
+            'slug' => $post->slug,
+            'title' => $post->title,
+            'description' => $post->description,
+            'category_id' => $post->category_id,
+            'content' => $post->content,
+            'status' => $post->status,
+            'category' => [
+                'id' => $post->category->id,
+                'name' => $post->category->name
+            ]
+        ];
 
         return Inertia::render('Posts/Post', [
-            'post' => $post->with('category')->first(),
-            'image' => $post->image ? route('storage.images', ['filename' => $post->image]) : '',
+            'post' => $post,
+            'image' => $image,
             'categories' => $categories
         ]);
     }
@@ -116,5 +130,43 @@ class PostController extends Controller
         ]);
 
         return redirect(route('admin.posts.show', ['post' => $post]));
+    }
+
+    public function post_public_view($category, $slug){
+        $post = Post::where('status', 'published')
+            ->whereHas('category', function($query) use ($category) {
+                $query->where('name', $category);
+            })
+            ->where('slug', $slug)
+            ->with('category')
+            ->select('id', 'slug' ,'title', 'description', 'category_id', 'content', 'image', 'created_at', 'user_id') // Select necessary fields
+            ->first();
+
+        if (!$post) {
+            abort(404);
+        }   
+
+        $post = [
+            'id' => $post->id,
+            'slug' => $post->slug,
+            'title' => $post->title,
+            'description' => $post->description,
+            'image' => route('storage.images', ['filename' => $post->image]),
+            'posted_at' => $post->created_at->diffForHumans(),
+            'posted_by' => $post->user->name,
+            'category_id' => $post->category_id,
+            'content' => $post->content,
+            'category' => [
+                'id' => $post->category->id,
+                'name' => $post->category->name
+            ]
+        ];
+
+        $categories = Category::where('parent_id', 0)->select(['id', 'name'])->get();
+
+        return Inertia::render("Posts/View", [
+            'categories' =>  Category::where('parent_id', 0)->select(['id', 'name'])->get(),
+            'post' => $post
+        ]);
     }
 }

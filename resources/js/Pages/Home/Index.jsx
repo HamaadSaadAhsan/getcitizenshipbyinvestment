@@ -1,8 +1,6 @@
 import React from "react";
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
-import Dropdown from "./Components/Dropdown";
-import { description } from './../Auth/Login';
 
 const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
     return (
@@ -32,7 +30,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                             <div data-testid="edinburgh-card">
                                                 <div data-testid="anchor-inner-wrapper">
                                                     <a
-                                                        href=""
+                                                        href={route('posts.show', [post.category.name, post.slug])}
                                                         data-testid="external-anchor"
                                                         target="_self"
                                                         class="sc-2e6baa30-0 gILusN"
