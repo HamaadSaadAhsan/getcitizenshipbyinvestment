@@ -30,7 +30,12 @@ const View = ({ post, categories }) => {
 
     return (
         <Layout categories={categories}>
-            <Head title={post.title} />
+            <Head>
+                <title>{post.title}</title>
+                <meta head-key="description" name="description" content={post.description} />
+                <meta head-key="robots" name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+           
+            </Head>
 
             <article>
                 {/* title block */}

@@ -64,6 +64,7 @@ const Create = ({ categories, post, image }) => {
             .max(100, "Title must be 100 characters or less"),
         content: z.string().min(1, "Content is required"),
         description: z.string().min(1, "Description is required"),
+        slug: z.string().min(1, "Slug is required"),
         category: z.string({
             required_error: "Please select a Post Category",
         }),
@@ -79,6 +80,7 @@ const Create = ({ categories, post, image }) => {
             content: post.content ?? "",
             category: post.category.name ?? "",
             status: post.status ?? "draft",
+            slug: post.slug ?? "draft",
         },
     });
 
@@ -173,7 +175,11 @@ const Create = ({ categories, post, image }) => {
                 </>
             }
         >
-            <Head title="Create Post" />
+            <Head>
+                <title>Create Post</title>
+                <meta head-key="description" name="description" content={post.description ?? ''} />
+                <meta head-key="robots" name="robots" content="max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+            </Head>
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -259,6 +265,31 @@ const Create = ({ categories, post, image }) => {
                                                     )}
                                                 />
                                             </div>
+
+
+                                            <div className="grid gap-3">
+                                                <FormField
+                                                    control={form.control}
+                                                    name="slug"
+                                                    render={({ field }) => (
+                                                        <FormItem>
+                                                            <FormLabel>
+                                                                Slug
+                                                            </FormLabel>
+                                                            <FormControl>
+                                                                <Input
+                                                                    placeholder="Slug"
+                                                                    type="text"
+                                                                    className="w-full"
+                                                                    {...field}
+                                                                />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                            </div>
+
                                             <div className="grid gap-3">
                                                 <FormField
                                                     control={form.control}
@@ -463,7 +494,7 @@ const Create = ({ categories, post, image }) => {
                                             />
                                             {!selectedImage ? (
                                                 <img
-                                                    alt="Post image"
+                                                    alt={post.title ?? ''}
                                                     className="aspect-square w-full rounded-md object-cover"
                                                     height="300"
                                                     src="/placeholder.svg"
@@ -478,7 +509,7 @@ const Create = ({ categories, post, image }) => {
                                                             )
                                                             .click()
                                                         : undefined}
-                                                    alt="Post image"
+                                                    alt={post.title ?? ''}
                                                     className={`aspect-square w-full rounded-md object-cover ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                                     height="300"
                                                     src={selectedImage}
