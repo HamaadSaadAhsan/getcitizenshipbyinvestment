@@ -1,13 +1,15 @@
 import React from "react";
 import { Head } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
+import "../../../css/article.css";
+import NewsSlider from "./Components/NewsSlider";
 
 const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
     return (
         <Layout categories={categories}>
             <Head title="Home" />
 
-            <div className="px-6">
+            <div className="">
                 <article className="block">
                     <section className="sc-2448c165-1 gvnjGp">
                         <div
@@ -27,10 +29,20 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                         className="sc-93223220-0 sc-e70150c3-1 gPmTJa fNRFwC"
                                     >
                                         {citizenshipPosts.map((post) => (
-                                            <div key={post.id} data-testid="edinburgh-card">
+                                            <div
+                                                key={post.id}
+                                                data-testid="edinburgh-card"
+                                            >
                                                 <div data-testid="anchor-inner-wrapper">
                                                     <a
-                                                        href={route('posts.show', [post.category.name, post.slug])}
+                                                        href={route(
+                                                            "posts.show",
+                                                            [
+                                                                post.category
+                                                                    .name,
+                                                                post.slug,
+                                                            ]
+                                                        )}
                                                         data-testid="external-anchor"
                                                         target="_self"
                                                         className="sc-2e6baa30-0 gILusN"
@@ -50,10 +62,51 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                     <div className="sc-a34861b-1 jxzoZC">
                                                                         <img
                                                                             sizes="96vw"
-                                                                            srcSet={route('storage.images', post.image) + ' 240w,' + route('storage.images', post.image) + ' 320w,' + route('storage.images', post.image) + ' 480w,' + route('storage.images', post.image) + ' 640w,' + route('storage.images', post.image) + ' 800w,' + route('storage.images', post.image) + ' 1024w,' + route('storage.images', post.image) + ' 1536'}
-                                                                            src={route('storage.images', post.image)}
+                                                                            srcSet={
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 240w," +
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 320w," +
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 480w," +
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 640w," +
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 800w," +
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 1024w," +
+                                                                                route(
+                                                                                    "storage.images",
+                                                                                    post.image
+                                                                                ) +
+                                                                                " 1536"
+                                                                            }
+                                                                            src={route(
+                                                                                "storage.images",
+                                                                                post.image
+                                                                            )}
                                                                             loading="lazy"
-                                                                            alt={post.title}
+                                                                            alt={
+                                                                                post.title
+                                                                            }
                                                                             className="sc-a34861b-0 efFcac"
                                                                         />
                                                                     </div>
@@ -65,12 +118,13 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             >
                                                                 <div className="sc-4fedabc7-1 kbvCmj">
                                                                     <div className="sc-4fedabc7-0 kZtaAl">
-
                                                                         <h2
                                                                             data-testid="card-headline"
                                                                             className="sc-4fedabc7-3 zTZri"
                                                                         >
-                                                                            {post.title}
+                                                                            {
+                                                                                post.title
+                                                                            }
                                                                         </h2>
                                                                     </div>
                                                                 </div>
@@ -78,7 +132,9 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                     data-testid="card-description"
                                                                     className="sc-b8778340-4 kYtujW"
                                                                 >
-                                                                    {post.description}
+                                                                    {
+                                                                        post.description
+                                                                    }
                                                                 </p>
                                                                 <div className="sc-4e537b1-0 gtLVrL"></div>
                                                             </div>
@@ -757,20 +813,352 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                     </section>
 
                     <section className="gvnjGp">
-                        <div className="sc-2448c165-2 eMVRpx">
-                            <div className="sc-6f766713-2 ctfMqF">
-                                <div className="sc-6f766713-1 iGzJZA">
-                                    <hr className="section-divider" />
+                        <div className="eMVRpx">
+                            <div className="ctfMqF">
+                                <div className="iGzJZA">
+                                    <hr className="lgKNnV" />
                                 </div>
-                                <div className="sc-6f766713-3 cYOBar"><div>
-                                    <div className="sc-6f766713-7 dqKfa">
-                                        <h2 className="sc-6f766713-4 elqzuS">From Residency</h2>
+                                <div className="cYOBar">
+                                    <div>
+                                        <div className="dqKfa">
+                                            <h2 className="elqzuS">
+                                                From Residency
+                                            </h2>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div className="jKLwmR td-big-grid-flex  td-big-grid-flex-scroll td_block_wrap td_block_big_grid_flex_2 tdi_96 td-pb-border-top td_block_template_2 td-big-grid-flex-posts">
+                                <div className="left-column td_block_inner">
+                                    <div className="td_module_flex_6 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-0 td-cpt-post h-full">
+                                        <div className="td-module-container td-category-pos-above h-full">
+                                            <div className="td-image-container h-full">
+                                                <div className="td-module-thumb h-full">
+                                                    <a
+                                                        href="https://startuppakistan.com.pk/ministry-of-it-announces-jobs-opportunities-in-pakistan/"
+                                                        rel="bookmark"
+                                                        className="td-image-wrap h-full"
+                                                        title="Ministry Of IT Announces Jobs Opportunities in Pakistan"
+                                                    >
+                                                        <span
+                                                            className="entry-thumb td-thumb-css td-animation-stack-type0-2"
+                                                            data-type="css_image"
+                                                            data-img-url="https://startuppakistan.com.pk/wp-content/uploads/2024/10/images-2024-10-02T093136.991.jpeg"
+                                                            style={{
+                                                                backgroundImage: `url('https://startuppakistan.com.pk/wp-content/uploads/2024/10/images-2024-10-02T093136.991.jpeg')`,
+                                                            }}
+                                                        ></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div className="td-module-meta-info">
+                                                <a
+                                                    href="https://startuppakistan.com.pk/category/business/jobs-business/"
+                                                    className="td-post-category"
+                                                >
+                                                    Jobs
+                                                </a>
+                                                <div className="tdb-module-title-wrap">
+                                                    <h3 className="entry-title td-module-title">
+                                                        <a
+                                                            href="https://startuppakistan.com.pk/ministry-of-it-announces-jobs-opportunities-in-pakistan/"
+                                                            rel="bookmark"
+                                                            title="Ministry Of IT Announces Jobs Opportunities in Pakistan"
+                                                        >
+                                                            Ministry Of IT
+                                                            Announces Jobs
+                                                            Opportunities in
+                                                            Pakistan
+                                                        </a>
+                                                    </h3>{" "}
+                                                </div>
+
+                                                <div className="td-editor-date">
+                                                    <span className="td-post-author-name">
+                                                        <a href="https://startuppakistan.com.pk/author/momina/">
+                                                            Momina
+                                                        </a>{" "}
+                                                        <span>-</span>{" "}
+                                                    </span>{" "}
+                                                    <span className="td-post-date">
+                                                        <time
+                                                            className="entry-date updated td-module-date"
+                                                            dateTime="2024-10-02T10:58:52+05:00"
+                                                        >
+                                                            October 2, 2024
+                                                        </time>
+                                                    </span>{" "}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="right-column td_block_inner tdi_96 td-big-grid-flex">
+                                    <div className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-1 td-cpt-post">
+                                        <div className="td-module-container td-category-pos-above">
+                                            <div className="td-image-container">
+                                                <div className="td-module-thumb">
+                                                    <a
+                                                        href="https://startuppakistan.com.pk/chief-commissioner-office-announces-job-vacancies-in-pakistan/"
+                                                        rel="bookmark"
+                                                        className="td-image-wrap "
+                                                        title="Chief Commissioner Office Announces Job Vacancies in Pakistan"
+                                                    >
+                                                        <span
+                                                            className="entry-thumb td-thumb-css td-animation-stack-type0-2"
+                                                            data-type="css_image"
+                                                            data-img-url="https://startuppakistan.com.pk/wp-content/uploads/2024/10/images-2024-10-02T115044.621.jpeg"
+                                                            style={{
+                                                                backgroundImage:
+                                                                    'url("https://startuppakistan.com.pk/wp-content/uploads/2024/10/images-2024-10-02T115044.621.jpeg")',
+                                                            }}
+                                                        ></span>
+                                                    </a>
+                                                </div>{" "}
+                                            </div>
+
+                                            <div className="td-module-meta-info">
+                                                <a
+                                                    href="https://startuppakistan.com.pk/category/business/jobs-business/"
+                                                    className="td-post-category"
+                                                >
+                                                    Jobs
+                                                </a>
+                                                <div className="tdb-module-title-wrap">
+                                                    <h3 className="entry-title td-module-title">
+                                                        <a
+                                                            href="https://startuppakistan.com.pk/chief-commissioner-office-announces-job-vacancies-in-pakistan/"
+                                                            rel="bookmark"
+                                                            title="Chief Commissioner Office Announces Job Vacancies in Pakistan"
+                                                        >
+                                                            Chief Commissioner
+                                                            Office Announces Job
+                                                            Vacancies in
+                                                            Pakistan
+                                                        </a>
+                                                    </h3>{" "}
+                                                </div>
+
+                                                <div className="td-editor-date">
+                                                    <span className="td-post-author-name">
+                                                        <a href="https://startuppakistan.com.pk/author/momina/">
+                                                            Momina
+                                                        </a>
+                                                        <span>-</span>
+                                                    </span>
+                                                    <span className="td-post-date">
+                                                        <time
+                                                            className="entry-date updated td-module-date"
+                                                            dateTime="2024-10-02T11:51:42+05:00"
+                                                        >
+                                                            October 2, 2024
+                                                        </time>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-2 td-cpt-post">
+                                        <div className="td-module-container td-category-pos-above">
+                                            <div className="td-image-container">
+                                                <div className="td-module-thumb">
+                                                    <a
+                                                        href="https://startuppakistan.com.pk/25-years-strong-ipl-and-diebold-nixdorf-celebrate-silver-jubilee/"
+                                                        rel="bookmark"
+                                                        className="td-image-wrap "
+                                                        title="25 Years Strong: IPL and Diebold Nixdorf Celebrate Silver Jubilee"
+                                                    >
+                                                        <span
+                                                            className="entry-thumb td-thumb-css td-animation-stack-type0-2"
+                                                            data-type="css_image"
+                                                            data-img-url="https://startuppakistan.com.pk/wp-content/uploads/2024/10/1-696x392.png"
+                                                            style={{
+                                                                backgroundImage:
+                                                                    'url("https://startuppakistan.com.pk/wp-content/uploads/2024/10/1-696x392.png")',
+                                                            }}
+                                                        ></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div className="td-module-meta-info">
+                                                <a
+                                                    href="https://startuppakistan.com.pk/category/business/"
+                                                    className="td-post-category"
+                                                >
+                                                    Business
+                                                </a>
+                                                <div className="tdb-module-title-wrap">
+                                                    <h3 className="entry-title td-module-title">
+                                                        <a
+                                                            href="https://startuppakistan.com.pk/25-years-strong-ipl-and-diebold-nixdorf-celebrate-silver-jubilee/"
+                                                            rel="bookmark"
+                                                            title="25 Years Strong: IPL and Diebold Nixdorf Celebrate Silver Jubilee"
+                                                        >
+                                                            25 Years Strong: IPL
+                                                            and Diebold Nixdorf
+                                                            Celebrate Silver
+                                                            Jubilee
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                                <div className="td-editor-date">
+                                                    <span className="td-post-author-name">
+                                                        <a href="https://startuppakistan.com.pk/author/syedamaryem/">
+                                                            Syeda Maryem
+                                                        </a>
+                                                        <span>-</span>
+                                                    </span>
+                                                    <span className="td-post-date">
+                                                        <time
+                                                            className="entry-date updated td-module-date"
+                                                            dateTime="2024-10-02T11:22:09+05:00"
+                                                        >
+                                                            October 2, 2024
+                                                        </time>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-2 td-cpt-post">
+                                        <div className="td-module-container td-category-pos-above">
+                                            <div className="td-image-container">
+                                                <div className="td-module-thumb">
+                                                    <a
+                                                        href="https://startuppakistan.com.pk/25-years-strong-ipl-and-diebold-nixdorf-celebrate-silver-jubilee/"
+                                                        rel="bookmark"
+                                                        className="td-image-wrap "
+                                                        title="25 Years Strong: IPL and Diebold Nixdorf Celebrate Silver Jubilee"
+                                                    >
+                                                        <span
+                                                            className="entry-thumb td-thumb-css td-animation-stack-type0-2"
+                                                            data-type="css_image"
+                                                            data-img-url="https://startuppakistan.com.pk/wp-content/uploads/2024/10/1-696x392.png"
+                                                            style={{
+                                                                backgroundImage:
+                                                                    'url("https://startuppakistan.com.pk/wp-content/uploads/2024/10/1-696x392.png")',
+                                                            }}
+                                                        ></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div className="td-module-meta-info">
+                                                <a
+                                                    href="https://startuppakistan.com.pk/category/business/"
+                                                    className="td-post-category"
+                                                >
+                                                    Business
+                                                </a>
+                                                <div className="tdb-module-title-wrap">
+                                                    <h3 className="entry-title td-module-title">
+                                                        <a
+                                                            href="https://startuppakistan.com.pk/25-years-strong-ipl-and-diebold-nixdorf-celebrate-silver-jubilee/"
+                                                            rel="bookmark"
+                                                            title="25 Years Strong: IPL and Diebold Nixdorf Celebrate Silver Jubilee"
+                                                        >
+                                                            25 Years Strong: IPL
+                                                            and Diebold Nixdorf
+                                                            Celebrate Silver
+                                                            Jubilee
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                                <div className="td-editor-date">
+                                                    <span className="td-post-author-name">
+                                                        <a href="https://startuppakistan.com.pk/author/syedamaryem/">
+                                                            Syeda Maryem
+                                                        </a>
+                                                        <span>-</span>
+                                                    </span>
+                                                    <span className="td-post-date">
+                                                        <time
+                                                            className="entry-date updated td-module-date"
+                                                            dateTime="2024-10-02T11:22:09+05:00"
+                                                        >
+                                                            October 2, 2024
+                                                        </time>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-2 td-cpt-post">
+                                        <div className="td-module-container td-category-pos-above">
+                                            <div className="td-image-container">
+                                                <div className="td-module-thumb">
+                                                    <a
+                                                        href="https://startuppakistan.com.pk/25-years-strong-ipl-and-diebold-nixdorf-celebrate-silver-jubilee/"
+                                                        rel="bookmark"
+                                                        className="td-image-wrap "
+                                                        title="25 Years Strong: IPL and Diebold Nixdorf Celebrate Silver Jubilee"
+                                                    >
+                                                        <span
+                                                            className="entry-thumb td-thumb-css td-animation-stack-type0-2"
+                                                            data-type="css_image"
+                                                            data-img-url="https://startuppakistan.com.pk/wp-content/uploads/2024/10/1-696x392.png"
+                                                            style={{
+                                                                backgroundImage:
+                                                                    'url("https://startuppakistan.com.pk/wp-content/uploads/2024/10/1-696x392.png")',
+                                                            }}
+                                                        ></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div className="td-module-meta-info">
+                                                <a
+                                                    href="https://startuppakistan.com.pk/category/business/"
+                                                    className="td-post-category"
+                                                >
+                                                    Business
+                                                </a>
+                                                <div className="tdb-module-title-wrap">
+                                                    <h3 className="entry-title td-module-title">
+                                                        <a
+                                                            href="https://startuppakistan.com.pk/25-years-strong-ipl-and-diebold-nixdorf-celebrate-silver-jubilee/"
+                                                            rel="bookmark"
+                                                            title="25 Years Strong: IPL and Diebold Nixdorf Celebrate Silver Jubilee"
+                                                        >
+                                                            25 Years Strong: IPL
+                                                            and Diebold Nixdorf
+                                                            Celebrate Silver
+                                                            Jubilee
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                                <div className="td-editor-date">
+                                                    <span className="td-post-author-name">
+                                                        <a href="https://startuppakistan.com.pk/author/syedamaryem/">
+                                                            Syeda Maryem
+                                                        </a>
+                                                        <span>-</span>
+                                                    </span>
+                                                    <span className="td-post-date">
+                                                        <time
+                                                            className="entry-date updated td-module-date"
+                                                            dateTime="2024-10-02T11:22:09+05:00"
+                                                        >
+                                                            October 2, 2024
+                                                        </time>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
+                    <NewsSlider />
+
                 </article>
             </div>
         </Layout>

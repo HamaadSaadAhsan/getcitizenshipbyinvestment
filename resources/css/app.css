@@ -83,7 +83,45 @@ body{
     margin-block: 48px;
 }
 
+.fWdqDG {
+    display: grid;
+    width: 100%;
+    background-color: rgb(20, 22, 24);
+    padding-block: 24px;
+}
 
+.gaQDrT {
+    display: flex;
+    overflow: scroll;
+    column-gap: 12px;
+    scroll-snap-type: x;
+    scrollbar-width: none;
+}
+
+.bmYCSL:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: transparent;
+}
+
+.jEhueU {
+    border-bottom: 1px solid rgb(230, 232, 234);
+    transition: opacity 0.2s ease-in-out;
+    grid-auto-rows: auto auto 1fr auto;
+    position: relative;
+    display: grid;
+    opacity: 0.3;
+}
+
+.blulaQ:hover {
+    background-color: rgb(84, 86, 88);
+}
+
+.blulaQ:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: transparent;
+}
 
 .eMVRpx {
     max-width: 1280px;
@@ -131,6 +169,15 @@ body{
     color: unset;
 }
 
+.jGHyKs {
+    border-bottom: 1px solid rgb(230, 232, 234);
+    transition: opacity 0.2s ease-in-out;
+    grid-auto-rows: auto auto 1fr auto;
+    position: relative;
+    display: grid;
+    opacity: 1;
+}
+
 .kFuHJG {
     border-bottom: 1px solid rgb(230, 232, 234);
     transition: opacity 0.2s ease-in-out;
@@ -142,6 +189,25 @@ body{
 
 .jvzsLx {
     position: relative;
+}
+
+.eTiihu {
+    background-color: rgb(20, 22, 24);
+    color: rgb(0, 0, 0);
+    gap: 12px;
+    display: grid;
+    padding-top: 8px;
+}
+
+.iscyVn {
+    color: rgb(230, 232, 234);
+    font-family: "BBC Reith Serif", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: -0.36px;
 }
 
 .kUyIkJ {
@@ -320,10 +386,30 @@ body{
 .kbvCmj {
     width: 100%;
 }
+
 .kZtaAl {
     width: 100%;
     margin-right: 0px;
 }
+
+.fsrXqA {
+    color: rgb(230, 232, 234);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0px;
+}
+
+.iIHPGq {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: -0.12px;
+    color: rgb(175, 177, 180);
+}
+
 .cXvgVW {
     grid-template-columns: auto auto;
     -webkit-box-align: center;
