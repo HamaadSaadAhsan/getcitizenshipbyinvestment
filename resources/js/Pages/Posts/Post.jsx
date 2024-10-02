@@ -13,7 +13,7 @@ import {
 } from "@/Components/ui/breadcrumb";
 import { Link, Head } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
-import { ChevronLeft, CirclePlusIcon, Loader2, UploadIcon } from "lucide-react";
+import { ChevronLeft, EyeIcon, Loader2, UploadIcon } from "lucide-react";
 import { Badge } from "@/Components/ui/badge";
 import {
     Card,
@@ -49,7 +49,7 @@ import {
 
 import QuillEditor from "@/Components/QuillEditor";
 
-const Create = ({ categories, post, image }) => {
+const Post = ({ categories, post, image }) => {
     const [quillContent, setQuillContent] = useState(post.content ?? "");
     const [isLoading, setIsLoading] = useState(false);
     const [selectedImage, setSelectedImage] = useState(image ?? null);
@@ -63,7 +63,7 @@ const Create = ({ categories, post, image }) => {
             .min(1, "Title is required")
             .max(100, "Title must be 100 characters or less"),
         content: z.string().min(1, "Content is required"),
-        description: z.string().min(1, "Description is required"),
+        description: z.string().min(1, "Description is required").max(180, "Description should be maximum 180 characters"),
         slug: z.string().min(1, "Slug is required"),
         category: z.string({
             required_error: "Please select a Post Category",
@@ -169,6 +169,8 @@ const Create = ({ categories, post, image }) => {
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
+
+
                     <BreadcrumbItem>
                         <BreadcrumbPage>Add Post</BreadcrumbPage>
                     </BreadcrumbItem>
@@ -190,8 +192,8 @@ const Create = ({ categories, post, image }) => {
                                 size="icon"
                                 className="h-7 w-7"
                             >
-                                <ChevronLeft className="h-4 w-4" />
-                                <span className="sr-only">Back</span>
+                                <Link href={route('admin.posts')}><ChevronLeft className="h-4 w-4" /></Link>
+                                <Link className="sr-only" href={route('admin.posts')}><span>Back</span></Link>
                             </Button>
                             <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
                                 {form.getValues("title") !== "" ? (
@@ -208,7 +210,26 @@ const Create = ({ categories, post, image }) => {
                             >
                                 {post.status ?? "Draft"}
                             </Badge>
+
+                            
                             <div className="hidden items-center gap-2 md:ml-auto md:flex">
+
+                            {
+                                post.status === "draft" ? (<>
+                                    <Button variant="secondary" className="space-x-1" size="sm">
+                                        <Link href={route("posts.show", [post.category.name, post.slug])}>Preview</Link>
+                                        <EyeIcon size={15} />
+                                    </Button>
+                                </>) : (
+                                    <>
+                                    <Button variant="secondary" className="space-x-1" size="sm">
+                                        <Link href={route("posts.show", [post.category.name, post.slug])}>View </Link>
+                                        <EyeIcon size={15}/>
+                                    </Button>
+                                    </>
+                                )
+                            }
+
                                 <Button variant="outline" size="sm">
                                     Discard
                                 </Button>
@@ -663,4 +684,4 @@ const Create = ({ categories, post, image }) => {
     );
 };
 
-export default Create;
+export default Post;

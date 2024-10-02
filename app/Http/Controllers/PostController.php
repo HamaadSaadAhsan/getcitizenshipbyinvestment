@@ -92,7 +92,7 @@ class PostController extends Controller
     public function update(Post $post, Request $request){
         $request->validate([
             'title' => 'required|max:100',
-            'description' => 'required|max:500',
+            'description' => 'required|max:180',
             'category' => 'required|max:20',
             'content' => 'required'
         ]);

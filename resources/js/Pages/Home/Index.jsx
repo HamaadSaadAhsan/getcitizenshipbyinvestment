@@ -9,66 +9,66 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
 
             <div className="px-6">
                 <article className="block">
-                    <section class="sc-2448c165-1 gvnjGp">
+                    <section className="sc-2448c165-1 gvnjGp">
                         <div
                             data-testid="vermont-section"
-                            class="sc-2448c165-2 eMVRpx"
+                            className="sc-2448c165-2 eMVRpx"
                         >
-                            <div class="sc-6f766713-2 ctfMqF">
-                                <div class="sc-6f766713-1 iGzJZA"></div>
+                            <div className="sc-6f766713-2 ctfMqF">
+                                <div className="sc-6f766713-1 iGzJZA"></div>
                             </div>
                             <div
                                 data-testid="Vermont-grid"
-                                class="sc-e70150c3-0 fbvxoY"
+                                className="sc-e70150c3-0 fbvxoY"
                             >
-                                <div class="sc-93223220-0 bOZIBp">
+                                <div className="sc-93223220-0 bOZIBp">
                                     <div
                                         data-testid="first-grid"
-                                        class="sc-93223220-0 sc-e70150c3-1 gPmTJa fNRFwC"
+                                        className="sc-93223220-0 sc-e70150c3-1 gPmTJa fNRFwC"
                                     >
                                         {citizenshipPosts.map((post) => (
-                                            <div data-testid="edinburgh-card">
+                                            <div key={post.id} data-testid="edinburgh-card">
                                                 <div data-testid="anchor-inner-wrapper">
                                                     <a
                                                         href={route('posts.show', [post.category.name, post.slug])}
                                                         data-testid="external-anchor"
                                                         target="_self"
-                                                        class="sc-2e6baa30-0 gILusN"
+                                                        className="sc-2e6baa30-0 gILusN"
                                                     >
                                                         <div
                                                             data-testid="edinburgh-live"
-                                                            class="sc-b8778340-0 kFuHJG"
+                                                            className="sc-b8778340-0 kFuHJG"
                                                         >
                                                             <div
                                                                 data-testid="card-media-wrapper"
-                                                                class="sc-b8778340-1 jvzsLx"
+                                                                className="sc-b8778340-1 jvzsLx"
                                                             >
                                                                 <div
                                                                     data-testid="card-media"
-                                                                    class="sc-b8778340-2 kUyIkJ"
+                                                                    className="sc-b8778340-2 kUyIkJ"
                                                                 >
-                                                                    <div class="sc-a34861b-1 jxzoZC">
+                                                                    <div className="sc-a34861b-1 jxzoZC">
                                                                         <img
                                                                             sizes="96vw"
-                                                                            srcset={route('storage.images', post.image) + ' 240w,'+ route('storage.images', post.image) + ' 320w,'+ route('storage.images', post.image) + ' 480w,'+ route('storage.images', post.image) + ' 640w,'+ route('storage.images', post.image) + ' 800w,'+ route('storage.images', post.image) + ' 1024w,'+ route('storage.images', post.image) + ' 1536'}
+                                                                            srcSet={route('storage.images', post.image) + ' 240w,' + route('storage.images', post.image) + ' 320w,' + route('storage.images', post.image) + ' 480w,' + route('storage.images', post.image) + ' 640w,' + route('storage.images', post.image) + ' 800w,' + route('storage.images', post.image) + ' 1024w,' + route('storage.images', post.image) + ' 1536'}
                                                                             src={route('storage.images', post.image)}
                                                                             loading="lazy"
                                                                             alt={post.title}
-                                                                            class="sc-a34861b-0 efFcac"
+                                                                            className="sc-a34861b-0 efFcac"
                                                                         />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
                                                                 data-testid="card-text-wrapper"
-                                                                class="sc-b8778340-3 gxEarx"
+                                                                className="sc-b8778340-3 gxEarx"
                                                             >
-                                                                <div class="sc-4fedabc7-1 kbvCmj">
-                                                                    <div class="sc-4fedabc7-0 kZtaAl">
+                                                                <div className="sc-4fedabc7-1 kbvCmj">
+                                                                    <div className="sc-4fedabc7-0 kZtaAl">
 
                                                                         <h2
                                                                             data-testid="card-headline"
-                                                                            class="sc-4fedabc7-3 zTZri"
+                                                                            className="sc-4fedabc7-3 zTZri"
                                                                         >
                                                                             {post.title}
                                                                         </h2>
@@ -76,11 +76,11 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                 </div>
                                                                 <p
                                                                     data-testid="card-description"
-                                                                    class="sc-b8778340-4 kYtujW"
+                                                                    className="sc-b8778340-4 kYtujW"
                                                                 >
                                                                     {post.description}
                                                                 </p>
-                                                                <div class="sc-4e537b1-0 gtLVrL"></div>
+                                                                <div className="sc-4e537b1-0 gtLVrL"></div>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -90,7 +90,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                     </div>
                                     <div
                                         data-testid="first-grid-narrow"
-                                        class="sc-93223220-0 sc-e70150c3-2 jrqxhV jzPkfJ"
+                                        className="sc-93223220-0 sc-e70150c3-2 jrqxhV jzPkfJ"
                                     >
                                         <div data-testid="dundee-card">
                                             <div data-testid="anchor-inner-wrapper">
@@ -98,46 +98,46 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                     href="https://www.bbc.com/news/live/cwyl3prj39wt"
                                                     data-testid="external-anchor"
                                                     target="_self"
-                                                    class="sc-2e6baa30-0 gILusN"
+                                                    className="sc-2e6baa30-0 gILusN"
                                                 >
                                                     <div
                                                         data-testid="dundee-live"
-                                                        class="sc-1a9a6d5b-1 iYglrs"
+                                                        className="sc-1a9a6d5b-1 iYglrs"
                                                     >
                                                         <div
                                                             data-testid="card-image-wrapper"
-                                                            class="sc-1a9a6d5b-3 jsqFvT"
+                                                            className="sc-1a9a6d5b-3 jsqFvT"
                                                         >
                                                             <div
                                                                 data-testid="card-media"
-                                                                class="sc-1a9a6d5b-4 fGVWed"
+                                                                className="sc-1a9a6d5b-4 fGVWed"
                                                             >
-                                                                <div class="sc-a34861b-1 jxzoZC">
+                                                                <div className="sc-a34861b-1 jxzoZC">
                                                                     <img
                                                                         sizes="96vw"
-                                                                        srcset="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 240w,https://ichef.bbci.co.uk/ace/standard/320/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 320w,https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 480w,https://ichef.bbci.co.uk/ace/standard/640/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 640w,https://ichef.bbci.co.uk/ace/standard/800/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 800w,https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 1024w,https://ichef.bbci.co.uk/ace/standard/1536/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 1536w"
+                                                                        srcSet="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 240w,https://ichef.bbci.co.uk/ace/standard/320/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 320w,https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 480w,https://ichef.bbci.co.uk/ace/standard/640/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 640w,https://ichef.bbci.co.uk/ace/standard/800/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 800w,https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 1024w,https://ichef.bbci.co.uk/ace/standard/1536/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp 1536w"
                                                                         src="https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/1ea6/live/caf5b930-7c1a-11ef-b02d-c5f3b724a1ea.jpg.webp"
                                                                         loading="lazy"
                                                                         alt="New York City Mayor Eric Adams speaks to the press outside his official residence Gracie Mansion"
-                                                                        class="sc-a34861b-0 efFcac"
+                                                                        className="sc-a34861b-0 efFcac"
                                                                     />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div
                                                             data-testid="card-text-wrapper"
-                                                            class="sc-93223220-0 gcYoBW"
+                                                            className="sc-93223220-0 gcYoBW"
                                                         >
-                                                            <div class="sc-4fedabc7-1 kbvCmj">
-                                                                <div class="sc-4fedabc7-0 kZtaAl">
-                                                                    <div class="sc-4d9540e7-1 sc-4fedabc7-2 cIYZQl cXvgVW">
+                                                            <div className="sc-4fedabc7-1 kbvCmj">
+                                                                <div className="sc-4fedabc7-0 kZtaAl">
+                                                                    <div className="sc-4d9540e7-1 sc-4fedabc7-2 cIYZQl cXvgVW">
                                                                         <svg
                                                                             width="32"
                                                                             height="32"
                                                                             viewBox="0 0 32 32"
                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                             data-testid="live-icon-svg-styled"
-                                                                            class="sc-d00e3bf7-0 exnLpe sc-1097f7fe-0 jmthjj"
+                                                                            className="sc-d00e3bf7-0 exnLpe sc-1097f7fe-0 jmthjj"
                                                                         >
                                                                             <path
                                                                                 id="outer"
@@ -148,13 +148,13 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                 d="M13.8318 24.0437C10.5541 23.2949 7.94042 20.6671 7.24815 17.3894C6.42872 13.5042 8.40665 9.57661 12.0658 7.83886C16.2901 5.84681 21.4327 7.72584 23.4389 12.0066C25.6287 16.683 23.1422 22.2918 18.1974 23.8459C16.9965 24.2274 15.0186 24.3122 13.8318 24.0437Z"
                                                                             ></path>
                                                                         </svg>
-                                                                        <span class="sc-4fedabc7-4 hjkPtM">
+                                                                        <span className="sc-4fedabc7-4 hjkPtM">
                                                                             LIVE
                                                                         </span>
                                                                     </div>
                                                                     <h2
                                                                         data-testid="card-headline"
-                                                                        class="sc-4fedabc7-3 zTZri"
+                                                                        className="sc-4fedabc7-3 zTZri"
                                                                     >
                                                                         NYC
                                                                         Mayor
@@ -171,7 +171,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             </div>
                                                             <p
                                                                 data-testid="card-description"
-                                                                class="sc-1a9a6d5b-0 kGKNqV"
+                                                                className="sc-1a9a6d5b-0 kGKNqV"
                                                             >
                                                                 "I look forward
                                                                 to defending
@@ -184,7 +184,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                 foreign campaign
                                                                 donations.
                                                             </p>
-                                                            <div class="sc-4e537b1-0 hJDQRX"></div>
+                                                            <div className="sc-4e537b1-0 hJDQRX"></div>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -195,41 +195,41 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                 <a
                                                     href="/news/articles/c80rkv0k4j8o"
                                                     data-testid="internal-link"
-                                                    class="sc-2e6baa30-0 gILusN"
+                                                    className="sc-2e6baa30-0 gILusN"
                                                 >
                                                     <div
                                                         data-testid="dundee-article"
-                                                        class="sc-1a9a6d5b-1 iYglrs"
+                                                        className="sc-1a9a6d5b-1 iYglrs"
                                                     >
                                                         <div
                                                             data-testid="card-image-wrapper"
-                                                            class="sc-1a9a6d5b-3 jsqFvT"
+                                                            className="sc-1a9a6d5b-3 jsqFvT"
                                                         >
                                                             <div
                                                                 data-testid="card-media"
-                                                                class="sc-1a9a6d5b-4 fGVWed"
+                                                                className="sc-1a9a6d5b-4 fGVWed"
                                                             >
-                                                                <div class="sc-a34861b-1 jxzoZC">
+                                                                <div className="sc-a34861b-1 jxzoZC">
                                                                     <img
                                                                         sizes="96vw"
-                                                                        srcset="https://ichef.bbci.co.uk/news/240/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 240w,https://ichef.bbci.co.uk/news/320/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 320w,https://ichef.bbci.co.uk/news/480/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 480w,https://ichef.bbci.co.uk/news/640/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 640w,https://ichef.bbci.co.uk/news/800/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 800w,https://ichef.bbci.co.uk/news/1024/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 1024w,https://ichef.bbci.co.uk/news/1536/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 1536w"
+                                                                        srcSet="https://ichef.bbci.co.uk/news/240/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 240w,https://ichef.bbci.co.uk/news/320/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 320w,https://ichef.bbci.co.uk/news/480/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 480w,https://ichef.bbci.co.uk/news/640/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 640w,https://ichef.bbci.co.uk/news/800/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 800w,https://ichef.bbci.co.uk/news/1024/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 1024w,https://ichef.bbci.co.uk/news/1536/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp 1536w"
                                                                         src="https://ichef.bbci.co.uk/news/480/cpsprodpb/bb05/live/6a9a8220-7be6-11ef-a067-535ff32592e2.jpg.webp"
                                                                         loading="lazy"
                                                                         alt="President Volodymyr Zelensky signs ammunition while visiting the Scranton Army Ammunition Plant (SCAAP) in Scranton, Pennsylvania, USA, on 23 September 2024"
-                                                                        class="sc-a34861b-0 efFcac"
+                                                                        className="sc-a34861b-0 efFcac"
                                                                     />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div
                                                             data-testid="card-text-wrapper"
-                                                            class="sc-93223220-0 gcYoBW"
+                                                            className="sc-93223220-0 gcYoBW"
                                                         >
-                                                            <div class="sc-4fedabc7-1 kbvCmj">
-                                                                <div class="sc-4fedabc7-0 kZtaAl">
+                                                            <div className="sc-4fedabc7-1 kbvCmj">
+                                                                <div className="sc-4fedabc7-0 kZtaAl">
                                                                     <h2
                                                                         data-testid="card-headline"
-                                                                        class="sc-4fedabc7-3 zTZri"
+                                                                        className="sc-4fedabc7-3 zTZri"
                                                                     >
                                                                         Escalating
                                                                         Trump
@@ -243,7 +243,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             </div>
                                                             <p
                                                                 data-testid="card-description"
-                                                                class="sc-1a9a6d5b-0 kGKNqV"
+                                                                className="sc-1a9a6d5b-0 kGKNqV"
                                                             >
                                                                 Republicans
                                                                 accused Zelensky
@@ -254,20 +254,20 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                 with top
                                                                 Democrats.
                                                             </p>
-                                                            <div class="sc-4e537b1-0 hJDQRX">
+                                                            <div className="sc-4e537b1-0 hJDQRX">
                                                                 <span
                                                                     data-testid="card-metadata-lastupdated"
-                                                                    class="sc-4e537b1-1 dsUUMv"
+                                                                    className="sc-4e537b1-1 dsUUMv"
                                                                 >
                                                                     3 hrs ago
                                                                 </span>
                                                                 <div
                                                                     data-testid="card-metadata-separator"
-                                                                    class="sc-4e537b1-3 lmDmEx"
+                                                                    className="sc-4e537b1-3 lmDmEx"
                                                                 ></div>
                                                                 <span
                                                                     data-testid="card-metadata-tag"
-                                                                    class="sc-4e537b1-2 eRsxHt"
+                                                                    className="sc-4e537b1-2 eRsxHt"
                                                                 >
                                                                     US &amp;
                                                                     Canada
@@ -279,57 +279,57 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="sc-93223220-0 jrqxhV">
+                                    <div className="sc-93223220-0 jrqxhV">
                                         <div data-testid="westminster-card">
                                             <div
                                                 data-testid="westminster-live"
-                                                class="sc-6781995d-3 fGXoHh"
+                                                className="sc-6781995d-3 fGXoHh"
                                             >
                                                 <div data-testid="anchor-inner-wrapper">
                                                     <a
                                                         href="https://www.bbc.com/news/live/c981g8mrl8lt"
                                                         data-testid="external-anchor"
                                                         target="_self"
-                                                        class="sc-2e6baa30-0 gILusN"
+                                                        className="sc-2e6baa30-0 gILusN"
                                                     >
                                                         <div
                                                             data-testid="westminster"
-                                                            class="sc-6781995d-2 jOKQKE"
+                                                            className="sc-6781995d-2 jOKQKE"
                                                         >
                                                             <div
                                                                 data-testid="card-media-wrapper"
-                                                                class="sc-6781995d-4 fTeUGL"
+                                                                className="sc-6781995d-4 fTeUGL"
                                                             >
                                                                 <div
                                                                     data-testid="card-media"
-                                                                    class="sc-6781995d-1 iHDalG"
+                                                                    className="sc-6781995d-1 iHDalG"
                                                                 >
-                                                                    <div class="sc-a34861b-1 jxzoZC">
+                                                                    <div className="sc-a34861b-1 jxzoZC">
                                                                         <img
                                                                             sizes="96vw"
-                                                                            srcset="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 240w,https://ichef.bbci.co.uk/ace/standard/320/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 320w,https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 480w,https://ichef.bbci.co.uk/ace/standard/640/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 640w,https://ichef.bbci.co.uk/ace/standard/800/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 800w,https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 1024w,https://ichef.bbci.co.uk/ace/standard/1536/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 1536w"
+                                                                            srcSet="https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 240w,https://ichef.bbci.co.uk/ace/standard/320/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 320w,https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 480w,https://ichef.bbci.co.uk/ace/standard/640/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 640w,https://ichef.bbci.co.uk/ace/standard/800/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 800w,https://ichef.bbci.co.uk/ace/standard/1024/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 1024w,https://ichef.bbci.co.uk/ace/standard/1536/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp 1536w"
                                                                             src="https://ichef.bbci.co.uk/ace/standard/480/cpsprodpb/b1a4/live/0bf24c70-7c19-11ef-b282-4535eb84fe4b.jpg.webp"
                                                                             loading="eager"
                                                                             alt="People crowd around outside the site of a strike in Beirut"
-                                                                            class="sc-a34861b-0 efFcac"
+                                                                            className="sc-a34861b-0 efFcac"
                                                                         />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
                                                                 data-testid="card-text-wrapper"
-                                                                class="sc-6781995d-5 dWflPh"
+                                                                className="sc-6781995d-5 dWflPh"
                                                             >
-                                                                <div class="sc-4fedabc7-1 kbvCmj">
-                                                                    <div class="sc-4fedabc7-0 hJUdDc">
-                                                                        <div class="sc-4d9540e7-1 sc-4fedabc7-2 gglKuy jOAobE">
+                                                                <div className="sc-4fedabc7-1 kbvCmj">
+                                                                    <div className="sc-4fedabc7-0 hJUdDc">
+                                                                        <div className="sc-4d9540e7-1 sc-4fedabc7-2 gglKuy jOAobE">
                                                                             <svg
                                                                                 width="32"
                                                                                 height="32"
                                                                                 viewBox="0 0 32 32"
                                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                                 data-testid="live-icon-svg-styled"
-                                                                                class="sc-d00e3bf7-0 exnLpe sc-1097f7fe-0 jmthjj"
+                                                                                className="sc-d00e3bf7-0 exnLpe sc-1097f7fe-0 jmthjj"
                                                                             >
                                                                                 <path
                                                                                     id="outer"
@@ -340,13 +340,13 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                     d="M13.8318 24.0437C10.5541 23.2949 7.94042 20.6671 7.24815 17.3894C6.42872 13.5042 8.40665 9.57661 12.0658 7.83886C16.2901 5.84681 21.4327 7.72584 23.4389 12.0066C25.6287 16.683 23.1422 22.2918 18.1974 23.8459C16.9965 24.2274 15.0186 24.3122 13.8318 24.0437Z"
                                                                                 ></path>
                                                                             </svg>
-                                                                            <span class="sc-4fedabc7-4 dWoXdj">
+                                                                            <span className="sc-4fedabc7-4 dWoXdj">
                                                                                 LIVE
                                                                             </span>
                                                                         </div>
                                                                         <h2
                                                                             data-testid="card-headline"
-                                                                            class="sc-4fedabc7-3 eVkEgC"
+                                                                            className="sc-4fedabc7-3 eVkEgC"
                                                                         >
                                                                             Israel
                                                                             strikes
@@ -367,7 +367,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                 </div>
                                                                 <p
                                                                     data-testid="card-description"
-                                                                    class="sc-6781995d-0 eZxCk"
+                                                                    className="sc-6781995d-0 eZxCk"
                                                                 >
                                                                     After
                                                                     Wednesday
@@ -383,19 +383,19 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                     action would
                                                                     continue.
                                                                 </p>
-                                                                <div class="sc-4e537b1-0 hJDQRX"></div>
+                                                                <div className="sc-4e537b1-0 hJDQRX"></div>
                                                                 <div
                                                                     data-testid="card-relatedUrls"
-                                                                    class="sc-c01f71b3-0 ctIIxE"
+                                                                    className="sc-c01f71b3-0 ctIIxE"
                                                                 >
                                                                     <div data-testid="anchor-inner-wrapper">
                                                                         <a
                                                                             href="/news/articles/cly3g1dplppo"
                                                                             data-testid="internal-link"
-                                                                            class="sc-5e33cc43-0 jZSdZm"
+                                                                            className="sc-5e33cc43-0 jZSdZm"
                                                                         >
-                                                                            <div class="sc-c01f71b3-2 fQxuYw">
-                                                                                <div class="sc-c01f71b3-3 fMShTC">
+                                                                            <div className="sc-c01f71b3-2 fQxuYw">
+                                                                                <div className="sc-c01f71b3-3 fMShTC">
                                                                                     <svg
                                                                                         width="3em"
                                                                                         height="3em"
@@ -404,7 +404,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                         category="content-types"
                                                                                         icon="dot"
                                                                                         data-testid="inline-icon"
-                                                                                        class="sc-2c06e71a-0 fsMljb"
+                                                                                        className="sc-2c06e71a-0 fsMljb"
                                                                                     >
                                                                                         <circle
                                                                                             cx="3"
@@ -415,7 +415,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                 </div>
                                                                                 <h4
                                                                                     data-testid="card-related-headline"
-                                                                                    class="sc-c01f71b3-1 hKDzsS"
+                                                                                    className="sc-c01f71b3-1 hKDzsS"
                                                                                 >
                                                                                     'The
                                                                                     bombs
@@ -436,10 +436,10 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                         <a
                                                                             href="/news/videos/cp8e5w1j13zo"
                                                                             data-testid="internal-link"
-                                                                            class="sc-5e33cc43-0 jZSdZm"
+                                                                            className="sc-5e33cc43-0 jZSdZm"
                                                                         >
-                                                                            <div class="sc-c01f71b3-2 fQxuYw">
-                                                                                <div class="sc-c01f71b3-3 gZRMhK">
+                                                                            <div className="sc-c01f71b3-2 fQxuYw">
+                                                                                <div className="sc-c01f71b3-3 gZRMhK">
                                                                                     <svg
                                                                                         viewBox="0 0 32 32"
                                                                                         width="3em"
@@ -447,14 +447,14 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                         category="playback-avkx"
                                                                                         icon="play"
                                                                                         data-testid="inline-icon"
-                                                                                        class="sc-2c06e71a-0 fsMljb"
+                                                                                        className="sc-2c06e71a-0 fsMljb"
                                                                                     >
                                                                                         <path d="M29 16 5.8 1v30L29 16z"></path>
                                                                                     </svg>
                                                                                 </div>
                                                                                 <h4
                                                                                     data-testid="card-related-headline"
-                                                                                    class="sc-c01f71b3-1 hKDzsS"
+                                                                                    className="sc-c01f71b3-1 hKDzsS"
                                                                                 >
                                                                                     Watch:
                                                                                     Deserted
@@ -471,10 +471,10 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                         <a
                                                                             href="/news/articles/c5y8gv1d8j8o"
                                                                             data-testid="internal-link"
-                                                                            class="sc-5e33cc43-0 jZSdZm"
+                                                                            className="sc-5e33cc43-0 jZSdZm"
                                                                         >
-                                                                            <div class="sc-c01f71b3-2 fQxuYw">
-                                                                                <div class="sc-c01f71b3-3 fMShTC">
+                                                                            <div className="sc-c01f71b3-2 fQxuYw">
+                                                                                <div className="sc-c01f71b3-3 fMShTC">
                                                                                     <svg
                                                                                         width="3em"
                                                                                         height="3em"
@@ -483,7 +483,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                         category="content-types"
                                                                                         icon="dot"
                                                                                         data-testid="inline-icon"
-                                                                                        class="sc-2c06e71a-0 fsMljb"
+                                                                                        className="sc-2c06e71a-0 fsMljb"
                                                                                     >
                                                                                         <circle
                                                                                             cx="3"
@@ -494,7 +494,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                                                 </div>
                                                                                 <h4
                                                                                     data-testid="card-related-headline"
-                                                                                    class="sc-c01f71b3-1 hKDzsS"
+                                                                                    className="sc-c01f71b3-1 hKDzsS"
                                                                                 >
                                                                                     How
                                                                                     the
@@ -514,35 +514,35 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                         </div>
                                                     </a>
                                                 </div>
-                                                <hr class="sc-6781995d-6 bbWpTX"></hr>
+                                                <hr className="sc-6781995d-6 bbWpTX"></hr>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div
                                     data-testid="second-grid"
-                                    class="sc-93223220-0 sc-e70150c3-3 jPpGMu kdbokE"
+                                    className="sc-93223220-0 sc-e70150c3-3 jPpGMu kdbokE"
                                 >
                                     <div data-testid="manchester-card">
                                         <div data-testid="anchor-inner-wrapper">
                                             <a
                                                 href="/news/articles/czd13mezz7mo"
                                                 data-testid="internal-link"
-                                                class="sc-2e6baa30-0 gILusN"
+                                                className="sc-2e6baa30-0 gILusN"
                                             >
                                                 <div
                                                     data-testid="manchester-article"
-                                                    class="sc-e5949eb5-1 cMUTXL"
+                                                    className="sc-e5949eb5-1 cMUTXL"
                                                 >
                                                     <div
                                                         data-testid="card-text-wrapper"
-                                                        class="sc-e5949eb5-2 eOoDdE"
+                                                        className="sc-e5949eb5-2 eOoDdE"
                                                     >
-                                                        <div class="sc-4fedabc7-1 kbvCmj">
-                                                            <div class="sc-4fedabc7-0 kZtaAl">
+                                                        <div className="sc-4fedabc7-1 kbvCmj">
+                                                            <div className="sc-4fedabc7-0 kZtaAl">
                                                                 <h2
                                                                     data-testid="card-headline"
-                                                                    class="sc-4fedabc7-3 zTZri"
+                                                                    className="sc-4fedabc7-3 zTZri"
                                                                 >
                                                                     Florida
                                                                     braces for
@@ -555,7 +555,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                         </div>
                                                         <p
                                                             data-testid="card-description"
-                                                            class="sc-e5949eb5-0 gpCoKv"
+                                                            className="sc-e5949eb5-0 gpCoKv"
                                                         >
                                                             Officials have urged
                                                             residents to heed
@@ -564,20 +564,20 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             towards Florida's
                                                             Big Bend.
                                                         </p>
-                                                        <div class="sc-4e537b1-0 hJDQRX">
+                                                        <div className="sc-4e537b1-0 hJDQRX">
                                                             <span
                                                                 data-testid="card-metadata-lastupdated"
-                                                                class="sc-4e537b1-1 dsUUMv"
+                                                                className="sc-4e537b1-1 dsUUMv"
                                                             >
                                                                 24 mins ago
                                                             </span>
                                                             <div
                                                                 data-testid="card-metadata-separator"
-                                                                class="sc-4e537b1-3 lmDmEx"
+                                                                className="sc-4e537b1-3 lmDmEx"
                                                             ></div>
                                                             <span
                                                                 data-testid="card-metadata-tag"
-                                                                class="sc-4e537b1-2 eRsxHt"
+                                                                className="sc-4e537b1-2 eRsxHt"
                                                             >
                                                                 World
                                                             </span>
@@ -592,21 +592,21 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                             <a
                                                 href="/news/articles/c5y9x6zrkrro"
                                                 data-testid="internal-link"
-                                                class="sc-2e6baa30-0 gILusN"
+                                                className="sc-2e6baa30-0 gILusN"
                                             >
                                                 <div
                                                     data-testid="manchester-article"
-                                                    class="sc-e5949eb5-1 cMUTXL"
+                                                    className="sc-e5949eb5-1 cMUTXL"
                                                 >
                                                     <div
                                                         data-testid="card-text-wrapper"
-                                                        class="sc-e5949eb5-2 eOoDdE"
+                                                        className="sc-e5949eb5-2 eOoDdE"
                                                     >
-                                                        <div class="sc-4fedabc7-1 kbvCmj">
-                                                            <div class="sc-4fedabc7-0 kZtaAl">
+                                                        <div className="sc-4fedabc7-1 kbvCmj">
+                                                            <div className="sc-4fedabc7-0 kZtaAl">
                                                                 <h2
                                                                     data-testid="card-headline"
-                                                                    class="sc-4fedabc7-3 zTZri"
+                                                                    className="sc-4fedabc7-3 zTZri"
                                                                 >
                                                                     World's
                                                                     longest-serving
@@ -619,7 +619,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                         </div>
                                                         <p
                                                             data-testid="card-description"
-                                                            class="sc-e5949eb5-0 gpCoKv"
+                                                            className="sc-e5949eb5-0 gpCoKv"
                                                         >
                                                             After almost half a
                                                             century on death row
@@ -627,20 +627,20 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             has been acquitted
                                                             of murder.
                                                         </p>
-                                                        <div class="sc-4e537b1-0 hJDQRX">
+                                                        <div className="sc-4e537b1-0 hJDQRX">
                                                             <span
                                                                 data-testid="card-metadata-lastupdated"
-                                                                class="sc-4e537b1-1 dsUUMv"
+                                                                className="sc-4e537b1-1 dsUUMv"
                                                             >
                                                                 4 hrs ago
                                                             </span>
                                                             <div
                                                                 data-testid="card-metadata-separator"
-                                                                class="sc-4e537b1-3 lmDmEx"
+                                                                className="sc-4e537b1-3 lmDmEx"
                                                             ></div>
                                                             <span
                                                                 data-testid="card-metadata-tag"
-                                                                class="sc-4e537b1-2 eRsxHt"
+                                                                className="sc-4e537b1-2 eRsxHt"
                                                             >
                                                                 Asia
                                                             </span>
@@ -655,21 +655,21 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                             <a
                                                 href="/news/articles/cjwdq3ppw01o"
                                                 data-testid="internal-link"
-                                                class="sc-2e6baa30-0 gILusN"
+                                                className="sc-2e6baa30-0 gILusN"
                                             >
                                                 <div
                                                     data-testid="manchester-article"
-                                                    class="sc-e5949eb5-1 cMUTXL"
+                                                    className="sc-e5949eb5-1 cMUTXL"
                                                 >
                                                     <div
                                                         data-testid="card-text-wrapper"
-                                                        class="sc-e5949eb5-2 eOoDdE"
+                                                        className="sc-e5949eb5-2 eOoDdE"
                                                     >
-                                                        <div class="sc-4fedabc7-1 kbvCmj">
-                                                            <div class="sc-4fedabc7-0 kZtaAl">
+                                                        <div className="sc-4fedabc7-1 kbvCmj">
+                                                            <div className="sc-4fedabc7-0 kZtaAl">
                                                                 <h2
                                                                     data-testid="card-headline"
-                                                                    class="sc-4fedabc7-3 zTZri"
+                                                                    className="sc-4fedabc7-3 zTZri"
                                                                 >
                                                                     'Chaos
                                                                     reigns' -
@@ -683,7 +683,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                         </div>
                                                         <p
                                                             data-testid="card-description"
-                                                            class="sc-e5949eb5-0 gpCoKv"
+                                                            className="sc-e5949eb5-0 gpCoKv"
                                                         >
                                                             An extensive list of
                                                             notable names have
@@ -692,10 +692,10 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             troubled Brooklyn
                                                             facility
                                                         </p>
-                                                        <div class="sc-4e537b1-0 hJDQRX">
+                                                        <div className="sc-4e537b1-0 hJDQRX">
                                                             <span
                                                                 data-testid="card-metadata-lastupdated"
-                                                                class="sc-4e537b1-1 dsUUMv"
+                                                                className="sc-4e537b1-1 dsUUMv"
                                                             >
                                                                 17 hrs ago
                                                             </span>
@@ -711,21 +711,21 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                 href="https://www.bbc.co.uk/sounds/play/m0023051"
                                                 data-testid="external-anchor"
                                                 target="_self"
-                                                class="sc-2e6baa30-0 gILusN"
+                                                className="sc-2e6baa30-0 gILusN"
                                             >
                                                 <div
                                                     data-testid="manchester-customCard"
-                                                    class="sc-e5949eb5-1 cMUTXL"
+                                                    className="sc-e5949eb5-1 cMUTXL"
                                                 >
                                                     <div
                                                         data-testid="card-text-wrapper"
-                                                        class="sc-e5949eb5-2 eOoDdE"
+                                                        className="sc-e5949eb5-2 eOoDdE"
                                                     >
-                                                        <div class="sc-4fedabc7-1 kbvCmj">
-                                                            <div class="sc-4fedabc7-0 kZtaAl">
+                                                        <div className="sc-4fedabc7-1 kbvCmj">
+                                                            <div className="sc-4fedabc7-0 kZtaAl">
                                                                 <h2
                                                                     data-testid="card-headline"
-                                                                    class="sc-4fedabc7-3 zTZri"
+                                                                    className="sc-4fedabc7-3 zTZri"
                                                                 >
                                                                     Listen: The
                                                                     Coming Storm
@@ -737,7 +737,7 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                         </div>
                                                         <p
                                                             data-testid="card-description"
-                                                            class="sc-e5949eb5-0 gpCoKv"
+                                                            className="sc-e5949eb5-0 gpCoKv"
                                                         >
                                                             At the height of the
                                                             Cold War a
@@ -745,12 +745,28 @@ const Home = ({ featuredNews, topStories, categories, citizenshipPosts }) => {
                                                             Congressman meets a
                                                             strange death.{" "}
                                                         </p>
-                                                        <div class="sc-4e537b1-0 hJDQRX"></div>
+                                                        <div className="sc-4e537b1-0 hJDQRX"></div>
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="gvnjGp">
+                        <div className="sc-2448c165-2 eMVRpx">
+                            <div className="sc-6f766713-2 ctfMqF">
+                                <div className="sc-6f766713-1 iGzJZA">
+                                    <hr className="section-divider" />
+                                </div>
+                                <div className="sc-6f766713-3 cYOBar"><div>
+                                    <div className="sc-6f766713-7 dqKfa">
+                                        <h2 className="sc-6f766713-4 elqzuS">From Residency</h2>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

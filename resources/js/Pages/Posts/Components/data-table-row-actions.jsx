@@ -16,6 +16,7 @@ import {
 
 import { labels } from "../data/data"
 import { taskSchema } from "../data/schema"
+import { Link } from "@inertiajs/react"
 
 export function DataTableRowActions({
   row,
@@ -34,7 +35,9 @@ export function DataTableRowActions({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={route("admin.posts.show", row.original.id)}>Edit</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
