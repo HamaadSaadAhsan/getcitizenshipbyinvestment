@@ -51,14 +51,19 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts}) => {
                                                             className="sc-b8778340-2 kUyIkJ"
                                                         >
                                                             <div className="sc-a34861b-1 jxzoZC">
-                                                                <img
-                                                                    sizes="96vw"
-                                                                    srcSet={route("storage.images", post.image) + " 240w," + route("storage.images", post.image) + " 320w," + route("storage.images", post.image) + " 480w," + route("storage.images", post.image) + " 640w," + route("storage.images", post.image) + " 800w," + route("storage.images", post.image) + " 1024w," + route("storage.images", post.image) + " 1536"}
-                                                                    src={route("storage.images", post.image)}
-                                                                    loading="lazy"
-                                                                    alt={post.title}
-                                                                    className="sc-a34861b-0 efFcac"
-                                                                />
+                                                                {
+                                                                    post.image && (
+                                                                        <img
+                                                                            sizes="96vw"
+                                                                            srcSet={route("storage.images", post.image) + " 240w," + route("storage.images", post.image) + " 320w," + route("storage.images", post.image) + " 480w," + route("storage.images", post.image) + " 640w," + route("storage.images", post.image) + " 800w," + route("storage.images", post.image) + " 1024w," + route("storage.images", post.image) + " 1536"}
+                                                                            src={route("storage.images", post.image)}
+                                                                            loading="lazy"
+                                                                            alt={post.title}
+                                                                            className="sc-a34861b-0 efFcac"
+                                                                        />
+                                                                    )
+                                                                }
+
                                                             </div>
                                                         </div>
                                                     </div>
