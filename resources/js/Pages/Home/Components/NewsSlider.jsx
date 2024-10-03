@@ -7,71 +7,65 @@ const NewsSlider = () => {
     const sliderRef = useRef(null);
     const [prevDisabled, setPrevDisabled] = useState(true);
     const [nextDisabled, setNextDisabled] = useState(false);
-    const totalItems = 9;
-    const itemsPerPage = 5;
-    const [currentPage, setCurrentPage] = useState(1);
-    const [activeItems, setActiveItems] = useState([])
-
-    const calculateTotalPages = (total, perPage) => {
-        return Math.ceil(total / perPage);
-    };
-
-    const totalPages = calculateTotalPages(totalItems, itemsPerPage);
-    const lastIndex = totalItems - itemsPerPage;
-
-    const handleChanged = (event) => {
-        if (sliderRef.current) {
-            var items = document.getElementsByClassName('owl-item active')
-            let newItems = [];
-            for (let i= 0; i < items.length; i++) {
-                newItems.push(items[i])
-            }
-            console.log(newItems)
-            // setActiveItems(newItems)
-
-            // items = activeItems.find(item => item.classList.value === 'owl-item active')
-            // console.log(items)
-            // setActiveItems()
-            // console.log(activeItems)
-        }
-    };
 
     const responsiveConfig = {
-        0: {
-            items: 1,
-            loop: false
+        0:{
+            items:1
         },
-        576: {
-            items: 2,
-            loop: false
+        600:{
+            items:2
         },
-        768: {
+        700:{
             items: 3,
-            loop: false
+            margin: 80,
         },
-        992: {
+        768:{
             items: 3,
-            loop: false
+            margin: 120,
         },
-        1200: {
+        800:{
+          items: 3,
+        },
+        900:{
+            items:3,
+            margin: 175,
+        },
+        1000:{
+            items:3,
+        },
+        1024:{
+            items: 3,
+        },
+        1140:{
             items: 4,
-            loop: false
         }
     };
 
-    const next = () => {
-        if (!nextDisabled) {
-            sliderRef.current.next(1000);
-        }
-    };
+    useEffect(() => {
+        let owl = $('.owl-carousel').owlCarousel();
 
-    const prev = () => {
-        if (!prevDisabled) {
-            sliderRef.current.prev(1000);
-        }
-    };
+        $(".next-btn").click(function () {
+            owl.trigger("next.owl.carousel");
+        });
 
-    const onCarouselInitialized = (event) => {}
+        $(".prev-btn").click(function () {
+            owl.trigger("prev.owl.carousel");
+        });
+
+        $(owl).on("translated.owl.carousel", function (event) {
+            if ($(".owl-prev").hasClass("disabled")) {
+                $(".prev-btn").addClass("disabled");
+            } else {
+                $(".prev-btn").removeClass("disabled");
+            }
+            if ($(".owl-next").hasClass("disabled")) {
+                $(".next-btn").addClass("disabled");
+            } else {
+                $(".next-btn").removeClass("disabled");
+            }
+        });
+    })
+
 
     // const updateScrollButtons = () => {
     //     if (sliderRef.current) {
@@ -191,11 +185,9 @@ const NewsSlider = () => {
                                 <h2 className="elqzuS-White">More news</h2>
                             </div>
                         </div>
-                        <div className="sc-8fb73bb-0 fZGzuG">
+                        <div className="fZGzuG">
                             <button
-                                onClick={prev}
-                                disabled={prevDisabled}
-                                className="bmYCSL"
+                                className="bmYCSL prev-btn"
                                 aria-label="Previous Page"
                             >
                                 <svg viewBox="0 0 32 32" width="1em" height="1em" category="arrows" icon="chevron-left"
@@ -204,9 +196,7 @@ const NewsSlider = () => {
                                 </svg>
                             </button>
                             <button
-                                onClick={next}
-                                disabled={nextDisabled}
-                                className="blulaQ"
+                                className="blulaQ next-btn"
                                 aria-label="Next Page"
                                 data-testid="right-arrow"
                             >
@@ -222,13 +212,10 @@ const NewsSlider = () => {
                     <div className="gaQDrT">
                         <OwlCarousel
                             ref={sliderRef}
-                            onInitialized={handleChanged}
-                            onChange={handleChanged}
-                            className='owl-carousel'
-                            margin={0}
-                            items={itemsPerPage}
+                            className='owl-carousel owl-theme'
+                            margin={10}
                             dots={false}
-                            nav={false}
+                            nav={true}
                             responsive={responsiveConfig}
                         >
                             {/* Repeat this block for each news item */}

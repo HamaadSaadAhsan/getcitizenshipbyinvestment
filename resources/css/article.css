@@ -300,12 +300,6 @@ button {
     letter-spacing: -0.36px;
 }
 
-.gvnjGp{
-    display: grid;
-    width: 100%;
-    background-color: rgb(255,255,255);
-    margin-block: 48px;
-}
 
 .eMVRpx {
     max-width: 1280px;
@@ -404,7 +398,7 @@ hr {
 }
 
 
-.lgKNnV {
+.lgKNnV-white {
     margin: 0px 16px;
     border-width: 0px;
     height: 2px;
@@ -453,6 +447,21 @@ hr {
     width: auto;
 }
 
+.owl-theme .owl-nav .disabled,
+button.disabled {
+    opacity: 0.6;
+}
+
+.fZGzuG.disabled button{
+    opacity: 0.6;
+}
+
+.owl-stage{
+    padding-left: 0 !important;
+}
+
+
+
 .iPpURb {
     margin: 0px 16px;
     border-width: 0px;
@@ -487,6 +496,12 @@ hr {
     width: 270px;
     flex-shrink: 0;
     scroll-snap-align: start;
+}
+
+@media screen and (max-width: 600px) {
+    .jupLmo{
+        width: 100%;
+    }
 }
 
 .blulaQ svg {
@@ -1004,13 +1019,6 @@ body .tdi_96 .td_module_flex_7 .entry-thumb {
 
     .left-column .td_module_flex_6 {
         width: 100%;
-    }
-}
-
-
-@media screen and (max-width: 599px) {
-    .gvnjGp {
-        margin-block: 32px;
     }
 }
 
