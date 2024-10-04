@@ -18,7 +18,11 @@ class HomeController extends Controller
         $topStories = News::where('is_featured', false)->inRandomOrder()->take(5)->get();
 
         $citizenshipCategory = Category::where('name', 'Citizenship')->first();
-        $citizenshipPosts = Post::where('category_id', $citizenshipCategory?->id)->with('category')->orderBy('created_at', 'desc')->take(2)->get();
+        $citizenshipPosts = Post::where('category_id', $citizenshipCategory?->id)
+            ->with('category')
+            ->orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
 
         return Inertia::render('Home/Index', [
             'categories' => $categories,

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 import Logo from "./logo/CBILogoWhite";
 import Dropdown from "../Pages/Home/Components/Dropdown";
+import {Footer} from "@/Components/Footer.jsx";
 const Layout = ({ children, categories }) => {
     return (
         <div className="min-h-screen flex flex-col">
@@ -65,14 +66,7 @@ const Layout = ({ children, categories }) => {
 
             <main className="flex-grow">{children}</main>
 
-            <footer className="bg-gray-900 text-white py-8">
-                <div className="container mx-auto px-4">
-                    {/* Add footer content here */}
-                    <p className="text-center">
-                        &copy; 2024 <a target="_blank" href="https://saadahsan.com">Saad Ahsan</a>. All rights reserved.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };

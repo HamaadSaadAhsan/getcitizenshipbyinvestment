@@ -557,11 +557,11 @@ button.disabled {
     }
 } */
 
-.grid-item {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border: 1px solid #ddd;
-}
+/*.grid-item {*/
+/*    background-color: #f0f0f0;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ddd;*/
+/*}*/
 
 .large-item {
     height: 100%;
