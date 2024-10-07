@@ -144,14 +144,14 @@ class PostController extends Controller
 
         if (!$post) {
             abort(404);
-        }   
+        }
 
         $post = [
             'id' => $post->id,
             'slug' => $post->slug,
             'title' => $post->title,
             'description' => $post->description,
-            'image' => route('storage.images', ['filename' => $post->image]),
+            'image' => $post->image ? route('storage.images', ['filename' => $post->image]) : '',
             'posted_at' => $post->created_at->diffForHumans(),
             'posted_by' => $post->user->name,
             'category_id' => $post->category_id,
