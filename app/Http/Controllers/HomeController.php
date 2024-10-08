@@ -11,24 +11,60 @@ use Inertia\Inertia;
 class HomeController extends Controller
 {
     // Index Page
-    public function index(){
-
+    public function index()
+    {
         $categories = Category::where('parent_id', 0)->with('children')->get();
-        $featuredNews = News::where('is_featured', true)->first();
-        $topStories = News::where('is_featured', false)->inRandomOrder()->take(5)->get();
+        $featuredNews = Post::whereFeatured(true)->with(['user', 'category'])->first();
+        $topStories = Post::with(['category', 'user'])
+        ->whereHas('category', function ($q){
+            $q->where('slug', 'immigration-news');
+        })
+        ->orderBy('created_at', 'DESC')
+        ->take(4)
+        ->get();
+
+        $moreNews = Post::with(['category', 'user'])
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'immigration-news');
+            })
+            ->whereFeatured(false)
+            ->orderBy('created_at', 'DESC')
+            ->take(8)  // Take the next 8 posts (or however many you want)
+            ->skip(4)
+            ->get();
 
         $citizenshipCategory = Category::where('name', 'Citizenship')->first();
         $citizenshipPosts = Post::where('category_id', $citizenshipCategory?->id)
-            ->with('category')
+            ->with(['category', 'user'])
             ->orderBy('created_at', 'desc')
             ->take(2)
+            ->get();
+
+        $residencePosts = Post::with(['category', 'user'])
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'residency');
+            })
+            ->orderBy('created_at', 'DESC')
+            ->take(4)
+            ->get();
+
+        $digitalNomad = Post::with(['category', 'user'])
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'digital-nomad');
+            })
+            ->orderBy('created_at', 'DESC')
+            ->take(8)
             ->get();
 
         return Inertia::render('Home/Index', [
             'categories' => $categories,
             'featuredNews' => $featuredNews,
             'topStories' => $topStories,
-            'citizenshipPosts' => $citizenshipPosts
+            'citizenshipPosts' => $citizenshipPosts,
+            'residencePosts' => $residencePosts,
+            'moreNews' => $moreNews,
+            'digitalNomadPosts' => $digitalNomad,
+            'posts' => session('posts') ?? []
         ]);
     }
 }

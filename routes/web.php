@@ -10,7 +10,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->prefix('/admin')->group(function() {
     Route::get('/dashboard', function () {
@@ -27,6 +27,12 @@ Route::middleware(['auth'])->prefix('/admin')->group(function() {
     Route::post('image/upload', [ImageController::class, 'upload'])->name('image.upload');
 });
 
+Route::middleware(['auth'])->group(function (){
+    Route::controller(\App\Http\Controllers\CategoryController::class)->group(function (){
+        Route::get('category/{category}', 'show')->name('category.show');
+    });
+});
+
 Route::get('/storage/images/{filename}', function ($filename) {
     $path = Storage::path("images/{$filename}");
 
@@ -36,6 +42,9 @@ Route::get('/storage/images/{filename}', function ($filename) {
 
     return response()->file($path);
 })->name('storage.images');
+
+Route::get('posts/{author}', [PostController::class, 'postsByAuthor'])->name('posts.author');
+Route::post('category/{category}/posts', [PostController::class, 'postsByCategory'])->name('category.posts');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -17,7 +17,7 @@ const toolbarOptions = [
 ];
 
 const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange }, ref) => {
-    console.log(defaultValue)
+
     const containerRef = useRef(null);
     const defaultValueRef = useRef(defaultValue);
     const onTextChangeRef = useRef(onTextChange);
@@ -27,7 +27,7 @@ const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange 
         onTextChangeRef.current = onTextChange;
         onSelectionChangeRef.current = onSelectionChange;
     });
-  
+
     useEffect(() => {
         const container = containerRef.current;
         const editorContainer = container.appendChild(
@@ -41,22 +41,22 @@ const QuillEditor = forwardRef(({ defaultValue, onTextChange, onSelectionChange 
               },
           }
         });
-  
+
         ref.current = quill;
-  
+
         if (defaultValueRef.current) {
           quill.setContents(defaultValueRef.current);
           ref.current.root.innerHTML = defaultValueRef.current;
         }
-  
+
         quill.on(Quill.events.TEXT_CHANGE, (...args) => {
           onTextChangeRef.current?.(...args);
         });
-  
+
         quill.on(Quill.events.SELECTION_CHANGE, (...args) => {
           onSelectionChangeRef.current?.(...args);
         });
-  
+
         return () => {
           ref.current = null;
           container.innerHTML = '';

@@ -51,6 +51,7 @@ import Quill from "quill";
 
 const Delta = Quill.import('delta');
 import QuillEditor from "@/Components/QuillEditor";
+import {Switch} from "@/Components/ui/switch.jsx";
 
 const Create = ({ categories }) => {
     const [quillContent, setQuillContent] = useState("");
@@ -80,6 +81,7 @@ const Create = ({ categories }) => {
             content: "",
             category: "",
             status: "draft",
+            featured: false,
         },
     });
 
@@ -92,11 +94,16 @@ const Create = ({ categories }) => {
     };
 
     const handleEditorChange = (content) => {
-        setQuillContent(quillRef.current.getSemanticHTML());
-        form.setValue("content", quillRef.current.getSemanticHTML(), { shouldValidate: true });
+        const htmlContent = quillRef.current.getSemanticHTML();
+        setQuillContent(htmlContent);
+        form.setValue("content", htmlContent, { shouldValidate: true });
     }
 
     function onSubmit(values) {
+        if (!form.formState.isValid) {
+            return; // Prevent submission if form is invalid
+        }
+
         router.post(route("admin.posts.store"), values, {
             onStart: handleFormProcessing,
             onFinish: handleFormProcessed,
@@ -115,6 +122,9 @@ const Create = ({ categories }) => {
                 });
                 if (errors.status) form.setError("status", {
                     message: errors.status
+                });
+                if (errors.featured) form.setError("featured", {
+                    message: errors.featured
                 });
             }
         });
@@ -159,20 +169,11 @@ const Create = ({ categories }) => {
                                 <span className="sr-only">Back</span>
                             </Button>
                             <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-                                {form.getValues("title") !== "" ? (
-                                    form.getValues("title")
-                                ) : (
-                                    <span className="text-gray-400">
+                              <span className="text-gray-400">
                                         Draft Post
                                     </span>
-                                )}
                             </h1>
-                            <Badge
-                                variant="outline"
-                                className="ml-auto sm:ml-0"
-                            >
-                                Draft
-                            </Badge>
+
                             <div className="hidden items-center gap-2 md:ml-auto md:flex">
                                 <Button variant="outline" size="sm">
                                     Discard
@@ -347,7 +348,7 @@ const Create = ({ categories }) => {
 
                                 <Card x-chunk="dashboard-07-chunk-3">
                                     <CardHeader>
-                                        <CardTitle>Product Status</CardTitle>
+                                        <CardTitle>Post Status</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="grid gap-6">
@@ -388,6 +389,7 @@ const Create = ({ categories }) => {
                                                                     </SelectItem>
                                                                 </SelectContent>
                                                             </Select>
+                                                            <FormMessage />
                                                         </FormItem>
                                                     )}
                                                 />
@@ -395,6 +397,40 @@ const Create = ({ categories }) => {
                                         </div>
                                     </CardContent>
                                 </Card>
+
+                                <Card
+                                    className="overflow-hidden"
+                                    x-chunk="dashboard-07-chunk-5"
+                                >
+                                    <CardHeader>
+                                        <CardTitle>Mark Post as Featured</CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <div className="grid gap-6">
+                                            <div className="grid gap-3">
+                                                <FormField
+                                                    control={form.control}
+                                                    name="featured"
+                                                    render={({ field }) => (
+                                                        <FormItem className="flex flex-row items-center justify-between">
+                                                            <FormDescription>
+                                                                Marking this post will display it in top first section all other posts will be un marked as featured.
+                                                            </FormDescription>
+                                                            <FormControl>
+                                                                <Switch
+                                                                    checked={field.value}
+                                                                    onCheckedChange={field.onChange}
+                                                                />
+                                                            </FormControl>
+                                                            <FormMessage />
+                                                        </FormItem>
+                                                    )}
+                                                />
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+
                                 <Card
                                     className="overflow-hidden"
                                     x-chunk="dashboard-07-chunk-4"

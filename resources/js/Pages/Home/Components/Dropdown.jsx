@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import React, {useState, useRef, useEffect, forwardRef} from 'react';
+import {Link} from '@inertiajs/react';
 
-const Dropdown = ({ category }) => {
+const Dropdown = forwardRef(({ category }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
+    console.log(window.location.pathname)
+
+    const toggleDropdown = () => setIsOpen(!isOpen);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     return (
-        <div className="relative">
-            <button onClick={toggleDropdown} className="flex items-center p-4">
-                <span className="mr-2">{category.name}</span>
+        <div className={`p-3 ${
+            route().current('category.*')
+                ? "active-link"
+                : ""
+        }`} ref={dropdownRef}>
+            <button onClick={toggleDropdown} className="flex items-center mb-0">
+                <span className="mr-2 text-[14px]">{category.name}</span>
                 <svg
-                    className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                    className={`w-3 h-3 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180' : ''}`}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -23,18 +39,15 @@ const Dropdown = ({ category }) => {
                 </svg>
             </button>
             <div
-                className={`absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-10 transition-opacity duration-300 ease-in-out ${
-                    isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                className={`absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-10 overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'
                 }`}
-                style={{ transition: 'max-height 0.3s ease-in-out', maxHeight: isOpen ? '200px' : '0' }}
             >
                 {category.children.map((child) => (
                     <Link
                         key={child.id}
-                        href={`/category/${child.slug}`}
-                        className={`block px-4 py-2 text-gray-800 hover:bg-gray-200 transition duration-200 ${
-                            window.location.pathname === `/category/${child.category}` ? 'border-b-4 border-black' : ''
-                        }`}
+                        href={ route('category.show', child.slug)}
+                        className={`nav-link block px-4 py-2 text-gray-800 hover:bg-gray-200 transition duration-200`}
                     >
                         {child.name}
                     </Link>
@@ -42,6 +55,6 @@ const Dropdown = ({ category }) => {
             </div>
         </div>
     );
-};
+});
 
 export default Dropdown;

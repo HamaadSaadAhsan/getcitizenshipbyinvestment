@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\News;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,14 +60,15 @@ class PostController extends Controller
             'description' => $request->description,
             'category_id' => Category::where('name', $request->category)->first()?->id,
             'content' => $request->content,
-            'status' => $request->status
+            'status' => $request->status,
+            'featured' => $request->featured ?? false
         ]);
 
         return redirect(route('admin.posts.show', ['post' => $post]));
     }
 
     public function show(Post $post){
-        $categories = Category::where('parent_id', 0)->select(['id', 'name'])->get();
+        $categories = Category::where('parent_id', 0)->with('children')->get();
         $image = $post->image ? route('storage.images', ['filename' => $post->image]) : '';
         $post = [
             'id' => $post->id,
@@ -76,6 +78,7 @@ class PostController extends Controller
             'category_id' => $post->category_id,
             'content' => $post->content,
             'status' => $post->status,
+            'featured' => $post->featured,
             'category' => [
                 'id' => $post->category->id,
                 'name' => $post->category->name
@@ -97,13 +100,16 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
+        Post::whereFeatured(true)->update(['featured' => false]);
+
         $post->update([
             'slug' => Str::slug($request->title),
             'title' => $request->title,
             'description' => $request->description,
             'category_id' => Category::where('name', $request->category)->first()?->id,
             'content' => $request->content,
-            'status' => $request->status
+            'status' => $request->status,
+            'featured' => $request->featured ?? false
         ]);
 
         return redirect(route('admin.posts.show', ['post' => $post]));
@@ -146,6 +152,8 @@ class PostController extends Controller
             abort(404);
         }
 
+        $categories = Category::where('parent_id', 0)->with('children')->get();
+
         $post = [
             'id' => $post->id,
             'slug' => $post->slug,
@@ -162,11 +170,26 @@ class PostController extends Controller
             ]
         ];
 
-        $categories = Category::where('parent_id', 0)->select(['id', 'name'])->get();
-
         return Inertia::render("Posts/View", [
-            'categories' =>  Category::where('parent_id', 0)->select(['id', 'name'])->get(),
+            'categories' =>  $categories,
             'post' => $post
+        ]);
+    }
+
+    public function postsByCategory(Category $category)
+    {
+        $posts = $category->posts->take(3)->map(function ($post) {
+            return [
+                'id' => $post->id,
+                'title' => $post->title,
+                'description' => $post->description,
+                'image' => $post->image ? route('storage.images', ['filename' => $post->image]) : '',
+                'slug' => $post->slug
+            ];
+        });
+
+        return response()->json([
+            'posts' => $posts
         ]);
     }
 }

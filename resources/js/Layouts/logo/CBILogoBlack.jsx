@@ -1,13 +1,13 @@
 import React from "react";
 
-function CBILogoWhite() {
+function CBILogoWhite({ classNames = '' }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             id="Layer_1"
             data-name="Layer 1"
             viewBox="0 0 2078.21 557.62"
-            className="w-[280px] md:w-[280px] lg:w-[280px]"
+            className={ classNames ?? "w-[280px] md:w-[280px] lg:w-[280px]"}
         >
             <defs>
                 <style>{`.cls-1{fill:#62aa57;}.cls-2{fill:black;}`}</style>

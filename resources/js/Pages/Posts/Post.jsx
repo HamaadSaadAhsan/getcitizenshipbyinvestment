@@ -48,6 +48,7 @@ import {
 } from "@/Components/ui/tooltip";
 
 import QuillEditor from "@/Components/QuillEditor";
+import {Switch} from "@/Components/ui/switch.jsx";
 
 const Post = ({ categories, post, image }) => {
     const [quillContent, setQuillContent] = useState(post.content ?? "");
@@ -68,7 +69,7 @@ const Post = ({ categories, post, image }) => {
         category: z.string({
             required_error: "Please select a Post Category",
         }),
-        status: z.string().min(1, "Status is required"),
+        status: z.string().min(1, "Status is required")
     });
 
 
@@ -81,6 +82,7 @@ const Post = ({ categories, post, image }) => {
             category: post.category.name ?? "",
             status: post.status ?? "draft",
             slug: post.slug ?? "draft",
+            featured: post.featured ?? false
         },
     });
 
@@ -185,8 +187,8 @@ const Post = ({ categories, post, image }) => {
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className="mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4">
-                        <div className="flex items-center gap-4">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex items-center gap-4 flex-wrap md:flex-wrap lg:flex-nowrap">
                             <Button
                                 variant="outline"
                                 size="icon"
@@ -195,23 +197,9 @@ const Post = ({ categories, post, image }) => {
                                 <Link href={route('admin.posts')}><ChevronLeft className="h-4 w-4" /></Link>
                                 <Link className="sr-only" href={route('admin.posts')}><span>Back</span></Link>
                             </Button>
-                            <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-                                {form.getValues("title") !== "" ? (
-                                    form.getValues("title")
-                                ) : (
-                                    <span className="text-gray-400">
-                                        Draft Post
-                                    </span>
-                                )}
-                            </h1>
-                            <Badge
-                                variant="outline"
-                                className="ml-auto sm:ml-0 capitalize"
-                            >
-                                {post.status ?? "Draft"}
-                            </Badge>
 
-                            
+
+
                             <div className="hidden items-center gap-2 md:ml-auto md:flex">
 
                             {
@@ -236,7 +224,6 @@ const Post = ({ categories, post, image }) => {
                                 <Button
                                     size="sm"
                                     type="submit"
-                                    disabled={isLoading}
                                 >
                                     {isLoading ? (
                                         <>
@@ -255,11 +242,7 @@ const Post = ({ categories, post, image }) => {
                                     <CardHeader>
                                         <CardTitle>Post Details</CardTitle>
                                         <CardDescription>
-                                            {form.getValues("description") ?? (
-                                                <span className="text-gray-400">
-                                                    Draft Post
-                                                </span>
-                                            )}
+                                            Enter Details related to post
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
@@ -476,6 +459,35 @@ const Post = ({ categories, post, image }) => {
                                         </div>
                                     </CardContent>
                                 </Card>
+
+                                <Card x-chunk="dashboard-07-chunk-3">
+                                    <div className="flex p-5 justify-between items-center">
+                                        <div className="flex flex-col max-w-[380px] space-y-2">
+                                            <CardTitle>Featured Post</CardTitle>
+                                            <CardDescription>
+                                                Marking this post as featured will reset other posts featured.
+                                            </CardDescription>
+                                        </div>
+
+                                        <FormField
+                                            control={form.control}
+                                            name="featured"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormControl>
+                                                        <Switch
+                                                            checked={field.value}
+                                                            onCheckedChange={field.onChange}
+                                                        />
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+
+                                </Card>
+
+
                                 <Card
                                     className="overflow-hidden"
                                     x-chunk="dashboard-07-chunk-4"
@@ -616,7 +628,7 @@ const Post = ({ categories, post, image }) => {
                             <Button variant="outline" size="sm">
                                 Discard
                             </Button>
-                            <Button size="sm">Save Post</Button>
+                            <Button type="submit" size="sm">Save Post</Button>
                         </div>
                     </div>
                 </form>
