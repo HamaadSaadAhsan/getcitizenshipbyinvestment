@@ -58,7 +58,7 @@ class PostController extends Controller
             'category' => 'required|max:20',
             'content' => 'required',
             'subcategory' => Rule::requiredIf(function() use ($request)  {
-                return $request->has('category') && Category::where('slug', Str::slug($request->category))->count();
+                return $request->has('category') && Category::where('slug', Str::slug($request->category))->first()?->children?->count();
             })
         ]);
 
