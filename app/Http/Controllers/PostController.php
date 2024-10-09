@@ -58,7 +58,13 @@ class PostController extends Controller
             'category' => 'required|max:20',
             'content' => 'required',
             'subcategory' => Rule::requiredIf(function() use ($request)  {
-                return $request->has('category') && Category::where('slug', Str::slug($request->category))->first()?->children?->count();
+                if($request->has('category'))
+                {
+                    $category = Category::whereName($request->category)->first();
+                    return (bool)$category?->children->count();
+                }else{
+                    return false;
+                }
             })
         ]);
 
@@ -66,7 +72,7 @@ class PostController extends Controller
             'slug' => Str::slug($request->title),
             'title' => $request->title,
             'description' => $request->description,
-            'category_id' => $request->has('subcategory') ? Category::where('name', $request->subcategory)->first()?->id : Category::where('name', $request->category)->first()?->id,
+            'category_id' => $request->has('subcategory') && !is_null($request->subcategory) ? Category::where('name', $request->subcategory)->first()?->id : Category::where('name', $request->category)->first()?->id,
             'content' => $request->content,
             'status' => $request->status,
             'featured' => $request->featured ?? false
@@ -96,7 +102,7 @@ class PostController extends Controller
                 'id' => $post->category->id,
                 'name' => $post->category->name
             ],
-            'subcategories' => $post->category->parent->children
+            'subcategories' => $post->category?->parent?->children
         ];
 
         return Inertia::render('Posts/Post', [
@@ -157,6 +163,7 @@ class PostController extends Controller
 
     public function post_public_view($category, $slug){
         $post = Post::where('status', 'published')
+            ->orWhere('status', 'draft')
             ->whereHas('category', function($query) use ($category) {
                 $query->where('name', $category);
             })

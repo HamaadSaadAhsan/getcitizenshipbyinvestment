@@ -93,11 +93,12 @@ const Create = ({ categories }) => {
 
     const handleCategoryChange = (value) => {
         const category = categories.find(category => category.name === value)
+        console.log(category)
         if (category.children && category.children.length) {
             setSubCategories(category.children);
             form.setValue("category", category.name);
         } else {
-            form.setValue("category", value);
+            form.setValue("category", category.name);
             form.setValue("subcategory", "")
             setSubCategories([]);
         }
@@ -222,11 +223,9 @@ const Create = ({ categories }) => {
                                     <CardHeader>
                                         <CardTitle>Post Details</CardTitle>
                                         <CardDescription>
-                                            {form.getValues("description") ?? (
-                                                <span className="text-gray-400">
+                                            <span className="text-gray-400">
                                                     Draft Post
-                                                </span>
-                                            )}
+                                            </span>
                                         </CardDescription>
                                     </CardHeader>
                                     <CardContent>
@@ -327,7 +326,7 @@ const Create = ({ categories }) => {
                                                             </FormLabel>
                                                             <Select
                                                                 onValueChange={(value) => {
-                                                                    field.onChange
+                                                                    field.onChange(value)
                                                                     handleCategoryChange(value)
                                                                 }}
                                                                 defaultValue={
