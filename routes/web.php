@@ -25,6 +25,8 @@ Route::middleware(['auth'])->prefix('/admin')->group(function() {
     Route::post('posts/{post}/image', [PostController::class, 'updateImage'])->name('admin.posts.image.update');
 
     Route::post('image/upload', [ImageController::class, 'upload'])->name('image.upload');
+    Route::get('test', [PostController::class, 'test']);
+
 });
 
 Route::middleware(['auth'])->group(function (){

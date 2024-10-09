@@ -216,4 +216,9 @@ class PostController extends Controller
             'posts' => $posts
         ]);
     }
+
+    public function test()
+    {
+        return Inertia::render('Test');
+    }
 }

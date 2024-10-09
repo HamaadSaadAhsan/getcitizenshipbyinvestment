@@ -22,7 +22,7 @@ export default function Authenticated({ header, children }) {
             <Sidebar />
             <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
                 <Header header={header} />
-                <main className="grid flex-1 items-start p-4 sm:px-6 sm:py-0 lg:grid-cols-1 xl:grid-cols-1">
+                <main className="grid items-start p-4 sm:px-6 grid-cols-1 sm:py-0 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1">
                     {children}
                 </main>
             </div>
