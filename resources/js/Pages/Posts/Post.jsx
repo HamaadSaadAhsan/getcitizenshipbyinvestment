@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { router } from "@inertiajs/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {router} from "@inertiajs/react";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
 import "quill/dist/quill.snow.css";
 import {
     BreadcrumbItem,
@@ -11,10 +11,10 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/Components/ui/breadcrumb";
-import { Link, Head } from "@inertiajs/react";
-import { Button } from "@/Components/ui/button";
-import { ChevronLeft, EyeIcon, Loader2, UploadIcon } from "lucide-react";
-import { Badge } from "@/Components/ui/badge";
+import {Link, Head} from "@inertiajs/react";
+import {Button} from "@/Components/ui/button";
+import {ChevronLeft, EyeIcon, Loader2, UploadIcon} from "lucide-react";
+import {Badge} from "@/Components/ui/badge";
 import {
     Card,
     CardContent,
@@ -22,7 +22,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/Components/ui/card";
-import { Input } from "@/Components/ui/input";
+import {Input} from "@/Components/ui/input";
 import {
     Form,
     FormControl,
@@ -39,7 +39,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/Components/ui/select";
-import { Textarea } from "@/Components/ui/textarea";
+import {Textarea} from "@/Components/ui/textarea";
 import {
     Tooltip,
     TooltipContent,
@@ -49,10 +49,12 @@ import {
 
 import QuillEditor from "@/Components/QuillEditor";
 import {Switch} from "@/Components/ui/switch.jsx";
+import { getBooleanValue } from "@/Helpers/helpers";
 
-const Post = ({ categories, post, image }) => {
+const Post = ({categories = [], post, image}) => {
     const [quillContent, setQuillContent] = useState(post.content ?? "");
     const [isLoading, setIsLoading] = useState(false);
+    const [subCategories, setSubCategories] = useState(post.subcategories || []);
     const [selectedImage, setSelectedImage] = useState(image ?? null);
 
     // Use a ref to access the quill instance directly
@@ -69,7 +71,9 @@ const Post = ({ categories, post, image }) => {
         category: z.string({
             required_error: "Please select a Post Category",
         }),
-        status: z.string().min(1, "Status is required")
+        status: z.string().min(1, "Status is required"),
+        featured: z.boolean().optional(),
+        subcategory: z.string().optional(),
     });
 
 
@@ -82,9 +86,23 @@ const Post = ({ categories, post, image }) => {
             category: post.category.name ?? "",
             status: post.status ?? "draft",
             slug: post.slug ?? "draft",
-            featured: post.featured ?? false
+            featured: getBooleanValue(post.featured) ?? false,
+            subcategory: post.subcategory?.name ?? ""
         },
     });
+
+
+    const handleCategoryChange = (value) => {
+        const category = categories.find(category => category.name === value)
+        if (category.children && category.children.length) {
+            setSubCategories(category.children);
+            form.setValue("category", category.name);
+        } else {
+            form.setValue("category", value);
+            form.setValue("subcategory", "");
+            setSubCategories([]);
+        }
+    }
 
     const imageForm = useForm({
         resolver: zodResolver(FormSchema),
@@ -102,8 +120,9 @@ const Post = ({ categories, post, image }) => {
     };
 
     const handleEditorChange = (content) => {
-        setQuillContent(quillRef.current.getSemanticHTML());
-        form.setValue("content", quillRef.current.getSemanticHTML(), { shouldValidate: true });
+        const htmlContent = quillRef.current.getSemanticHTML();
+        setQuillContent(htmlContent);
+        form.setValue("content", htmlContent, {shouldValidate: true});
     }
 
 
@@ -112,46 +131,38 @@ const Post = ({ categories, post, image }) => {
             onStart: handleFormProcessing,
             onFinish: handleFormProcessed,
             onError: (errors) => {
-                if (errors.title)
-                    form.setError("title", {
-                        message: errors.title,
-                    });
-                if (errors.description)
-                    form.setError("description", {
-                        message: errors.description,
-                    });
-                if (errors.content)
-                    form.setError("content", {
-                        message: errors.content,
-                    });
-                if (errors.category)
-                    form.setError("category", {
-                        message: errors.category,
-                    });
-                if (errors.status)
-                    form.setError("status", {
-                        message: errors.status,
-                    });
+                setFormErrors(errors);
             },
         });
     }
 
     const updateImage = () => {
+        const imageFile = imageForm.getValues("image");
+        if (!imageFile) {
+            return; // Handle case where no image is selected
+        }
 
         const formData = new FormData();
-        formData.append("image", imageForm.getValues("image"));
+        formData.append("image", imageFile);
 
         router.post(route("admin.posts.image.update", post.id), formData, {
             onStart: handleFormProcessing,
             onFinish: handleFormProcessed,
             onError: (errors) => {
-                if (errors.image)
+                if (errors.image) {
                     imageForm.setError("image", {
                         message: errors.image,
                     });
+                }
             }
         });
     }
+
+    const setFormErrors = (errors) => {
+        Object.keys(errors).forEach((key) => {
+            form.setError(key, {message: errors[key]});
+        });
+    };
 
     return (
         <AuthenticatedLayout
@@ -164,13 +175,13 @@ const Post = ({ categories, post, image }) => {
                             </Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
                             <Link href={route("admin.posts")}>Posts</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
 
 
                     <BreadcrumbItem>
@@ -181,8 +192,9 @@ const Post = ({ categories, post, image }) => {
         >
             <Head>
                 <title>Create Post</title>
-                <meta head-key="description" name="description" content={post.description ?? ''} />
-                <meta head-key="robots" name="robots" content="max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+                <meta head-key="description" name="description" content={post.description ?? ''}/>
+                <meta head-key="robots" name="robots"
+                      content="max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
             </Head>
 
             <Form {...form}>
@@ -194,29 +206,30 @@ const Post = ({ categories, post, image }) => {
                                 size="icon"
                                 className="h-7 w-7"
                             >
-                                <Link href={route('admin.posts')}><ChevronLeft className="h-4 w-4" /></Link>
+                                <Link href={route('admin.posts')}><ChevronLeft className="h-4 w-4"/></Link>
                                 <Link className="sr-only" href={route('admin.posts')}><span>Back</span></Link>
                             </Button>
 
 
-
                             <div className="hidden items-center gap-2 md:ml-auto md:flex">
 
-                            {
-                                post.status === "draft" ? (<>
-                                    <Button variant="secondary" className="space-x-1" size="sm">
-                                        <Link href={route("posts.show", [post.category.name, post.slug])}>Preview</Link>
-                                        <EyeIcon size={15} />
-                                    </Button>
-                                </>) : (
-                                    <>
-                                    <Button variant="secondary" className="space-x-1" size="sm">
-                                        <Link href={route("posts.show", [post.category.name, post.slug])}>View </Link>
-                                        <EyeIcon size={15}/>
-                                    </Button>
-                                    </>
-                                )
-                            }
+                                {
+                                    post.status === "draft" ? (<>
+                                        <Button variant="secondary" className="space-x-1" size="sm">
+                                            <Link
+                                                href={route("posts.show", [post.subcategory ? post.subcategory.name : post.category.name, post.slug])}>Preview</Link>
+                                            <EyeIcon size={15}/>
+                                        </Button>
+                                    </>) : (
+                                        <>
+                                            <Button variant="secondary" className="space-x-1" size="sm">
+                                                <Link
+                                                    href={route("posts.show", [post.subcategory ? post.subcategory.name : post.category.name, post.slug])}>View </Link>
+                                                <EyeIcon size={15}/>
+                                            </Button>
+                                        </>
+                                    )
+                                }
 
                                 <Button variant="outline" size="sm">
                                     Discard
@@ -227,7 +240,7 @@ const Post = ({ categories, post, image }) => {
                                 >
                                     {isLoading ? (
                                         <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin"/>{" "}
                                             Saving
                                         </>
                                     ) : (
@@ -251,7 +264,7 @@ const Post = ({ categories, post, image }) => {
                                                 <FormField
                                                     control={form.control}
                                                     name="title"
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <FormItem>
                                                             <FormLabel>
                                                                 Title
@@ -264,7 +277,7 @@ const Post = ({ categories, post, image }) => {
                                                                     {...field}
                                                                 />
                                                             </FormControl>
-                                                            <FormMessage />
+                                                            <FormMessage/>
                                                         </FormItem>
                                                     )}
                                                 />
@@ -275,7 +288,7 @@ const Post = ({ categories, post, image }) => {
                                                 <FormField
                                                     control={form.control}
                                                     name="slug"
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <FormItem>
                                                             <FormLabel>
                                                                 Slug
@@ -288,7 +301,7 @@ const Post = ({ categories, post, image }) => {
                                                                     {...field}
                                                                 />
                                                             </FormControl>
-                                                            <FormMessage />
+                                                            <FormMessage/>
                                                         </FormItem>
                                                     )}
                                                 />
@@ -298,7 +311,7 @@ const Post = ({ categories, post, image }) => {
                                                 <FormField
                                                     control={form.control}
                                                     name="description"
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <FormItem>
                                                             <FormLabel>
                                                                 Description
@@ -311,7 +324,7 @@ const Post = ({ categories, post, image }) => {
                                                                     {...field}
                                                                 />
                                                             </FormControl>
-                                                            <FormMessage />
+                                                            <FormMessage/>
                                                         </FormItem>
                                                     )}
                                                 />
@@ -321,7 +334,7 @@ const Post = ({ categories, post, image }) => {
                                                 <FormField
                                                     control={form.control}
                                                     name="content"
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <FormItem>
                                                             <FormLabel>
                                                                 Content
@@ -341,7 +354,7 @@ const Post = ({ categories, post, image }) => {
                                                                 Write your post
                                                                 content here.
                                                             </FormDescription>
-                                                            <FormMessage />
+                                                            <FormMessage/>
                                                         </FormItem>
                                                     )}
                                                 />
@@ -361,22 +374,23 @@ const Post = ({ categories, post, image }) => {
                                                 <FormField
                                                     control={form.control}
                                                     name="category"
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <FormItem>
                                                             <FormLabel>
                                                                 Category
                                                             </FormLabel>
                                                             <Select
-                                                                onValueChange={
-                                                                    field.onChange
-                                                                }
+                                                                onValueChange={(e) => {
+                                                                    handleCategoryChange(e)
+                                                                }}
                                                                 defaultValue={
                                                                     field.value
                                                                 }
                                                             >
                                                                 <FormControl>
                                                                     <SelectTrigger>
-                                                                        <SelectValue placeholder="Select a Post Category" />
+                                                                        <SelectValue
+                                                                            placeholder="Select a Post Category"/>
                                                                     </SelectTrigger>
                                                                 </FormControl>
                                                                 <SelectContent>
@@ -400,10 +414,62 @@ const Post = ({ categories, post, image }) => {
                                                                     )}
                                                                 </SelectContent>
                                                             </Select>
-                                                            <FormMessage />
+                                                            <FormMessage/>
                                                         </FormItem>
                                                     )}
                                                 />
+
+                                                {
+                                                    subCategories.length ? (
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="subcategory"
+                                                            render={({field}) => (
+                                                                <FormItem>
+                                                                    <FormLabel>
+                                                                        Sub Category
+                                                                    </FormLabel>
+                                                                    <Select
+                                                                        onValueChange={
+                                                                            field.onChange
+                                                                        }
+                                                                        defaultValue={
+                                                                            field.value
+                                                                        }
+                                                                    >
+                                                                        <FormControl>
+                                                                            <SelectTrigger>
+                                                                                <SelectValue
+                                                                                    placeholder="Select a Post Category"/>
+                                                                            </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                            {subCategories.map(
+                                                                                (
+                                                                                    category
+                                                                                ) => (
+                                                                                    <SelectItem
+                                                                                        key={
+                                                                                            category.id
+                                                                                        }
+                                                                                        value={
+                                                                                            category.name
+                                                                                        }
+                                                                                    >
+                                                                                        {
+                                                                                            category.name
+                                                                                        }
+                                                                                    </SelectItem>
+                                                                                )
+                                                                            )}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                    <FormMessage/>
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                    ) : null
+                                                }
                                             </div>
                                         </div>
                                     </CardContent>
@@ -419,7 +485,7 @@ const Post = ({ categories, post, image }) => {
                                                 <FormField
                                                     control={form.control}
                                                     name="status"
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <FormItem>
                                                             <FormLabel>
                                                                 Status
@@ -437,7 +503,7 @@ const Post = ({ categories, post, image }) => {
                                                                         id="status"
                                                                         aria-label="Select status"
                                                                     >
-                                                                        <SelectValue placeholder="Select status" />
+                                                                        <SelectValue placeholder="Select status"/>
                                                                     </SelectTrigger>
                                                                 </FormControl>
                                                                 <SelectContent>
@@ -472,7 +538,7 @@ const Post = ({ categories, post, image }) => {
                                         <FormField
                                             control={form.control}
                                             name="featured"
-                                            render={({ field }) => (
+                                            render={({field}) => (
                                                 <FormItem>
                                                     <FormControl>
                                                         <Switch
@@ -536,11 +602,11 @@ const Post = ({ categories, post, image }) => {
                                             ) : (
                                                 <img
                                                     onClick={!isLoading ? (e) =>
-                                                        document
-                                                            .getElementById(
-                                                                "file-upload"
-                                                            )
-                                                            .click()
+                                                            document
+                                                                .getElementById(
+                                                                    "file-upload"
+                                                                )
+                                                                .click()
                                                         : undefined}
                                                     alt={post.title ?? ''}
                                                     className={`aspect-square w-full rounded-md object-cover ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
@@ -571,7 +637,7 @@ const Post = ({ categories, post, image }) => {
                                                                             .click()
                                                                     }
                                                                 >
-                                                                    <UploadIcon className="h-4 w-4 mr-2" />
+                                                                    <UploadIcon className="h-4 w-4 mr-2"/>
                                                                     Upload Image
                                                                 </Button>
                                                             ) : (
@@ -593,15 +659,17 @@ const Post = ({ categories, post, image }) => {
                                                                         }
                                                                         disabled={isLoading}
                                                                     >
-                                                                        <UploadIcon className="h-4 w-4 mr-2" />
+                                                                        <UploadIcon className="h-4 w-4 mr-2"/>
                                                                         Change
                                                                         Image
                                                                     </Button>
 
-                                                                    <Button className="mt-2" type="button" onClick={updateImage} disabled={isLoading}>
+                                                                    <Button className="mt-2" type="button"
+                                                                            onClick={updateImage} disabled={isLoading}>
                                                                         {isLoading ? (
                                                                             <>
-                                                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                                                                                <Loader2
+                                                                                    className="mr-2 h-4 w-4 animate-spin"/>{" "}
                                                                                 Saving
                                                                             </>
                                                                         ) : (
@@ -639,9 +707,11 @@ const Post = ({ categories, post, image }) => {
                     border-bottom: 1px solid hsl(var(--border));
                     padding: 0.5rem;
                 }
+
                 .quill-shadcn .ql-container.ql-snow {
                     border: none;
                 }
+
                 .quill-shadcn .ql-editor {
                     min-height: 200px;
                     font-size: 1rem;
@@ -649,10 +719,12 @@ const Post = ({ categories, post, image }) => {
                     padding: 1rem;
                     color: hsl(var(--foreground));
                 }
+
                 .quill-shadcn .ql-editor.ql-blank::before {
                     color: hsl(var(--muted-foreground));
                     font-style: normal;
                 }
+
                 .quill-shadcn .ql-formats button {
                     height: 28px;
                     width: 28px;
@@ -662,20 +734,25 @@ const Post = ({ categories, post, image }) => {
                     border-radius: 4px;
                     color: hsl(var(--foreground));
                 }
+
                 .quill-shadcn .ql-formats button:hover {
                     background-color: hsl(var(--accent));
                     color: hsl(var(--accent-foreground));
                 }
+
                 .quill-shadcn .ql-formats button.ql-active {
                     background-color: hsl(var(--accent));
                     color: hsl(var(--accent-foreground));
                 }
+
                 .quill-shadcn .ql-formats .ql-picker {
                     color: hsl(var(--foreground));
                 }
+
                 .quill-shadcn .ql-formats .ql-picker:hover .ql-picker-label {
                     color: hsl(var(--accent-foreground));
                 }
+
                 .quill-shadcn .ql-formats .ql-picker-options {
                     background-color: hsl(var(--background));
                     border: 1px solid hsl(var(--border));
@@ -683,10 +760,12 @@ const Post = ({ categories, post, image }) => {
                     padding: 0.5rem;
                     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                 }
+
                 .quill-shadcn .ql-formats .ql-picker-item {
                     padding: 0.25rem 0.5rem;
                     border-radius: 4px;
                 }
+
                 .quill-shadcn .ql-formats .ql-picker-item:hover {
                     background-color: hsl(var(--accent));
                     color: hsl(var(--accent-foreground));

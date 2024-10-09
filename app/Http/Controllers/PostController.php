@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Str;
 
@@ -39,7 +40,11 @@ class PostController extends Controller
     }
 
     public function create(){
-        $categories = Category::where('parent_id', 0)->select(['id', 'name'])->get();
+        $categories = Category::where('parent_id', 0)
+            ->with('children')
+            ->select(['id', 'name'])
+            ->get();
+
         return Inertia::render('Posts/Create', [
             'categories' => $categories
         ]);
@@ -51,14 +56,17 @@ class PostController extends Controller
             'title' => 'required|max:100',
             'description' => 'required|max:500',
             'category' => 'required|max:20',
-            'content' => 'required'
+            'content' => 'required',
+            'subcategory' => Rule::requiredIf(function() use ($request)  {
+                return $request->has('category') && Category::where('slug', Str::slug($request->category))->count();
+            })
         ]);
 
         $post = auth()->user()->posts()->create([
             'slug' => Str::slug($request->title),
             'title' => $request->title,
             'description' => $request->description,
-            'category_id' => Category::where('name', $request->category)->first()?->id,
+            'category_id' => $request->has('subcategory') ? Category::where('name', $request->subcategory)->first()?->id : Category::where('name', $request->category)->first()?->id,
             'content' => $request->content,
             'status' => $request->status,
             'featured' => $request->featured ?? false
@@ -70,6 +78,7 @@ class PostController extends Controller
     public function show(Post $post){
         $categories = Category::where('parent_id', 0)->with('children')->get();
         $image = $post->image ? route('storage.images', ['filename' => $post->image]) : '';
+
         $post = [
             'id' => $post->id,
             'slug' => $post->slug,
@@ -80,9 +89,14 @@ class PostController extends Controller
             'status' => $post->status,
             'featured' => $post->featured,
             'category' => [
+                'id' => $post->category->parent ? $post->category->parent->id : $post->category->parent_id,
+                'name' => $post->category->parent ? $post->category->parent->name : $post->category->name
+            ],
+            'subcategory' => [
                 'id' => $post->category->id,
                 'name' => $post->category->name
-            ]
+            ],
+            'subcategories' => $post->category->parent->children
         ];
 
         return Inertia::render('Posts/Post', [
@@ -97,7 +111,10 @@ class PostController extends Controller
             'title' => 'required|max:100',
             'description' => 'required|max:180',
             'category' => 'required|max:20',
-            'content' => 'required'
+            'content' => 'required',
+            'subcategory' => Rule::requiredIf(function() use ($request)  {
+                return $request->has('category') && Category::where('slug', Str::slug($request->category))->count();
+            })
         ]);
 
         Post::whereFeatured(true)->update(['featured' => false]);
@@ -106,7 +123,7 @@ class PostController extends Controller
             'slug' => Str::slug($request->title),
             'title' => $request->title,
             'description' => $request->description,
-            'category_id' => Category::where('name', $request->category)->first()?->id,
+            'category_id' => $request->has('subcategory') ? Category::where('name', $request->subcategory)->first()?->id : Category::where('name', $request->category)->first()?->id,
             'content' => $request->content,
             'status' => $request->status,
             'featured' => $request->featured ?? false
@@ -117,7 +134,7 @@ class PostController extends Controller
 
     public function updateImage(Post $post, Request $request){
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
         ]);
 
         // Remove previous image if it exists

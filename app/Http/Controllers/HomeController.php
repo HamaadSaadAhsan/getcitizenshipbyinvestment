@@ -56,6 +56,22 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
+        $skilledImmigrationPosts = Post::with(['category', 'user'])
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'skilled-immigration');
+            })
+            ->orderBy('created_at', 'DESC')
+            ->take(9)
+            ->get();
+
+        $businessImmigrationPosts = Post::with(['category', 'user'])
+            ->whereHas('category', function ($q) {
+                $q->where('slug', 'business-immigration');
+            })
+            ->orderBy('created_at', 'DESC')
+            ->take(9)
+            ->get();
+
         return Inertia::render('Home/Index', [
             'categories' => $categories,
             'featuredNews' => $featuredNews,
@@ -64,6 +80,8 @@ class HomeController extends Controller
             'residencePosts' => $residencePosts,
             'moreNews' => $moreNews,
             'digitalNomadPosts' => $digitalNomad,
+            'skilledImmigrationPosts' => $skilledImmigrationPosts,
+            'businessImmigrationPosts' => $businessImmigrationPosts,
             'posts' => session('posts') ?? []
         ]);
     }

@@ -1,9 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, {useState, useRef, useEffect} from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import {boolean, z} from "zod";
 import "quill/dist/quill.snow.css";
 import {
     BreadcrumbItem,
@@ -56,7 +56,7 @@ import {Switch} from "@/Components/ui/switch.jsx";
 const Create = ({ categories }) => {
     const [quillContent, setQuillContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
+    const [subCategories, setSubCategories] = useState([])
     // Use a ref to access the quill instance directly
     const quillRef = useRef();
 
@@ -70,7 +70,11 @@ const Create = ({ categories }) => {
         category: z.string({
             required_error: "Please select a Post Category",
         }),
-        status: z.string().min(1, "Status is required")
+        status: z.string().min(1, "Status is required"),
+        featured: z.boolean().default(false).optional(),
+        subcategory: subCategories.length ? z.string({
+            required_error: "Please select any subcategory"
+        }) : z.string().optional(),
     });
 
     const form = useForm({
@@ -80,10 +84,24 @@ const Create = ({ categories }) => {
             description: "",
             content: "",
             category: "",
+            subcategory: "",
             status: "draft",
             featured: false,
         },
     });
+
+
+    const handleCategoryChange = (value) => {
+        const category = categories.find(category => category.name === value)
+        if (category.children && category.children.length) {
+            setSubCategories(category.children);
+            form.setValue("category", category.name);
+        } else {
+            form.setValue("category", value);
+            form.setValue("subcategory", "")
+            setSubCategories([]);
+        }
+    }
 
     const handleFormProcessing = (response) => {
         setIsLoading(true);
@@ -100,6 +118,7 @@ const Create = ({ categories }) => {
     }
 
     function onSubmit(values) {
+        console.log(form.formState.errors)
         if (!form.formState.isValid) {
             return; // Prevent submission if form is invalid
         }
@@ -125,6 +144,9 @@ const Create = ({ categories }) => {
                 });
                 if (errors.featured) form.setError("featured", {
                     message: errors.featured
+                });
+                if (errors.subcategory) form.setError("subcategory", {
+                    message: errors.subcategory
                 });
             }
         });
@@ -304,9 +326,10 @@ const Create = ({ categories }) => {
                                                                 Category
                                                             </FormLabel>
                                                             <Select
-                                                                onValueChange={
+                                                                onValueChange={(value) => {
                                                                     field.onChange
-                                                                }
+                                                                    handleCategoryChange(value)
+                                                                }}
                                                                 defaultValue={
                                                                     field.value
                                                                 }
@@ -341,6 +364,59 @@ const Create = ({ categories }) => {
                                                         </FormItem>
                                                     )}
                                                 />
+
+                                                {
+                                                    subCategories.length ? (
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="subcategory"
+                                                            render={({ field }) => (
+                                                                <FormItem>
+                                                                    <FormLabel>
+                                                                        Sub Category
+                                                                    </FormLabel>
+                                                                    <Select
+                                                                        onValueChange={
+                                                                            field.onChange
+                                                                        }
+                                                                        defaultValue={
+                                                                            field.value
+                                                                        }
+                                                                        required={true}
+                                                                    >
+                                                                        <FormControl>
+                                                                            <SelectTrigger>
+                                                                                <SelectValue placeholder="Select a Post Category" />
+                                                                            </SelectTrigger>
+                                                                        </FormControl>
+                                                                        <SelectContent>
+                                                                            {subCategories.map(
+                                                                                (
+                                                                                    category
+                                                                                ) => (
+                                                                                    <SelectItem
+                                                                                        key={
+                                                                                            category.id
+                                                                                        }
+                                                                                        value={
+                                                                                            category.name
+                                                                                        }
+                                                                                    >
+                                                                                        {
+                                                                                            category.name
+                                                                                        }
+                                                                                    </SelectItem>
+                                                                                )
+                                                                            )}
+                                                                        </SelectContent>
+                                                                    </Select>
+                                                                    <FormMessage />
+                                                                </FormItem>
+                                                            )}
+                                                        />
+                                                    ) : ""
+                                                }
+
                                             </div>
                                         </div>
                                     </CardContent>
