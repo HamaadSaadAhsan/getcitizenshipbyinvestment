@@ -54,7 +54,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|max:100',
-            'description' => 'required|max:500',
+            'description' => 'required|max:180',
             'category' => 'required|max:20',
             'content' => 'required',
             'subcategory' => Rule::requiredIf(function() use ($request)  {
