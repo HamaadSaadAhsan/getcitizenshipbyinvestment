@@ -61,14 +61,11 @@ import {
     WordCount,
 } from 'ckeditor5';
 
-const CKEditorComponent = () => {
+const CKEditorComponent = ({ data = '', onChange }) => {
     const editorRef = useRef(null);
     const [words, setWords] = useState(0)
     const [characters, setCharacters] = useState(0)
-
-
     const LICENSE_KEY = '';
-
     const REDUCED_MATERIAL_COLORS = [
         {label: 'Red 50', color: '#ffebee'},
         {label: 'Purple 50', color: '#f3e5f5'},
@@ -191,13 +188,6 @@ const CKEditorComponent = () => {
         {label: 'Grey 900', color: '#212121'},
         {label: 'Blue grey 900', color: '#263238'},
     ];
-
-    function customMentionUserItemRenderer(item) {
-    }
-
-    function SpecialCharactersEmoji(editor) {
-    }
-
     const TEMPLATE_DEFINITIONS = [
         {
             title: 'Signature (multi-line)',
@@ -356,7 +346,6 @@ const CKEditorComponent = () => {
             description: 'Document letterhead with logo',
         },
     ];
-
     const editorConfiguration = {
         plugins: [
             Alignment, Autoformat, AutoImage, AutoLink, BlockQuote, Bold,
@@ -372,7 +361,7 @@ const CKEditorComponent = () => {
             TableColumnResize, TableProperties, TableToolbar, TextPartLanguage,
             TextTransformation, TodoList, Underline, WordCount
         ],
-        licenseKey: LICENSE_KEY,
+        licenseKey: '',
         toolbar: {
             items: [
                 // --- Document-wide tools ----------------------------------------------------------------------
@@ -762,37 +751,34 @@ const CKEditorComponent = () => {
             }
         }
     };
+    function customMentionUserItemRenderer(item) {
+    }
+    function SpecialCharactersEmoji(editor) {
+    }
 
     return (
         <div className="editor-container">
             <CKEditor
+                id="editor"
                 className="editor"
                 editor={ClassicEditor}
                 config={editorConfiguration}
-                data=""
+                data={data}
                 onReady={editor => {
                     editorRef.current = editor;
-                    // editor.editing.view.change(writer => {
-                    //     writer.setStyle(
-                    //         'height',
-                    //         '500px',
-                    //         editor.editing.view.document.getRoot()
-                    //     );
-                    // });
                 }}
 
                 onChange={(event, editor) => {
                     const data = editor.getData();
-                    // console.log({event, editor, data});
+                    onChange(data)
                 }}
                 onBlur={(event, editor) => {
-                    console.log('Blur.', editor);
+                    const data = editor.getData();
+                    onChange(data);
                 }}
                 disableWatchdog={true}
                 disabled={false}
-                id="editor"
-                onError={() => {
-                }}
+                onError={() => {}}
                 watchdogConfig={[]}
             />
             <div className="flex justify-end gap-2">

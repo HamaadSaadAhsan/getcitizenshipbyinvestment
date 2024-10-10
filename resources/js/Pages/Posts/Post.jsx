@@ -50,6 +50,7 @@ import {
 import QuillEditor from "@/Components/QuillEditor";
 import {Switch} from "@/Components/ui/switch.jsx";
 import { getBooleanValue } from "@/Helpers/helpers";
+import Editor from "@/Components/Editor.jsx";
 
 const Post = ({categories = [], post, image}) => {
     const [quillContent, setQuillContent] = useState(post.content ?? "");
@@ -78,6 +79,7 @@ const Post = ({categories = [], post, image}) => {
 
 
     const form = useForm({
+        mode: "onchange",
         resolver: zodResolver(FormSchema),
         defaultValues: {
             title: post.title ?? "",
@@ -120,9 +122,7 @@ const Post = ({categories = [], post, image}) => {
     };
 
     const handleEditorChange = (content) => {
-        const htmlContent = quillRef.current.getSemanticHTML();
-        setQuillContent(htmlContent);
-        form.setValue("content", htmlContent, {shouldValidate: true});
+        form.setValue("content", content)
     }
 
 
@@ -330,7 +330,7 @@ const Post = ({categories = [], post, image}) => {
                                                 />
                                             </div>
 
-                                            <div className="grid gap-3">
+                                            <div className="grid grid-cols-1">
                                                 <FormField
                                                     control={form.control}
                                                     name="content"
@@ -340,14 +340,8 @@ const Post = ({categories = [], post, image}) => {
                                                                 Content
                                                             </FormLabel>
                                                             <FormControl>
-                                                                <div className="border rounded-md quill-shadcn">
-                                                                    <QuillEditor
-                                                                        ref={quillRef}
-                                                                        defaultValue={post.content ?? ""}
-                                                                        onSelectionChange={handleEditorChange}
-                                                                        onTextChange={handleEditorChange}
-                                                                        className="min-h-[200px]"
-                                                                    />
+                                                                <div className="">
+                                                                    <Editor data={post.content} onChange={(content) => handleEditorChange(content)}/>
                                                                 </div>
                                                             </FormControl>
                                                             <FormDescription>

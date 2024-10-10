@@ -162,13 +162,16 @@ class PostController extends Controller
     }
 
     public function post_public_view($category, $slug){
-        $post = Post::where('status', 'published')
-            ->orWhere('status', 'draft')
+        $post = Post::query()
+            ->where(function ($query) {
+                $query->where('status', 'published')
+                    ->orWhere('status', 'draft');
+            })
+            ->with('category')
             ->whereHas('category', function($query) use ($category) {
-                $query->where('name', $category);
+                $query->where('slug', Str::slug($category));
             })
             ->where('slug', $slug)
-            ->with('category')
             ->select('id', 'slug' ,'title', 'description', 'category_id', 'content', 'image', 'created_at', 'user_id') // Select necessary fields
             ->first();
 

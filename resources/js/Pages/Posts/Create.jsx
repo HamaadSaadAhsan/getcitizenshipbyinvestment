@@ -52,13 +52,11 @@ import Quill from "quill";
 const Delta = Quill.import('delta');
 import QuillEditor from "@/Components/QuillEditor";
 import {Switch} from "@/Components/ui/switch.jsx";
+import Editor from "@/Components/Editor.jsx";
 
 const Create = ({ categories }) => {
-    const [quillContent, setQuillContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [subCategories, setSubCategories] = useState([])
-    // Use a ref to access the quill instance directly
-    const quillRef = useRef();
 
     const FormSchema = z.object({
         title: z
@@ -66,7 +64,7 @@ const Create = ({ categories }) => {
             .min(1, "Title is required")
             .max(100, "Title must be 100 characters or less"),
         content: z.string().min(1, "Content is required"),
-        description: z.string().min(1, "Description is required"),
+        description: z.string().min(1, "Description is required").max(180, "Description must be 180 or less characters"),
         category: z.string({
             required_error: "Please select a Post Category",
         }),
@@ -78,6 +76,7 @@ const Create = ({ categories }) => {
     });
 
     const form = useForm({
+        mode: "onChange",
         resolver: zodResolver(FormSchema),
         defaultValues: {
             title: "",
@@ -93,7 +92,6 @@ const Create = ({ categories }) => {
 
     const handleCategoryChange = (value) => {
         const category = categories.find(category => category.name === value)
-        console.log(category)
         if (category.children && category.children.length) {
             setSubCategories(category.children);
             form.setValue("category", category.name);
@@ -113,17 +111,10 @@ const Create = ({ categories }) => {
     };
 
     const handleEditorChange = (content) => {
-        const htmlContent = quillRef.current.getSemanticHTML();
-        setQuillContent(htmlContent);
-        form.setValue("content", htmlContent, { shouldValidate: true });
+        form.setValue("content", content)
     }
 
     function onSubmit(values) {
-        console.log(form.formState.errors)
-        if (!form.formState.isValid) {
-            return; // Prevent submission if form is invalid
-        }
-
         router.post(route("admin.posts.store"), values, {
             onStart: handleFormProcessing,
             onFinish: handleFormProcessed,
@@ -275,7 +266,7 @@ const Create = ({ categories }) => {
                                                 />
                                             </div>
 
-                                            <div className="grid gap-3">
+                                            <div className="grid grid-cols-1">
                                                 <FormField
                                                     control={form.control}
                                                     name="content"
@@ -285,15 +276,7 @@ const Create = ({ categories }) => {
                                                                 Content
                                                             </FormLabel>
                                                             <FormControl>
-                                                                <div className="border rounded-md quill-shadcn">
-                                                                    <QuillEditor
-                                                                        ref={quillRef}
-                                                                        defaultValue=""
-                                                                        onSelectionChange={handleEditorChange}
-                                                                        onTextChange={handleEditorChange}
-                                                                        className="min-h-[200px]"
-                                                                    />
-                                                                </div>
+                                                                <Editor onChange={handleEditorChange}/>
                                                             </FormControl>
                                                             <FormDescription>
                                                                 Write your post

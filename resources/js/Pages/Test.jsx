@@ -5,11 +5,6 @@ import {Head} from "@inertiajs/react";
 
 const Test = () => {
 
-    const [editorContent, setEditorContent] = useState(null)
-
-    useEffect(() => {
-        console.log(editorContent)
-    }, [editorContent]);
 
     return (
         <Authenticated>
