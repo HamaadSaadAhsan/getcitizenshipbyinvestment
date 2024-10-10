@@ -4,14 +4,25 @@ import Layout from "@/Layouts/Layout";
 import "../../../css/article.css";
 import NewsSlider from "./Components/NewsSlider";
 import {formatDateHumanReadable, formatDateTime} from "@/Helpers/dateFormatHelper.js";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
-const Home = ({featuredNews, topStories, categories, citizenshipPosts, residencePosts, digitalNomadPosts, moreNews, skilledImmigrationPosts, businessImmigrationPosts}) => {
+const Home = ({
+                  featuredNews,
+                  topStories,
+                  categories,
+                  citizenshipPosts,
+                  residencePosts,
+                  digitalNomadPosts,
+                  moreNews,
+                  skilledImmigrationPosts,
+                  businessImmigrationPosts
+              }) => {
     return (
         <Layout categories={categories}>
-            <Head >
-                <meta head-key="title" title="GCBI" />
-                <meta head-key="description" name="description" content="Latest News and Informatic Blogs about residenct citizenship by investment. Get latest immigration relevant news." />
+            <Head>
+                <meta head-key="title" title="GCBI"/>
+                <meta head-key="description" name="description"
+                      content="Latest News and Informatic Blogs about residenct citizenship by investment. Get latest immigration relevant news."/>
                 <link head-key="canonical" rel="canonical" href={route('home')}/>
             </Head>
 
@@ -36,72 +47,73 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                         className="sc-93223220-0 sc-e70150c3-1 gPmTJa fNRFwC"
                                     >
                                         {citizenshipPosts.map((post) => (
-                                        <div
-                                            key={post.id}
-                                            data-testid="edinburgh-card"
-                                        >
-                                            <div data-testid="anchor-inner-wrapper">
-                                                <a
-                                                    href={route("posts.show", [post.category.name, post.slug,])}
-                                                    data-testid="external-anchor"
-                                                    target="_self"
-                                                    className="sc-2e6baa30-0 gILusN"
-                                                >
-                                                    <div
-                                                        data-testid="edinburgh-live"
-                                                        className="sc-b8778340-0 kFuHJG"
+                                            <div
+                                                key={post.id}
+                                                data-testid="edinburgh-card"
+                                            >
+                                                <div data-testid="anchor-inner-wrapper">
+                                                    <a
+                                                        href={route("posts.show", [post.category.name, post.slug,])}
+                                                        data-testid="external-anchor"
+                                                        target="_self"
+                                                        className="sc-2e6baa30-0 gILusN"
                                                     >
                                                         <div
-                                                            data-testid="card-media-wrapper"
-                                                            className="sc-b8778340-1 jvzsLx"
+                                                            data-testid="edinburgh-live"
+                                                            className="sc-b8778340-0 kFuHJG"
                                                         >
                                                             <div
-                                                                data-testid="card-media"
-                                                                className="sc-b8778340-2 kUyIkJ"
+                                                                data-testid="card-media-wrapper"
+                                                                className="sc-b8778340-1 jvzsLx"
                                                             >
-                                                                <div className="sc-a34861b-1 jxzoZC">
-                                                                    {
-                                                                        post.image && (
-                                                                            <LazyLoadImage
-                                                                                sizes="96vw"
-                                                                                srcSet={route("storage.images", post.image) + " 240w," + route("storage.images", post.image) + " 320w," + route("storage.images", post.image) + " 480w," + route("storage.images", post.image) + " 640w," + route("storage.images", post.image) + " 800w," + route("storage.images", post.image) + " 1024w," + route("storage.images", post.image) + " 1536"}
-                                                                                src={route("storage.images", post.image)}
-                                                                                loading="lazy"
-                                                                                alt={post.title}
-                                                                                className="sc-a34861b-0 efFcac"
-                                                                            />
-                                                                        )
-                                                                    }
+                                                                <div
+                                                                    data-testid="card-media"
+                                                                    className="sc-b8778340-2 kUyIkJ"
+                                                                >
+                                                                    <div className="sc-a34861b-1 jxzoZC">
+                                                                        {
+                                                                            post.image && (
+                                                                                <LazyLoadImage
+                                                                                    title={post.title}
+                                                                                    sizes="96vw"
+                                                                                    srcSet={route("storage.images", post.image) + " 240w," + route("storage.images", post.image) + " 320w," + route("storage.images", post.image) + " 480w," + route("storage.images", post.image) + " 640w," + route("storage.images", post.image) + " 800w," + route("storage.images", post.image) + " 1024w," + route("storage.images", post.image) + " 1536"}
+                                                                                    src={route("storage.images", post.image)}
+                                                                                    loading="lazy"
+                                                                                    alt={post.title}
+                                                                                    className="sc-a34861b-0 efFcac"
+                                                                                />
+                                                                            )
+                                                                        }
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div
-                                                            data-testid="card-text-wrapper"
-                                                            className="sc-b8778340-3 gxEarx"
-                                                        >
-                                                            <div className="sc-4fedabc7-1 kbvCmj">
-                                                                <div className="sc-4fedabc7-0 kZtaAl">
-                                                                    <h2
-                                                                        data-testid="card-headline"
-                                                                        className="sc-4fedabc7-3 zTZri"
-                                                                    >
-                                                                        {post.title}
-                                                                    </h2>
-                                                                </div>
-                                                            </div>
-                                                            <p
-                                                                data-testid="card-description"
-                                                                className="sc-b8778340-4 kYtujW"
+                                                            <div
+                                                                data-testid="card-text-wrapper"
+                                                                className="sc-b8778340-3 gxEarx"
                                                             >
-                                                                {post.description}
-                                                            </p>
-                                                            <div className="sc-4e537b1-0 gtLVrL"></div>
+                                                                <div className="sc-4fedabc7-1 kbvCmj">
+                                                                    <div className="sc-4fedabc7-0 kZtaAl">
+                                                                        <h2
+                                                                            data-testid="card-headline"
+                                                                            className="sc-4fedabc7-3 zTZri"
+                                                                        >
+                                                                            {post.title}
+                                                                        </h2>
+                                                                    </div>
+                                                                </div>
+                                                                <p
+                                                                    data-testid="card-description"
+                                                                    className="sc-b8778340-4 kYtujW"
+                                                                >
+                                                                    {post.description}
+                                                                </p>
+                                                                <div className="sc-4e537b1-0 gtLVrL"></div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
                                         ))}
                                     </div>
                                     <div
@@ -109,84 +121,85 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                         className="sc-93223220-0 sc-e70150c3-2 jrqxhV jzPkfJ"
                                     >
                                         {citizenshipPosts.map((post) => (
-                                        <div key={post.id} data-testid="dundee-card">
-                                            <div data-testid="anchor-inner-wrapper">
-                                                <a
-                                                    href={route('posts.show', [post.category.name, post.slug])}
-                                                    data-testid="external-anchor"
-                                                    target="_self"
-                                                    className="sc-2e6baa30-0 gILusN"
-                                                >
-                                                    <div
-                                                        data-testid="dundee-live"
-                                                        className="sc-1a9a6d5b-1 iYglrs"
+                                            <div key={post.id} data-testid="dundee-card">
+                                                <div data-testid="anchor-inner-wrapper">
+                                                    <a
+                                                        href={route('posts.show', [post.category.name, post.slug])}
+                                                        data-testid="external-anchor"
+                                                        target="_self"
+                                                        className="sc-2e6baa30-0 gILusN"
                                                     >
-                                                        {post.image && (
-                                                            <div
-                                                                data-testid="card-image-wrapper"
-                                                                className="sc-1a9a6d5b-3 jsqFvT"
-                                                            >
+                                                        <div
+                                                            data-testid="dundee-live"
+                                                            className="sc-1a9a6d5b-1 iYglrs"
+                                                        >
+                                                            {post.image && (
                                                                 <div
-                                                                    data-testid="card-media"
-                                                                    className="sc-1a9a6d5b-4 fGVWed"
+                                                                    data-testid="card-image-wrapper"
+                                                                    className="sc-1a9a6d5b-3 jsqFvT"
                                                                 >
-                                                                    <div className="sc-a34861b-1 jxzoZC">
-                                                                        <LazyLoadImage
-                                                                            sizes="96vw"
-                                                                            srcSet={`${route('storage.images', post.image)} 240w,${route('storage.images', post.image)} 320w,${route('storage.images', post.image)} 480w,${route('storage.images', post.image)} 640w,${route('storage.images', post.image)} 800w,${route('storage.images', post.image)} 1024w,${route('storage.images', post.image)} 1536w`}
-                                                                            src={`${route('storage.images', post.image)}`}
-                                                                            loading="lazy"
-                                                                            alt={post.title}
-                                                                            className="sc-a34861b-0 efFcac"
-                                                                        />
+                                                                    <div
+                                                                        data-testid="card-media"
+                                                                        className="sc-1a9a6d5b-4 fGVWed"
+                                                                    >
+                                                                        <div className="sc-a34861b-1 jxzoZC">
+                                                                            <LazyLoadImage
+                                                                                title={post.title}
+                                                                                sizes="96vw"
+                                                                                srcSet={`${route('storage.images', post.image)} 240w,${route('storage.images', post.image)} 320w,${route('storage.images', post.image)} 480w,${route('storage.images', post.image)} 640w,${route('storage.images', post.image)} 800w,${route('storage.images', post.image)} 1024w,${route('storage.images', post.image)} 1536w`}
+                                                                                src={`${route('storage.images', post.image)}`}
+                                                                                loading="lazy"
+                                                                                alt={post.title}
+                                                                                className="sc-a34861b-0 efFcac"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        )}
+                                                            )}
 
-                                                        <div
-                                                            data-testid="card-text-wrapper"
-                                                            className="sc-93223220-0 gcYoBW"
-                                                        >
-                                                            <div className="sc-4fedabc7-1 kbvCmj">
-                                                                <div className="sc-4fedabc7-0 kZtaAl">
-                                                                    <h2
-                                                                        data-testid="card-headline"
-                                                                        className="sc-4fedabc7-3 zTZri"
-                                                                    >
-                                                                        {post.title}
-                                                                    </h2>
-                                                                </div>
-                                                            </div>
-                                                            <p
-                                                                data-testid="card-description"
-                                                                className="sc-1a9a6d5b-0 kGKNqV"
+                                                            <div
+                                                                data-testid="card-text-wrapper"
+                                                                className="sc-93223220-0 gcYoBW"
                                                             >
-                                                                {post.description}
-                                                            </p>
-                                                            <div className="sc-4e537b1-0 hJDQRX">
+                                                                <div className="sc-4fedabc7-1 kbvCmj">
+                                                                    <div className="sc-4fedabc7-0 kZtaAl">
+                                                                        <h2
+                                                                            data-testid="card-headline"
+                                                                            className="sc-4fedabc7-3 zTZri"
+                                                                        >
+                                                                            {post.title}
+                                                                        </h2>
+                                                                    </div>
+                                                                </div>
+                                                                <p
+                                                                    data-testid="card-description"
+                                                                    className="sc-1a9a6d5b-0 kGKNqV"
+                                                                >
+                                                                    {post.description}
+                                                                </p>
+                                                                <div className="sc-4e537b1-0 hJDQRX">
                                                                     <span
                                                                         data-testid="card-metadata-lastupdated"
                                                                         className="sc-4e537b1-1 dsUUMv"
                                                                     >
                                                                         {formatDateHumanReadable(post.created_at)}
                                                                     </span>
-                                                                <div
-                                                                    data-testid="card-metadata-separator"
-                                                                    className="sc-4e537b1-3 lmDmEx"
-                                                                ></div>
-                                                                <span
-                                                                    data-testid="card-metadata-tag"
-                                                                    className="sc-4e537b1-2 eRsxHt"
-                                                                >
+                                                                    <div
+                                                                        data-testid="card-metadata-separator"
+                                                                        className="sc-4e537b1-3 lmDmEx"
+                                                                    ></div>
+                                                                    <span
+                                                                        data-testid="card-metadata-tag"
+                                                                        className="sc-4e537b1-2 eRsxHt"
+                                                                    >
                                                                         {post.user.name}
                                                                     </span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
                                         ))}
                                     </div>
                                     <div className="sc-93223220-0 jrqxhV">
@@ -204,7 +217,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 target="_self"
                                                                 className="sc-2e6baa30-0 gILusN"
                                                             >
-                                                            <div
+                                                                <div
                                                                     data-testid="westminster"
                                                                     className="sc-6781995d-2 jOKQKE"
                                                                 >
@@ -218,6 +231,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                         >
                                                                             <div className="sc-a34861b-1 jxzoZC">
                                                                                 <LazyLoadImage
+                                                                                    title={post.title}
                                                                                     sizes="96vw"
                                                                                     srcSet={`${route('storage.images', featuredNews.image)} 240w,${route('storage.images', featuredNews.image)} 320w,${route('storage.images', featuredNews.image)} 480w,${route('storage.images', featuredNews.image)} 640w,${route('storage.images', featuredNews.image)} 800w,${route('storage.images', featuredNews.image)} 1024w,${route('storage.images', featuredNews.image)} 1536w`}
                                                                                     src={route('storage.images', featuredNews.image)}
@@ -306,14 +320,14 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                     >
                                                                         {formatDateHumanReadable(story.created_at)}
                                                                     </span>
-                                                                            <div
-                                                                                data-testid="card-metadata-separator"
-                                                                                className="sc-4e537b1-3 lmDmEx"
-                                                                            ></div>
-                                                                            <span
-                                                                                data-testid="card-metadata-tag"
-                                                                                className="sc-4e537b1-2 eRsxHt"
-                                                                            >
+                                                                    <div
+                                                                        data-testid="card-metadata-separator"
+                                                                        className="sc-4e537b1-3 lmDmEx"
+                                                                    ></div>
+                                                                    <span
+                                                                        data-testid="card-metadata-tag"
+                                                                        className="sc-4e537b1-2 eRsxHt"
+                                                                    >
                                                                         {story.user.name}
                                                                     </span>
                                                                 </div>
@@ -352,7 +366,8 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                     {
                                         residencePosts.map((post, index) => (
                                             index === 0 ? (
-                                                <div key={index} className="td_module_flex_6 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-0 td-cpt-post h-full">
+                                                <div key={index}
+                                                     className="td_module_flex_6 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-0 td-cpt-post h-full">
                                                     <div className="td-module-container td-category-pos-above h-full">
                                                         <div className="td-image-container h-full">
                                                             <div className="td-module-thumb h-full">
@@ -412,24 +427,25 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                         </div>
                                                     </div>
                                                 </div>
-                                            ): ""
+                                            ) : ""
                                         ))
                                     }
                                 </div>
                                 <div className="right-column td_block_inner tdi_96 td-big-grid-flex">
                                     {
                                         residencePosts.map((post, index) => (
-                                           index !== 0 ? (
-                                               <div key={index} className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-1 td-cpt-post">
-                                                   <div className="td-module-container td-category-pos-above">
-                                                       <div className="td-image-container">
-                                                           <div className="td-module-thumb">
-                                                               <a
-                                                                   href={route('posts.show', [post.category.name, post.slug])}
-                                                                   rel="bookmark"
-                                                                   className="td-image-wrap "
-                                                                   title={post.title}
-                                                               >
+                                            index !== 0 ? (
+                                                <div key={index}
+                                                     className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-1 td-cpt-post">
+                                                    <div className="td-module-container td-category-pos-above">
+                                                        <div className="td-image-container">
+                                                            <div className="td-module-thumb">
+                                                                <a
+                                                                    href={route('posts.show', [post.category.name, post.slug])}
+                                                                    rel="bookmark"
+                                                                    className="td-image-wrap "
+                                                                    title={post.title}
+                                                                >
                                                         <span
                                                             className="entry-thumb td-thumb-css td-animation-stack-type0-2"
                                                             data-type="css_image"
@@ -438,38 +454,38 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 backgroundImage: `url(${route('storage.images', post.image)})`,
                                                             }}
                                                         ></span>
-                                                               </a>
-                                                           </div>
-                                                           {" "}
-                                                       </div>
+                                                                </a>
+                                                            </div>
+                                                            {" "}
+                                                        </div>
 
-                                                       <div className="td-module-meta-info">
-                                                           <a
-                                                               href={route('posts.show', [post.category.name, post.slug])}
-                                                               className="td-post-category"
-                                                           >
-                                                               {post.category.name}
-                                                           </a>
-                                                           <div className="tdb-module-title-wrap">
-                                                               <h3 className="entry-title td-module-title">
-                                                                   <a
-                                                                       href={route('posts.show', [post.category.name, post.slug])}
-                                                                       rel="bookmark"
-                                                                       title={post.title}
-                                                                   >
-                                                                       {post.title}
-                                                                   </a>
-                                                               </h3>{" "}
-                                                           </div>
+                                                        <div className="td-module-meta-info">
+                                                            <a
+                                                                href={route('posts.show', [post.category.name, post.slug])}
+                                                                className="td-post-category"
+                                                            >
+                                                                {post.category.name}
+                                                            </a>
+                                                            <div className="tdb-module-title-wrap">
+                                                                <h3 className="entry-title td-module-title">
+                                                                    <a
+                                                                        href={route('posts.show', [post.category.name, post.slug])}
+                                                                        rel="bookmark"
+                                                                        title={post.title}
+                                                                    >
+                                                                        {post.title}
+                                                                    </a>
+                                                                </h3>{" "}
+                                                            </div>
 
-                                                           <div className="td-editor-date">
+                                                            <div className="td-editor-date">
                                                     <span className="td-post-author-name">
                                                         <a href={route('posts.author', post.user.name)}>
                                                             {post.user.name}
                                                         </a>
                                                         <span>-</span>
                                                     </span>
-                                                               <span className="td-post-date">
+                                                                <span className="td-post-date">
                                                         <time
                                                             className="entry-date updated td-module-date"
                                                             dateTime={formatDateHumanReadable(post.created_at)}
@@ -477,12 +493,12 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                             {formatDateHumanReadable(post.created_at)}
                                                         </time>
                                                     </span>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                               </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                           ) : ""
+                                            ) : ""
                                         ))
                                     }
                                 </div>
@@ -490,7 +506,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                         </div>
                     </section>
 
-                    <NewsSlider posts={moreNews} />
+                    <NewsSlider posts={moreNews}/>
 
                     <section className="gvnjGp">
                         <div className="eMVRpx">
@@ -526,6 +542,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                              className="sc-f98732b0-1 jSgXDY">
                                                                             <div className="sc-a34861b-1 jxzoZC">
                                                                                 <LazyLoadImage
+                                                                                    title={post.title}
                                                                                     sizes="(min-width: 768px) 50vw, 100vw"
                                                                                     srcSet={`${route('storage.images', post.image)} 240w,
                                                                                         ${route('storage.images', post.image)} 320w,
@@ -595,23 +612,27 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                     <a href={route('posts.show', [digitalNomadPosts[1].category.name, digitalNomadPosts[1].slug])}
                                                        data-testid="internal-link"
                                                        className="sc-2e6baa30-0 gILusN">
-                                                        <div data-testid="edinburgh-article" className="sc-b8778340-0 kFuHJG">
+                                                        <div data-testid="edinburgh-article"
+                                                             className="sc-b8778340-0 kFuHJG">
                                                             <div data-testid="card-media-wrapper"
                                                                  className="sc-b8778340-1 jvzsLx">
-                                                                <div data-testid="card-media" className="sc-b8778340-2 kUyIkJ">
-                                                                    <div className="sc-a34861b-1 jxzoZC"><LazyLoadImage
-                                                                        sizes="(min-width: 768px) 33vw, 96vw"
-                                                                        srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
+                                                                <div data-testid="card-media"
+                                                                     className="sc-b8778340-2 kUyIkJ">
+                                                                    <div className="sc-a34861b-1 jxzoZC">
+                                                                        <LazyLoadImage
+                                                                            title={digitalNomadPosts[1].title}
+                                                                            sizes="(min-width: 768px) 33vw, 96vw"
+                                                                            srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 320w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 480w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 640w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 800w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1024w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1536w`}
-                                                                        src={`${route('storage.images', digitalNomadPosts[1].image)}`}
-                                                                        loading="lazy"
-                                                                        alt={digitalNomadPosts[1].title}
-                                                                        className="sc-a34861b-0 efFcac"/></div>
+                                                                            src={`${route('storage.images', digitalNomadPosts[1].image)}`}
+                                                                            loading="lazy"
+                                                                            alt={digitalNomadPosts[1].title}
+                                                                            className="sc-a34861b-0 efFcac"/></div>
                                                                 </div>
                                                             </div>
                                                             <div data-testid="card-text-wrapper"
@@ -619,7 +640,8 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 <div className="sc-4fedabc7-1 kbvCmj">
                                                                     <div className="sc-4fedabc7-0 kZtaAl"><h2
                                                                         data-testid="card-headline"
-                                                                        className="sc-4fedabc7-3 zTZri">{digitalNomadPosts[1].title}</h2></div>
+                                                                        className="sc-4fedabc7-3 zTZri">{digitalNomadPosts[1].title}</h2>
+                                                                    </div>
                                                                 </div>
                                                                 <p data-testid="card-description"
                                                                    className="sc-b8778340-4 kYtujW">{digitalNomadPosts[1].description}</p>
@@ -629,7 +651,8 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                     <div data-testid="card-metadata-separator"
                                                                          className="sc-4e537b1-3 lmDmEx"></div>
                                                                     <span data-testid="card-metadata-tag"
-                                                                          className="sc-4e537b1-2 eRsxHt">{digitalNomadPosts[1].user.name}</span></div>
+                                                                          className="sc-4e537b1-2 eRsxHt">{digitalNomadPosts[1].user.name}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </a></div>
@@ -668,10 +691,10 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                         <span
                                                                             data-testid="card-metadata-lastupdated"
                                                                             className="sc-4e537b1-1 dsUUMv">{formatDateHumanReadable(post.created_at)}</span>
-                                                                                            <div data-testid="card-metadata-separator"
-                                                                                                 className="sc-4e537b1-3 lmDmEx"></div>
-                                                                                            <span data-testid="card-metadata-tag"
-                                                                                                  className="sc-4e537b1-2 eRsxHt">
+                                                                        <div data-testid="card-metadata-separator"
+                                                                             className="sc-4e537b1-3 lmDmEx"></div>
+                                                                        <span data-testid="card-metadata-tag"
+                                                                              className="sc-4e537b1-2 eRsxHt">
                                                                             {post.user.name}
                                                                         </span>
                                                                     </div>
@@ -693,23 +716,27 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                         <a href={route('posts.show', [digitalNomadPosts[1].category.name, digitalNomadPosts[1].slug])}
                                                            data-testid="internal-link"
                                                            className="sc-2e6baa30-0 gILusN">
-                                                            <div data-testid="edinburgh-article" className="sc-b8778340-0 kFuHJG">
+                                                            <div data-testid="edinburgh-article"
+                                                                 className="sc-b8778340-0 kFuHJG">
                                                                 <div data-testid="card-media-wrapper"
                                                                      className="sc-b8778340-1 jvzsLx">
-                                                                    <div data-testid="card-media" className="sc-b8778340-2 kUyIkJ">
-                                                                        <div className="sc-a34861b-1 jxzoZC"><LazyLoadImage
-                                                                            sizes="(min-width: 768px) 33vw, 96vw"
-                                                                            srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
+                                                                    <div data-testid="card-media"
+                                                                         className="sc-b8778340-2 kUyIkJ">
+                                                                        <div className="sc-a34861b-1 jxzoZC">
+                                                                            <LazyLoadImage
+                                                                                title={digitalNomadPosts[1].title}
+                                                                                sizes="(min-width: 768px) 33vw, 96vw"
+                                                                                srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 320w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 480w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 640w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 800w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1024w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1536w`}
-                                                                            src={`${route('storage.images', digitalNomadPosts[1].image)}`}
-                                                                            loading="lazy"
-                                                                            alt={digitalNomadPosts[1].title}
-                                                                            className="sc-a34861b-0 efFcac"/></div>
+                                                                                src={`${route('storage.images', digitalNomadPosts[1].image)}`}
+                                                                                loading="lazy"
+                                                                                alt={digitalNomadPosts[1].title}
+                                                                                className="sc-a34861b-0 efFcac"/></div>
                                                                     </div>
                                                                 </div>
                                                                 <div data-testid="card-text-wrapper"
@@ -717,7 +744,8 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                     <div className="sc-4fedabc7-1 kbvCmj">
                                                                         <div className="sc-4fedabc7-0 kZtaAl"><h2
                                                                             data-testid="card-headline"
-                                                                            className="sc-4fedabc7-3 zTZri">{digitalNomadPosts[1].title}</h2></div>
+                                                                            className="sc-4fedabc7-3 zTZri">{digitalNomadPosts[1].title}</h2>
+                                                                        </div>
                                                                     </div>
                                                                     <p data-testid="card-description"
                                                                        className="sc-b8778340-4 kYtujW">{digitalNomadPosts[1].description}</p>
@@ -727,7 +755,8 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                         <div data-testid="card-metadata-separator"
                                                                              className="sc-4e537b1-3 lmDmEx"></div>
                                                                         <span data-testid="card-metadata-tag"
-                                                                              className="sc-4e537b1-2 eRsxHt">{digitalNomadPosts[1].user.name}</span></div>
+                                                                              className="sc-4e537b1-2 eRsxHt">{digitalNomadPosts[1].user.name}</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </a></div>
@@ -743,29 +772,36 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                         <a href={route('posts.show', [post.category.name, post.slug])}
                                                            data-testid="internal-link"
                                                            className="sc-2e6baa30-0 gILusN">
-                                                            <div data-testid="edinburgh-article" className="sc-b8778340-0 kFuHJG">
-                                                                <div data-testid="card-media-wrapper" className="sc-b8778340-1 jvzsLx">
-                                                                    <div data-testid="card-media" className="sc-b8778340-2 kUyIkJ">
-                                                                        <div className="sc-a34861b-1 jxzoZC"><LazyLoadImage
-                                                                            sizes="(min-width: 768px) 33vw, 96vw"
-                                                                            srcSet={`${route('storage.images', post.image)} 240w,
+                                                            <div data-testid="edinburgh-article"
+                                                                 className="sc-b8778340-0 kFuHJG">
+                                                                <div data-testid="card-media-wrapper"
+                                                                     className="sc-b8778340-1 jvzsLx">
+                                                                    <div data-testid="card-media"
+                                                                         className="sc-b8778340-2 kUyIkJ">
+                                                                        <div className="sc-a34861b-1 jxzoZC">
+                                                                            <LazyLoadImage
+                                                                                title={post.title}
+                                                                                sizes="(min-width: 768px) 33vw, 96vw"
+                                                                                srcSet={`${route('storage.images', post.image)} 240w,
                                                                                 ${route('storage.images', post.image)} 320w,
                                                                                 ${route('storage.images', post.image)} 480w,
                                                                                 ${route('storage.images', post.image)} 640w,
                                                                                 ${route('storage.images', post.image)} 800w,
                                                                                 ${route('storage.images', post.image)} 1024w,
                                                                                 ${route('storage.images', post.image)} 1536w`}
-                                                                            src={`${route('storage.images', post.image)}`}
-                                                                            loading="lazy"
-                                                                            alt={post.title}
-                                                                            className="sc-a34861b-0 efFcac"/></div>
+                                                                                src={`${route('storage.images', post.image)}`}
+                                                                                loading="lazy"
+                                                                                alt={post.title}
+                                                                                className="sc-a34861b-0 efFcac"/></div>
                                                                     </div>
                                                                 </div>
-                                                                <div data-testid="card-text-wrapper" className="sc-b8778340-3 gxEarx">
+                                                                <div data-testid="card-text-wrapper"
+                                                                     className="sc-b8778340-3 gxEarx">
                                                                     <div className="sc-4fedabc7-1 kbvCmj">
                                                                         <div className="sc-4fedabc7-0 kZtaAl"><h2
                                                                             data-testid="card-headline"
-                                                                            className="sc-4fedabc7-3 zTZri">{post.title}</h2></div>
+                                                                            className="sc-4fedabc7-3 zTZri">{post.title}</h2>
+                                                                        </div>
                                                                     </div>
                                                                     <p data-testid="card-description"
                                                                        className="sc-b8778340-4 kYtujW">{post.description}</p>
@@ -808,7 +844,8 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                     <div data-testid="anchor-inner-wrapper">
                                         {
                                             skilledImmigrationPosts && skilledImmigrationPosts[0] ? (
-                                                <a key={skilledImmigrationPosts[0].id} href={route('posts.show', [skilledImmigrationPosts[0].category.name, skilledImmigrationPosts[0].slug])}
+                                                <a key={skilledImmigrationPosts[0].id}
+                                                   href={route('posts.show', [skilledImmigrationPosts[0].category.name, skilledImmigrationPosts[0].slug])}
                                                    data-testid="internal-link"
                                                    className="sc-2e6baa30-0 gILusN">
                                                     <div data-testid="edinburgh-article"
@@ -818,21 +855,24 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                             <div data-testid="card-media"
                                                                  className="sc-b8778340-2 kUyIkJ">
                                                                 {
-                                                                    skilledImmigrationPosts[0].image ? <div className="sc-a34861b-1 jxzoZC">
-                                                                        <LazyLoadImage sizes="96vw"
-                                                                             srcSet={`${route('storage.images', skilledImmigrationPosts[0].image)} 240w,
+                                                                    skilledImmigrationPosts[0].image ?
+                                                                        <div className="sc-a34861b-1 jxzoZC">
+                                                                            <LazyLoadImage
+                                                                            title={skilledImmigrationPosts[0].title}
+                                                                                sizes="96vw"
+                                                                                srcSet={`${route('storage.images', skilledImmigrationPosts[0].image)} 240w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 320w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 480w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 640w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 800w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 1024w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 1536w`}
-                                                                             src={`${route('storage.images', skilledImmigrationPosts[0].image)}`}
-                                                                             loading="lazy"
-                                                                             alt={skilledImmigrationPosts[0].title}
-                                                                             className="sc-a34861b-0 efFcac"
-                                                                        />
-                                                                    </div> : ""
+                                                                                           src={`${route('storage.images', skilledImmigrationPosts[0].image)}`}
+                                                                                           loading="lazy"
+                                                                                           alt={skilledImmigrationPosts[0].title}
+                                                                                           className="sc-a34861b-0 efFcac"
+                                                                            />
+                                                                        </div> : ""
                                                                 }
                                                             </div>
                                                         </div>
@@ -897,18 +937,18 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 <div data-testid="card-media"
                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                        <LazyLoadImage sizes="96vw"
-                                                                             srcSet={`${route('storage.images', post.image)} 240w,
+                                                                        <LazyLoadImage title={post.title} sizes="96vw"
+                                                                                       srcSet={`${route('storage.images', post.image)} 240w,
                                                                              ${route('storage.images', post.image)} 320w,
                                                                              ${route('storage.images', post.image)} 480w,
                                                                              ${route('storage.images', post.image)} 640w,
                                                                              ${route('storage.images', post.image)} 800w,
                                                                              ${route('storage.images', post.image)} 1024w,
                                                                              ${route('storage.images', post.image)} 1536w`}
-                                                                             src={`${route('storage.images', post.image)}`}
-                                                                             loading="lazy"
-                                                                             alt={post.title}
-                                                                             className="sc-a34861b-0 efFcac"
+                                                                                       src={`${route('storage.images', post.image)}`}
+                                                                                       loading="lazy"
+                                                                                       alt={post.title}
+                                                                                       className="sc-a34861b-0 efFcac"
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -961,7 +1001,9 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                         index > 0 && index < 4 ?
                                                             <div key={index} data-testid="chester-card">
                                                                 <div data-testid="anchor-inner-wrapper">
-                                                                    <a href={route('posts.show', [post.category.name, post.slug])} data-testid="internal-link" className="sc-2e6baa30-0 gILusN">
+                                                                    <a href={route('posts.show', [post.category.name, post.slug])}
+                                                                       data-testid="internal-link"
+                                                                       className="sc-2e6baa30-0 gILusN">
                                                                         <div data-testid="chester-article"
                                                                              className="sc-417019fc-0 bnGVfD">
                                                                             <div className="sc-4fedabc7-1 kbvCmj">
@@ -1005,6 +1047,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                         post.image ? <div
                                                                                             className="sc-a34861b-1 jxzoZC">
                                                                                             <LazyLoadImage
+                                                                                                title={post.title}
                                                                                                 sizes="96vw"
                                                                                                 srcSet={`${route('storage.images', post.image)} 240w,
                                                                                             ${route('storage.images', post.image)} 320w,
@@ -1040,13 +1083,13 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                     <div
                                                                                         data-testid="card-metadata-separator"
                                                                                         className="sc-4e537b1-3 lmDmEx"></div>
-                                                                            <span data-testid="card-metadata-tag"
-                                                                                  className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
+                                                                                    <span data-testid="card-metadata-tag"
+                                                                                          className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a></div>
-                                                    </div>  : ""
+                                                                    </a></div>
+                                                            </div> : ""
                                                     ))
                                                 }
                                             </div>
@@ -1104,6 +1147,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                         post.image ? <div
                                                                                             className="sc-a34861b-1 jxzoZC">
                                                                                             <LazyLoadImage
+                                                                                                title={post.title}
                                                                                                 sizes="96vw"
                                                                                                 srcSet={`${route('storage.images', post.image)} 240w,
                                                                                                 ${route('storage.images', post.image)} 320w,
@@ -1136,15 +1180,16 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                     className="sc-4e537b1-0 gtLVrL"><span
                                                                                     data-testid="card-metadata-lastupdated"
                                                                                     className="sc-4e537b1-1 dsUUMv">{formatDateHumanReadable(post.created_at)}</span>
-                                                                                    <div data-testid="card-metadata-separator"
-                                                                                         className="sc-4e537b1-3 lmDmEx"></div>
+                                                                                    <div
+                                                                                        data-testid="card-metadata-separator"
+                                                                                        className="sc-4e537b1-3 lmDmEx"></div>
                                                                                     <span data-testid="card-metadata-tag"
                                                                                           className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </a></div>
-                                                            </div>  : ""
+                                                            </div> : ""
                                                     ))
                                                 }
                                             </div>
@@ -1156,35 +1201,39 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                 {
                                                     businessImmigrationPosts ?
                                                         businessImmigrationPosts.map((post, index) => (
-                                                        index > 0 && index < 4 ?
-                                                            <div key={index} data-testid="chester-card">
-                                                                <div data-testid="anchor-inner-wrapper">
-                                                                    <a href={route('posts.show', [post.category.name, post.slug])}
-                                                                       data-testid="internal-link"
-                                                                       className="sc-2e6baa30-0 gILusN"
-                                                                    >
-                                                                        <div data-testid="chester-article"
-                                                                             className="sc-417019fc-0 bnGVfD">
-                                                                            <div className="sc-4fedabc7-1 kbvCmj">
-                                                                                <div className="sc-4fedabc7-0 kZtaAl">
-                                                                                    <h2
-                                                                                        data-testid="card-headline"
-                                                                                        className="sc-4fedabc7-3 zTZri">{post.title}
-                                                                                    </h2>
+                                                            index > 0 && index < 4 ?
+                                                                <div key={index} data-testid="chester-card">
+                                                                    <div data-testid="anchor-inner-wrapper">
+                                                                        <a href={route('posts.show', [post.category.name, post.slug])}
+                                                                           data-testid="internal-link"
+                                                                           className="sc-2e6baa30-0 gILusN"
+                                                                        >
+                                                                            <div data-testid="chester-article"
+                                                                                 className="sc-417019fc-0 bnGVfD">
+                                                                                <div className="sc-4fedabc7-1 kbvCmj">
+                                                                                    <div
+                                                                                        className="sc-4fedabc7-0 kZtaAl">
+                                                                                        <h2
+                                                                                            data-testid="card-headline"
+                                                                                            className="sc-4fedabc7-3 zTZri">{post.title}
+                                                                                        </h2>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    className="sc-4e537b1-0 hJDQRX"><span
+                                                                                    data-testid="card-metadata-lastupdated"
+                                                                                    className="sc-4e537b1-1 dsUUMv">{formatDateHumanReadable(post.created_at)}</span>
+                                                                                    <div
+                                                                                        data-testid="card-metadata-separator"
+                                                                                        className="sc-4e537b1-3 lmDmEx"></div>
+                                                                                    <span
+                                                                                        data-testid="card-metadata-tag"
+                                                                                        className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
                                                                                 </div>
                                                                             </div>
-                                                                            <div className="sc-4e537b1-0 hJDQRX"><span
-                                                                                data-testid="card-metadata-lastupdated"
-                                                                                className="sc-4e537b1-1 dsUUMv">{formatDateHumanReadable(post.created_at)}</span>
-                                                                                <div data-testid="card-metadata-separator"
-                                                                                     className="sc-4e537b1-3 lmDmEx"></div>
-                                                                                <span data-testid="card-metadata-tag"
-                                                                                      className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a></div>
-                                                            </div> : ""
-                                                    )) : ""
+                                                                        </a></div>
+                                                                </div> : ""
+                                                        )) : ""
                                                 }
 
                                                 {
@@ -1203,27 +1252,29 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                                     <div className="sc-a34861b-1 jxzoZC">
                                                                                         <LazyLoadImage
-                                                                                        sizes="96vw"
-                                                                                        srcSet={`${route('storage.images', post.image)} 240w,
+                                                                                            title={post.title}
+                                                                                            sizes="96vw"
+                                                                                            srcSet={`${route('storage.images', post.image)} 240w,
                                                                                     ${route('storage.images', post.image)} 320w,
                                                                                     ${route('storage.images', post.image)} 480w,
                                                                                     ${route('storage.images', post.image)} 640w,
                                                                                     ${route('storage.images', post.image)} 800w,
                                                                                     ${route('storage.images', post.image)} 1024w,
                                                                                     ${route('storage.images', post.image)} 1536w`}
-                                                                                        src={`${route('storage.images', post.image)}`}
-                                                                                        loading="lazy"
-                                                                                        alt={post.title}
-                                                                                        className="sc-a34861b-0 efFcac"/>
+                                                                                            src={`${route('storage.images', post.image)}`}
+                                                                                            loading="lazy"
+                                                                                            alt={post.title}
+                                                                                            className="sc-a34861b-0 efFcac"/>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div data-testid="card-text-wrapper"
                                                                                  className="sc-b8778340-3 gxEarx">
                                                                                 <div className="sc-4fedabc7-1 kbvCmj">
-                                                                                    <div className="sc-4fedabc7-0 kZtaAl"><h2
-                                                                                        data-testid="card-headline"
-                                                                                        className="sc-4fedabc7-3 zTZri">{post.title}</h2>
+                                                                                    <div className="sc-4fedabc7-0 kZtaAl">
+                                                                                        <h2
+                                                                                            data-testid="card-headline"
+                                                                                            className="sc-4fedabc7-3 zTZri">{post.title}</h2>
                                                                                     </div>
                                                                                 </div>
                                                                                 <p data-testid="card-description"
@@ -1231,15 +1282,16 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                 <div className="sc-4e537b1-0 gtLVrL"><span
                                                                                     data-testid="card-metadata-lastupdated"
                                                                                     className="sc-4e537b1-1 dsUUMv">{formatDateHumanReadable(post.created_at)}</span>
-                                                                                    <div data-testid="card-metadata-separator"
-                                                                                         className="sc-4e537b1-3 lmDmEx"></div>
+                                                                                    <div
+                                                                                        data-testid="card-metadata-separator"
+                                                                                        className="sc-4e537b1-3 lmDmEx"></div>
                                                                                     <span data-testid="card-metadata-tag"
                                                                                           className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </a></div>
-                                                            </div>  : ""
+                                                            </div> : ""
                                                     ))
                                                 }
                                             </div>
@@ -1297,6 +1349,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                         post.image ? <div
                                                                                             className="sc-a34861b-1 jxzoZC">
                                                                                             <LazyLoadImage
+                                                                                                title={post.title}
                                                                                                 sizes="96vw"
                                                                                                 srcSet={`${route('storage.images', post.image)} 240w,
                                                                                     ${route('storage.images', post.image)} 320w,
@@ -1329,15 +1382,16 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                     className="sc-4e537b1-0 gtLVrL"><span
                                                                                     data-testid="card-metadata-lastupdated"
                                                                                     className="sc-4e537b1-1 dsUUMv">{formatDateHumanReadable(post.created_at)}</span>
-                                                                                    <div data-testid="card-metadata-separator"
-                                                                                         className="sc-4e537b1-3 lmDmEx"></div>
+                                                                                    <div
+                                                                                        data-testid="card-metadata-separator"
+                                                                                        className="sc-4e537b1-3 lmDmEx"></div>
                                                                                     <span data-testid="card-metadata-tag"
                                                                                           className="sc-4e537b1-2 eRsxHt">{post.user.name}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </a></div>
-                                                            </div>  : ""
+                                                            </div> : ""
                                                     ))
                                                 }
                                             </div>
