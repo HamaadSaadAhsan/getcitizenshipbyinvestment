@@ -140,7 +140,7 @@ class PostController extends Controller
 
     public function updateImage(Post $post, Request $request){
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
+            'image' => 'required|mimes:jpeg,png,jpg,svg,webp',
         ]);
 
         // Remove previous image if it exists
@@ -149,7 +149,7 @@ class PostController extends Controller
             $oldImageNameWithoutExtension = pathinfo($post->image, PATHINFO_FILENAME);
             $oldImages = Storage::files("/images");
             foreach ($oldImages as $oldImage) {
-                if (strpos(basename($oldImage), $oldImageNameWithoutExtension) === 0) {
+                if (str_starts_with(basename($oldImage), $oldImageNameWithoutExtension)) {
                     Storage::delete($oldImage);
                 }
             }
