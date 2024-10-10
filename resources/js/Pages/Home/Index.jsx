@@ -4,6 +4,7 @@ import Layout from "@/Layouts/Layout";
 import "../../../css/article.css";
 import NewsSlider from "./Components/NewsSlider";
 import {formatDateHumanReadable, formatDateTime} from "@/Helpers/dateFormatHelper.js";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Home = ({featuredNews, topStories, categories, citizenshipPosts, residencePosts, digitalNomadPosts, moreNews, skilledImmigrationPosts, businessImmigrationPosts}) => {
     return (
@@ -61,7 +62,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 <div className="sc-a34861b-1 jxzoZC">
                                                                     {
                                                                         post.image && (
-                                                                            <img
+                                                                            <LazyLoadImage
                                                                                 sizes="96vw"
                                                                                 srcSet={route("storage.images", post.image) + " 240w," + route("storage.images", post.image) + " 320w," + route("storage.images", post.image) + " 480w," + route("storage.images", post.image) + " 640w," + route("storage.images", post.image) + " 800w," + route("storage.images", post.image) + " 1024w," + route("storage.images", post.image) + " 1536"}
                                                                                 src={route("storage.images", post.image)}
@@ -130,7 +131,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                     className="sc-1a9a6d5b-4 fGVWed"
                                                                 >
                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                        <img
+                                                                        <LazyLoadImage
                                                                             sizes="96vw"
                                                                             srcSet={`${route('storage.images', post.image)} 240w,${route('storage.images', post.image)} 320w,${route('storage.images', post.image)} 480w,${route('storage.images', post.image)} 640w,${route('storage.images', post.image)} 800w,${route('storage.images', post.image)} 1024w,${route('storage.images', post.image)} 1536w`}
                                                                             src={`${route('storage.images', post.image)}`}
@@ -216,7 +217,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                             className="sc-6781995d-1 iHDalG"
                                                                         >
                                                                             <div className="sc-a34861b-1 jxzoZC">
-                                                                                <img
+                                                                                <LazyLoadImage
                                                                                     sizes="96vw"
                                                                                     srcSet={`${route('storage.images', featuredNews.image)} 240w,${route('storage.images', featuredNews.image)} 320w,${route('storage.images', featuredNews.image)} 480w,${route('storage.images', featuredNews.image)} 640w,${route('storage.images', featuredNews.image)} 800w,${route('storage.images', featuredNews.image)} 1024w,${route('storage.images', featuredNews.image)} 1536w`}
                                                                                     src={route('storage.images', featuredNews.image)}
@@ -524,7 +525,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                         <div data-testid="card-media"
                                                                              className="sc-f98732b0-1 jSgXDY">
                                                                             <div className="sc-a34861b-1 jxzoZC">
-                                                                                <img
+                                                                                <LazyLoadImage
                                                                                     sizes="(min-width: 768px) 50vw, 100vw"
                                                                                     srcSet={`${route('storage.images', post.image)} 240w,
                                                                                         ${route('storage.images', post.image)} 320w,
@@ -598,7 +599,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                             <div data-testid="card-media-wrapper"
                                                                  className="sc-b8778340-1 jvzsLx">
                                                                 <div data-testid="card-media" className="sc-b8778340-2 kUyIkJ">
-                                                                    <div className="sc-a34861b-1 jxzoZC"><img
+                                                                    <div className="sc-a34861b-1 jxzoZC"><LazyLoadImage
                                                                         sizes="(min-width: 768px) 33vw, 96vw"
                                                                         srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 320w,
@@ -696,7 +697,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 <div data-testid="card-media-wrapper"
                                                                      className="sc-b8778340-1 jvzsLx">
                                                                     <div data-testid="card-media" className="sc-b8778340-2 kUyIkJ">
-                                                                        <div className="sc-a34861b-1 jxzoZC"><img
+                                                                        <div className="sc-a34861b-1 jxzoZC"><LazyLoadImage
                                                                             sizes="(min-width: 768px) 33vw, 96vw"
                                                                             srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 320w,
@@ -745,7 +746,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                             <div data-testid="edinburgh-article" className="sc-b8778340-0 kFuHJG">
                                                                 <div data-testid="card-media-wrapper" className="sc-b8778340-1 jvzsLx">
                                                                     <div data-testid="card-media" className="sc-b8778340-2 kUyIkJ">
-                                                                        <div className="sc-a34861b-1 jxzoZC"><img
+                                                                        <div className="sc-a34861b-1 jxzoZC"><LazyLoadImage
                                                                             sizes="(min-width: 768px) 33vw, 96vw"
                                                                             srcSet={`${route('storage.images', post.image)} 240w,
                                                                                 ${route('storage.images', post.image)} 320w,
@@ -818,7 +819,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                  className="sc-b8778340-2 kUyIkJ">
                                                                 {
                                                                     skilledImmigrationPosts[0].image ? <div className="sc-a34861b-1 jxzoZC">
-                                                                        <img sizes="96vw"
+                                                                        <LazyLoadImage sizes="96vw"
                                                                              srcSet={`${route('storage.images', skilledImmigrationPosts[0].image)} 240w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 320w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 480w,
@@ -896,7 +897,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                 <div data-testid="card-media"
                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                        <img sizes="96vw"
+                                                                        <LazyLoadImage sizes="96vw"
                                                                              srcSet={`${route('storage.images', post.image)} 240w,
                                                                              ${route('storage.images', post.image)} 320w,
                                                                              ${route('storage.images', post.image)} 480w,
@@ -1003,7 +1004,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                     {
                                                                                         post.image ? <div
                                                                                             className="sc-a34861b-1 jxzoZC">
-                                                                                            <img
+                                                                                            <LazyLoadImage
                                                                                                 sizes="96vw"
                                                                                                 srcSet={`${route('storage.images', post.image)} 240w,
                                                                                             ${route('storage.images', post.image)} 320w,
@@ -1102,7 +1103,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                     {
                                                                                         post.image ? <div
                                                                                             className="sc-a34861b-1 jxzoZC">
-                                                                                            <img
+                                                                                            <LazyLoadImage
                                                                                                 sizes="96vw"
                                                                                                 srcSet={`${route('storage.images', post.image)} 240w,
                                                                                                 ${route('storage.images', post.image)} 320w,
@@ -1201,7 +1202,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                 <div data-testid="card-media"
                                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                                        <img
+                                                                                        <LazyLoadImage
                                                                                         sizes="96vw"
                                                                                         srcSet={`${route('storage.images', post.image)} 240w,
                                                                                     ${route('storage.images', post.image)} 320w,
@@ -1295,7 +1296,7 @@ const Home = ({featuredNews, topStories, categories, citizenshipPosts, residence
                                                                                     {
                                                                                         post.image ? <div
                                                                                             className="sc-a34861b-1 jxzoZC">
-                                                                                            <img
+                                                                                            <LazyLoadImage
                                                                                                 sizes="96vw"
                                                                                                 srcSet={`${route('storage.images', post.image)} 240w,
                                                                                     ${route('storage.images', post.image)} 320w,
