@@ -167,7 +167,7 @@ class PostController extends Controller
                 $query->where('status', 'published')
                     ->orWhere('status', 'draft');
             })
-            ->with('category')
+            ->with(['category', 'user'])
             ->whereHas('category', function($query) use ($category) {
                 $query->where('slug', Str::slug($category));
             })

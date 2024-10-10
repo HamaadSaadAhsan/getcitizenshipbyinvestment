@@ -38,10 +38,11 @@ const View = ({post, categories}) => {
         <Layout categories={categories}>
             <Head>
                 <title>{post.title}</title>
+                <meta head-key="title" name="title" content={post.title}/>
                 <meta head-key="description" name="description" content={post.description}/>
                 <meta head-key="robots" name="robots"
                       content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
-
+                <meta head-key="author" name="author" content={post.user.name} />
             </Head>
 
             <article>
