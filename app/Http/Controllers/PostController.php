@@ -194,7 +194,12 @@ class PostController extends Controller
             'category' => [
                 'id' => $post->category->id,
                 'name' => $post->category->name
-            ]
+            ],
+            'user' => [
+                'name' => $post->user->name,
+                'email' => $post->user->email
+            ],
+            'created_at' => $post->created_at
         ];
 
         return Inertia::render("Posts/View", [
