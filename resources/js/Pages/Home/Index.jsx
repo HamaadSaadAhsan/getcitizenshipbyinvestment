@@ -8,7 +8,11 @@ import {formatDateHumanReadable, formatDateTime} from "@/Helpers/dateFormatHelpe
 const Home = ({featuredNews, topStories, categories, citizenshipPosts, residencePosts, digitalNomadPosts, moreNews, skilledImmigrationPosts, businessImmigrationPosts}) => {
     return (
         <Layout categories={categories}>
-            <Head title="Home"/>
+            <Head >
+                <meta head-key="title" title="GCBI" />
+                <meta head-key="description" name="description" content="Latest News and Informatic Blogs about residenct citizenship by investment. Get latest immigration relevant news." />
+                <link head-key="canonical" rel="canonical" href={route('home')}/>
+            </Head>
 
             <div className="">
                 <article className="block">
