@@ -140,7 +140,7 @@ class PostController extends Controller
 
     public function updateImage(Post $post, Request $request){
         $request->validate([
-            'image' => 'required|mimes:jpeg,png,jpg,svg,webp',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
         ]);
 
         // Remove previous image if it exists
@@ -156,7 +156,7 @@ class PostController extends Controller
         }
 
         $image = $request->file('image');
-        $imageName = time().'.'.$image->extension();
+        $imageName = time().'.'.$image->getClientOriginalExtension();
 
         // Store the image securely in the storage/app/public/images directory
         $path = $image->storeAs('/images', $imageName);
