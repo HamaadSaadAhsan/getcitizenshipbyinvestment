@@ -144,8 +144,15 @@ class PostController extends Controller
         ]);
 
         // Remove previous image if it exists
+        // Remove previous images with the same name (excluding extension)
         if ($post->image) {
-            Storage::delete($post->image); // Delete the old image from storage
+            $oldImageNameWithoutExtension = pathinfo($post->image, PATHINFO_FILENAME);
+            $oldImages = Storage::files("/images");
+            foreach ($oldImages as $oldImage) {
+                if (strpos(basename($oldImage), $oldImageNameWithoutExtension) === 0) {
+                    Storage::delete($oldImage);
+                }
+            }
         }
 
         $image = $request->file('image');
