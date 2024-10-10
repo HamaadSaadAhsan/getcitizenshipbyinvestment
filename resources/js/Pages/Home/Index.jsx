@@ -20,10 +20,11 @@ const Home = ({
     return (
         <Layout categories={categories}>
             <Head>
-                <meta head-key="title" title="GCBI"/>
+                <title head-key="title">GCBI</title>
                 <meta head-key="description" name="description"
                       content="Latest News and Informatic Blogs about residenct citizenship by investment. Get latest immigration relevant news."/>
                 <link head-key="canonical" rel="canonical" href={route('home')}/>
+                <meta head-key="og:site_name" property="og:site_name" content={route('home')}/>
             </Head>
 
             <div className="">
@@ -231,7 +232,7 @@ const Home = ({
                                                                         >
                                                                             <div className="sc-a34861b-1 jxzoZC">
                                                                                 <LazyLoadImage
-                                                                                    title={post.title}
+                                                                                    title={featuredNews.title}
                                                                                     sizes="96vw"
                                                                                     srcSet={`${route('storage.images', featuredNews.image)} 240w,${route('storage.images', featuredNews.image)} 320w,${route('storage.images', featuredNews.image)} 480w,${route('storage.images', featuredNews.image)} 640w,${route('storage.images', featuredNews.image)} 800w,${route('storage.images', featuredNews.image)} 1024w,${route('storage.images', featuredNews.image)} 1536w`}
                                                                                     src={route('storage.images', featuredNews.image)}
