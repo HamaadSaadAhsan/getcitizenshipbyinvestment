@@ -29,7 +29,7 @@ class HomeController extends Controller
 
         $moreNews = Post::with(['category', 'user'])
             ->whereHas('category', function ($q) {
-                $q->where('slug', 'immigration-news');
+                $q->where('slug', 'news');
             })
             ->whereFeatured(false)
             ->orderBy('created_at', 'DESC')
