@@ -41,6 +41,7 @@ class HomeController extends Controller
         $citizenshipPosts = Post::where('category_id', $citizenshipCategory?->id)
             ->with(['category', 'user'])
             ->orderBy('created_at', 'desc')
+            ->whereFeatured(false)
             ->take(2)
             ->get();
 
@@ -48,6 +49,7 @@ class HomeController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'residency');
             })
+            ->whereFeatured(false)
             ->orderBy('created_at', 'DESC')
             ->take(4)
             ->get();
@@ -56,6 +58,7 @@ class HomeController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'digital-nomad');
             })
+            ->whereFeatured(false)
             ->orderBy('created_at', 'DESC')
             ->take(8)
             ->get();
@@ -64,6 +67,7 @@ class HomeController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'skilled-immigration');
             })
+            ->whereFeatured(false)
             ->orderBy('created_at', 'DESC')
             ->take(9)
             ->get();
@@ -72,6 +76,7 @@ class HomeController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('slug', 'business-immigration');
             })
+            ->whereFeatured(false)
             ->orderBy('created_at', 'DESC')
             ->take(9)
             ->get();
