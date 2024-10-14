@@ -2,8 +2,7 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import axios from "axios";
 import {Link, router} from "@inertiajs/react";
 import Logo from "./logo/CBILogoWhite.jsx";
-import LogoBlack from "./logo/CBILogoBlack.jsx";
-import Dropdown from "../Pages/Home/Components/Dropdown";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 import {Footer} from "@/Components/Footer.jsx";
 import {
     ChartPieIcon, ChevronRightIcon,
@@ -124,7 +123,7 @@ const Layout = ({ children, categories }) => {
                                 { category.children && category.children.length ? (
                                     <PopoverPanel
                                         transition
-                                        className="fixed left-0 right-0 top-0 z-50 mt-[8rem] w-screen overflow-hidden bg-white shadow-lg transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                                        className="fixed left-0 right-0 top-0 z-50 mt-[7rem] w-screen overflow-hidden bg-white shadow-lg transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
                                     >
                                         <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-0 pb-0">
                                             <div className="grid-nav-links pb-5 px-5">
@@ -162,7 +161,7 @@ const Layout = ({ children, categories }) => {
                                     ) :
                                     <PopoverPanel
                                         transition
-                                        className="fixed left-0 right-0 top-0 z-50 mt-[8rem] w-screen overflow-hidden bg-white shadow-lg transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                                        className="fixed left-0 right-0 top-0 z-50 mt-[7rem] w-screen overflow-hidden bg-white shadow-lg transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
                                     >
                                     <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-0 pb-0">
                                         {
@@ -227,8 +226,7 @@ const Layout = ({ children, categories }) => {
                                                                                         post.image && post.image !== '' ? (
                                                                                             <div
                                                                                                 className="sc-a34861b-1 jxzoZC">
-
-                                                                                                <img
+                                                                                                <LazyLoadImage
                                                                                                     sizes="96vw"
                                                                                                     srcSet={post.image + " 240w," + post.image + " 320w," + post.image + " 480w," + post.image + " 640w," + post.image + " 800w," + post.image + " 1024w," + post.image + " 1536"}
                                                                                                     src={post.image}
@@ -236,8 +234,6 @@ const Layout = ({ children, categories }) => {
                                                                                                     alt={post.title}
                                                                                                     className="sc-a34861b-0 efFcac"
                                                                                                 />
-
-
                                                                                             </div>
                                                                                         ) : ""
                                                                                     }</div>

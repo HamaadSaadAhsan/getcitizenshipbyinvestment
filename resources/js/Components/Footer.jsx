@@ -155,7 +155,7 @@ export const Footer = () => {
                     <p className="text-center">
                         &copy; 2024 <a target="_blank"
                                        href="https://getcitizenshipbyinvestment.com">
-                        <span className="uppercase text-[#62aa57]">GetCitizenshipByInvestment</span>
+                        <span className="uppercase text-[#62aa57] text-sm md:text-md lg:text-lg">GetCitizenshipByInvestment</span>
                     </a>. All
                         rights reserved.
                     </p>

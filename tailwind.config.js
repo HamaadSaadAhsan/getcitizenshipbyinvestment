@@ -23,6 +23,9 @@ export default {
             fontFamily: {
                 sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
             },
+            fontWeight: {
+                'semi-bold': '650',
+            },
             colors: {
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
@@ -79,5 +82,27 @@ export default {
             },
         },
     },
-    plugins: [forms, require("tailwindcss-animate")],
+    plugins: [
+        require('@tailwindcss/typography'),
+        function({ addBase, theme }) {
+            addBase({
+                '@font-face': [{
+                    fontFamily: 'Montserrat',
+                    fontWeight: '100 900',
+                    fontStyle: 'normal',
+                    fontDisplay: 'swap',
+                    src: 'url("/fonts/Montserrat-VariableFont_wght.ttf") format("truetype-variations")',
+                },
+                    {
+                        fontFamily: 'Montserrat',
+                        fontWeight: '100 900',
+                        fontStyle: 'italic',
+                        fontDisplay: 'swap',
+                        src: 'url("/fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype-variations")',
+                    },
+
+                ],
+            });
+        },
+    ],
 };

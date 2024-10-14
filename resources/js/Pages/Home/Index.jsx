@@ -859,7 +859,7 @@ const Home = ({
                                                                     skilledImmigrationPosts[0].image ?
                                                                         <div className="sc-a34861b-1 jxzoZC">
                                                                             <LazyLoadImage
-                                                                            title={skilledImmigrationPosts[0].title}
+                                                                                title={skilledImmigrationPosts[0].title}
                                                                                 sizes="96vw"
                                                                                 srcSet={`${route('storage.images', skilledImmigrationPosts[0].image)} 240w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 320w,
@@ -868,10 +868,10 @@ const Home = ({
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 800w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 1024w,
                                                                              ${route('storage.images', skilledImmigrationPosts[0].image)} 1536w`}
-                                                                                           src={`${route('storage.images', skilledImmigrationPosts[0].image)}`}
-                                                                                           loading="lazy"
-                                                                                           alt={skilledImmigrationPosts[0].title}
-                                                                                           className="sc-a34861b-0 efFcac"
+                                                                                src={`${route('storage.images', skilledImmigrationPosts[0].image)}`}
+                                                                                loading="lazy"
+                                                                                alt={skilledImmigrationPosts[0].title}
+                                                                                className="sc-a34861b-0 efFcac"
                                                                             />
                                                                         </div> : ""
                                                                 }
