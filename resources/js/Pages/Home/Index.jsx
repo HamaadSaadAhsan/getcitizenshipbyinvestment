@@ -447,7 +447,7 @@ const Home = ({
                                 <div className="right-column td_block_inner tdi_96 td-big-grid-flex">
                                     {
                                         residencePosts.map((post, index) => (
-                                            index !== 0 ? (
+                                            index > 0 ? (
                                                 <div key={index}
                                                      className="td_module_flex_7 td-animation-stack td-big-grid-flex-post td-big-grid-flex-post-1 td-cpt-post">
                                                     <div className="td-module-container td-category-pos-above">
