@@ -14,7 +14,10 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::where('parent_id', 0)->with('children')->get();
-        $featuredNews = Post::whereFeatured(true)->with(['user', 'category'])->first();
+        $featuredNews = Post::whereFeatured(true)
+            ->orderBy('created_at', 'desc')
+            ->with(['user', 'category'])
+            ->first();
         $topStories = Post::with(['category', 'user'])
         ->whereHas('category', function ($q){
             $q->where('slug', 'immigration-news');
