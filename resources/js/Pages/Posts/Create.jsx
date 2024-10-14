@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState} from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { router } from "@inertiajs/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {boolean, z} from "zod";
+import {z} from "zod";
 import "quill/dist/quill.snow.css";
 import {
     BreadcrumbItem,
@@ -13,13 +13,11 @@ import {
 } from "@/Components/ui/breadcrumb";
 import { Link, Head } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
-import { ChevronLeft, CirclePlusIcon, Loader2, UploadIcon } from "lucide-react";
-import { Badge } from "@/Components/ui/badge";
+import { ChevronLeft, Loader2 } from "lucide-react";
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/Components/ui/card";
@@ -41,16 +39,6 @@ import {
     SelectValue,
 } from "@/Components/ui/select";
 import { Textarea } from "@/Components/ui/textarea";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/Components/ui/tooltip";
-import Quill from "quill";
-
-const Delta = Quill.import('delta');
-import QuillEditor from "@/Components/QuillEditor";
 import {Switch} from "@/Components/ui/switch.jsx";
 import Editor from "@/Components/Editor.jsx";
 
@@ -489,46 +477,6 @@ const Create = ({ categories }) => {
                                     </CardContent>
                                 </Card>
 
-                                <Card
-                                    className="overflow-hidden"
-                                    x-chunk="dashboard-07-chunk-4"
-                                >
-                                    <CardHeader>
-                                        <CardTitle>Post Image</CardTitle>
-                                        <CardDescription>
-                                            Upload featured image for this post.
-                                        </CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <div className="grid gap-2">
-                                            <img
-                                                alt="Post image"
-                                                className="aspect-square w-full rounded-md object-cover"
-                                                height="300"
-                                                src="/placeholder.svg"
-                                                width="300"
-                                            />
-                                            <div className="grid grid-cols-1">
-                                                <TooltipProvider>
-                                                    <Tooltip>
-                                                        <TooltipTrigger asChild>
-                                                            <button className="flex aspect-square w-full h-10 items-center justify-center rounded-md border border-dashed">
-                                                                <UploadIcon className="h-4 w-4 text-muted-foreground" />
-                                                                <span className="sr-only">
-                                                                    Upload
-                                                                </span>
-                                                            </button>
-                                                        </TooltipTrigger>
-                                                        <TooltipContent side="bottom">
-                                                            Click to upload
-                                                            image
-                                                        </TooltipContent>
-                                                    </Tooltip>
-                                                </TooltipProvider>
-                                            </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
                             </div>
                         </div>
                         <div className="flex items-center justify-center gap-2 md:hidden">
