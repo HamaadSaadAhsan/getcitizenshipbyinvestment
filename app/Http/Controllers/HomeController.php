@@ -21,7 +21,7 @@ class HomeController extends Controller
             ->first();
         $topStories = Post::with(['category', 'user'])
         ->whereHas('category', function ($q){
-            $q->where('slug', 'immigration-news');
+            $q->where('slug', 'news');
         })
         ->orderBy('created_at', 'DESC')
         ->take(4)
