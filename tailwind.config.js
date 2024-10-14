@@ -91,14 +91,14 @@ export default {
                     fontWeight: '100 900',
                     fontStyle: 'normal',
                     fontDisplay: 'swap',
-                    src: 'url("/fonts/Montserrat-VariableFont_wght.ttf") format("truetype-variations")',
+                    src: 'url("resources/fonts/Montserrat-VariableFont_wght.ttf") format("truetype-variations")',
                 },
                     {
                         fontFamily: 'Montserrat',
                         fontWeight: '100 900',
                         fontStyle: 'italic',
                         fontDisplay: 'swap',
-                        src: 'url("/fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype-variations")',
+                        src: 'url("resources/fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype-variations")',
                     },
 
                 ],
