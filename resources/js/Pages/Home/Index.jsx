@@ -472,7 +472,7 @@ const Home = ({
                                                             {" "}
                                                         </div>
 
-                                                        <div className="td-module-meta-info">
+                                                        <div className="td-module-meta-info" style={{ top: 113px; }}>
                                                             <a
                                                                 href={route('posts.show', [post.category.name, post.slug])}
                                                                 className="td-post-category"
