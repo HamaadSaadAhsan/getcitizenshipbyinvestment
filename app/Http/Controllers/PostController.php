@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class PostController extends Controller
 {
     public function index(){
         $posts = Auth::user()->posts()
-            ->with('category')
+            ->with(['category'])
             ->select('id', 'slug' ,'title', 'description', 'category_id', 'content' ,'status') // Select necessary fields
             ->get() // Get the collection
             ->map(function($post) {
@@ -31,7 +32,11 @@ class PostController extends Controller
                     'category' => [
                         'id' => $post->category->id,
                         'name' => $post->category->name
-                    ]
+                    ],
+                    'user' => [
+                        'name' => Auth::user()->name,
+                    ],
+                    'createdAt' => Carbon::parse($post->created_at)->format('M d Y, h:i A')
                 ];
             });
         return Inertia::render("Posts/Index", [

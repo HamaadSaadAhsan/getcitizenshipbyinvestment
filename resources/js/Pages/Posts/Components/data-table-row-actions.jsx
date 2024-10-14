@@ -35,9 +35,11 @@ export function DataTableRowActions({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>
-          <Link href={route("admin.posts.show", row.original.id)}>Edit</Link>
-        </DropdownMenuItem>
+      <Link href={route("admin.posts.show", row.original.id)}>
+          <DropdownMenuItem className="cursor-pointer">
+              Edit
+          </DropdownMenuItem>
+      </Link>
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />

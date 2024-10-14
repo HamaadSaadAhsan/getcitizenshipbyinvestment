@@ -22,4 +22,19 @@ class CategoryController extends Controller
             'category' => $category
         ]);
     }
+
+    public function list(Request $request){
+        $categories = Category::where('parent_id', 0)->with('children')->get();
+
+        $categories = $categories->map(function ($category){
+           return [
+               'name' => $category->name,
+               'value' => $category->slug
+           ];
+        });
+
+        return response()->json([
+            'categories' => $categories
+        ]);
+    }
 }

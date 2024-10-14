@@ -1,7 +1,7 @@
 import { Badge } from "@/Components/ui/badge"
 import { Checkbox } from "@/Components/ui/checkbox"
 
-import { labels, priorities, statuses } from "../data/data"
+import { labels, statuses } from "../data/data"
 import { DataTableColumnHeader } from "./data-table-column-header.jsx"
 import { DataTableRowActions } from "./data-table-row-actions.jsx"
 
@@ -27,15 +27,6 @@ export const columns = [
         className="translate-y-[2px]"
       />
     ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "slug",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Slug" />
-    ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("slug")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
@@ -74,25 +65,23 @@ export const columns = [
         </div>
       )
     },
-  },
-  {
-    accessorKey: "description",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Description" />
-    ),
-    cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+  },{
+        accessorKey: "author",
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Author" />
+        ),
+        cell: ({ row }) => {
+            const author = row.original.user.name
 
-      return (
-        <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("description")}
+            return (
+                <div className="flex space-x-2">
+                    <span className="max-w-[500px] truncate font-medium">
+            {author}
           </span>
-        </div>
-      )
+                </div>
+            )
+        },
     },
-  },
   {
     accessorKey: "status",
     header: ({ column }) => (
@@ -113,6 +102,27 @@ export const columns = [
             <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
           )}
           <span>{status.label}</span>
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Date" />
+    ),
+    cell: ({ row }) => {
+      const date = row.getValue("createdAt")
+      if (!date) {
+        return null
+      }
+
+      return (
+        <div className="flex w-[100px] items-center">
+          <span>{date}</span>
         </div>
       )
     },

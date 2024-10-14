@@ -1,64 +1,49 @@
 import {
-    ArrowDownIcon,
-    ArrowRightIcon,
-    ArrowUpIcon,
     CircleCheckIcon,
     CircleIcon,
-    CircleXIcon
-  } from "lucide-react"
+    CircleXIcon,
+    NewspaperIcon,
+    IdCardIcon,
+    HousePlusIcon,
+    CaravanIcon,
+    EarthIcon
+} from "lucide-react"
 
-  export const labels = [
-    {
-      value: "news",
-      label: "News",
-    },
-    {
-      value: "bug",
-      label: "Bug",
-    },
-    {
-      value: "feature",
-      label: "Feature",
-    },
-    {
-      value: "documentation",
-      label: "Documentation",
-    },
-  ]
+import axios from "axios"
 
-  export const statuses = [
-    {
-      value: "draft",
-      label: "Draft",
-      icon: CircleIcon,
-    },
+const iconMap = {
+    news: NewspaperIcon,
+    citizenship: IdCardIcon,
+    residency: HousePlusIcon,
+    "digital-nomad": CaravanIcon,
+    immigration: EarthIcon
+};
 
-    {
-      value: "active",
-      label: "Published",
-      icon: CircleCheckIcon,
-    },
-    {
-      value: "archived",
-      label: "Archived",
-      icon: CircleXIcon,
-    },
-  ]
+const getIcon = (value) => iconMap[value] || CircleIcon; // Default to CircleIcon if not found
 
-  export const priorities = [
-    {
-      label: "Low",
-      value: "low",
-      icon: ArrowDownIcon,
-    },
-    {
-      label: "Medium",
-      value: "medium",
-      icon: ArrowRightIcon,
-    },
-    {
-      label: "High",
-      value: "high",
-      icon: ArrowUpIcon,
-    },
-  ]
+export const getPriorities = async () => {
+    try {
+        const res = await axios.post(route('category.list'));
+        return res.data.categories.map((category) => ({
+            label: category.name,
+            value: category.value,
+            icon: getIcon(category.value)
+        }));
+    } catch (error) {
+        console.error('Error fetching priorities:', error);
+        return [];
+    }
+}
+
+export const labels = [
+    { value: "news", label: "News" },
+    { value: "bug", label: "Bug" },
+    { value: "feature", label: "Feature" },
+    { value: "documentation", label: "Documentation" },
+]
+
+export const statuses = [
+    { value: "draft", label: "Draft", icon: CircleIcon },
+    { value: "published", label: "Published", icon: CircleCheckIcon },
+    { value: "archived", label: "Archived", icon: CircleXIcon },
+]
