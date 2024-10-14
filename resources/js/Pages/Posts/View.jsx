@@ -28,11 +28,12 @@ const View = ({post, categories}) => {
     }, [isPopoverOpen]);
 
     const modifiedContent = post.content
-        .replace(/<p>/g, '<p class="article_p">')
-        .replace(/<h2>/g, '<h2 class="article_h2">')
+        .replace(/<p>/g, '<p class="article_p font-original">')
+        .replace(/<h2>/g, '<h2 class="article_h2 font-original">')
         .replace(/&nbsp;/g, '')
-        .replace(/<h3>/g, '<h3 class="article_h3">')
-        .replace(/<h4>/g, '<h4 class="article_h4">');
+        .replace(/<h3>/g, '<h3 class="article_h3 font-original">')
+        .replace(/<h4>/g, '<h4 class="article_h4 font-original">')
+        .replace(/<div>/g, '<div class="font-original">');
 
     return (
         <Layout categories={categories}>

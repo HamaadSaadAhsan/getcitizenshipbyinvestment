@@ -18,6 +18,10 @@
     src: url("../fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype-variations");
 }
 
+.font-original{
+    font-family: 'Montserrat', sans-serif;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
