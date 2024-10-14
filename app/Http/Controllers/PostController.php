@@ -145,7 +145,7 @@ class PostController extends Controller
 
     public function updateImage(Post $post, Request $request){
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp',
+            'image' => 'required|image|max:1024|mimes:jpeg,png,jpg,svg,webp',
         ]);
 
         // Remove previous image if it exists
