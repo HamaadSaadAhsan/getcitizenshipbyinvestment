@@ -239,7 +239,7 @@ const Home = ({
                                                                         >
                                                                             <div className="sc-a34861b-1 jxzoZC">
                                                                                 {
-                                                                                    post.image && (
+                                                                                    featuredNews.image && (
                                                                                         <LazyLoadImage
                                                                                             title={featuredNews.title}
                                                                                             sizes="96vw"
