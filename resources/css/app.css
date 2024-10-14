@@ -389,10 +389,10 @@ body {
     line-height: 18px;
     letter-spacing: 0px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    height: 50px;
+    height: 52px;
 }
 
 .iYglrs {
