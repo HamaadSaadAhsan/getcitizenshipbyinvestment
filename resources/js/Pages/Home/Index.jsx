@@ -146,15 +146,20 @@ const Home = ({
                                                                         className="sc-1a9a6d5b-4 fGVWed"
                                                                     >
                                                                         <div className="sc-a34861b-1 jxzoZC">
-                                                                            <LazyLoadImage
-                                                                                title={post.title}
-                                                                                sizes="96vw"
-                                                                                srcSet={`${route('storage.images', post.image)} 240w,${route('storage.images', post.image)} 320w,${route('storage.images', post.image)} 480w,${route('storage.images', post.image)} 640w,${route('storage.images', post.image)} 800w,${route('storage.images', post.image)} 1024w,${route('storage.images', post.image)} 1536w`}
-                                                                                src={`${route('storage.images', post.image)}`}
-                                                                                loading="lazy"
-                                                                                alt={post.title}
-                                                                                className="sc-a34861b-0 efFcac"
-                                                                            />
+                                                                            {
+                                                                                post.image && (
+                                                                                    <LazyLoadImage
+                                                                                        title={post.title}
+                                                                                        sizes="96vw"
+                                                                                        srcSet={`${route('storage.images', post.image)} 240w,${route('storage.images', post.image)} 320w,${route('storage.images', post.image)} 480w,${route('storage.images', post.image)} 640w,${route('storage.images', post.image)} 800w,${route('storage.images', post.image)} 1024w,${route('storage.images', post.image)} 1536w`}
+                                                                                        src={`${route('storage.images', post.image)}`}
+                                                                                        loading="lazy"
+                                                                                        alt={post.title}
+                                                                                        className="sc-a34861b-0 efFcac"
+                                                                                    />
+                                                                                )
+                                                                            }
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -233,15 +238,20 @@ const Home = ({
                                                                             className="sc-6781995d-1 iHDalG"
                                                                         >
                                                                             <div className="sc-a34861b-1 jxzoZC">
-                                                                                <LazyLoadImage
-                                                                                    title={featuredNews.title}
-                                                                                    sizes="96vw"
-                                                                                    srcSet={`${route('storage.images', featuredNews.image)} 240w,${route('storage.images', featuredNews.image)} 320w,${route('storage.images', featuredNews.image)} 480w,${route('storage.images', featuredNews.image)} 640w,${route('storage.images', featuredNews.image)} 800w,${route('storage.images', featuredNews.image)} 1024w,${route('storage.images', featuredNews.image)} 1536w`}
-                                                                                    src={route('storage.images', featuredNews.image)}
-                                                                                    loading="eager"
-                                                                                    alt={featuredNews.title}
-                                                                                    className="sc-a34861b-0 efFcac"
-                                                                                />
+                                                                                {
+                                                                                    post.image && (
+                                                                                        <LazyLoadImage
+                                                                                            title={featuredNews.title}
+                                                                                            sizes="96vw"
+                                                                                            srcSet={`${route('storage.images', featuredNews.image)} 240w,${route('storage.images', featuredNews.image)} 320w,${route('storage.images', featuredNews.image)} 480w,${route('storage.images', featuredNews.image)} 640w,${route('storage.images', featuredNews.image)} 800w,${route('storage.images', featuredNews.image)} 1024w,${route('storage.images', featuredNews.image)} 1536w`}
+                                                                                            src={route('storage.images', featuredNews.image)}
+                                                                                            loading="eager"
+                                                                                            alt={featuredNews.title}
+                                                                                            className="sc-a34861b-0 efFcac"
+                                                                                        />
+                                                                                    )
+                                                                                }
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -544,21 +554,25 @@ const Home = ({
                                                                         <div data-testid="card-media"
                                                                              className="sc-f98732b0-1 jSgXDY">
                                                                             <div className="sc-a34861b-1 jxzoZC">
-                                                                                <LazyLoadImage
-                                                                                    title={post.title}
-                                                                                    sizes="(min-width: 768px) 50vw, 100vw"
-                                                                                    srcSet={`${route('storage.images', post.image)} 240w,
+                                                                                {
+                                                                                    post.image && (
+                                                                                        <LazyLoadImage
+                                                                                            title={post.title}
+                                                                                            sizes="(min-width: 768px) 50vw, 100vw"
+                                                                                            srcSet={`${route('storage.images', post.image)} 240w,
                                                                                         ${route('storage.images', post.image)} 320w,
                                                                                         ${route('storage.images', post.image)} 480w,
                                                                                         ${route('storage.images', post.image)} 640w,
                                                                                         ${route('storage.images', post.image)} 800w,
                                                                                         ${route('storage.images', post.image)} 1024w,
                                                                                         ${route('storage.images', post.image)} 1536w`}
-                                                                                    src={route('storage.images', post.image)}
-                                                                                    loading="lazy"
-                                                                                    alt={post.title}
-                                                                                    className="sc-a34861b-0 efFcac"
-                                                                                />
+                                                                                            src={route('storage.images', post.image)}
+                                                                                            loading="lazy"
+                                                                                            alt={post.title}
+                                                                                            className="sc-a34861b-0 efFcac"
+                                                                                        />
+                                                                                    )
+                                                                                }
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -622,20 +636,25 @@ const Home = ({
                                                                 <div data-testid="card-media"
                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                        <LazyLoadImage
-                                                                            title={digitalNomadPosts[1].title}
-                                                                            sizes="(min-width: 768px) 33vw, 96vw"
-                                                                            srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
+                                                                        {
+                                                                            digitalNomadPosts[1].image && (
+                                                                                <LazyLoadImage
+                                                                                    title={digitalNomadPosts[1].title}
+                                                                                    sizes="(min-width: 768px) 33vw, 96vw"
+                                                                                    srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 320w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 480w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 640w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 800w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1024w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1536w`}
-                                                                            src={`${route('storage.images', digitalNomadPosts[1].image)}`}
-                                                                            loading="lazy"
-                                                                            alt={digitalNomadPosts[1].title}
-                                                                            className="sc-a34861b-0 efFcac"/></div>
+                                                                                    src={`${route('storage.images', digitalNomadPosts[1].image)}`}
+                                                                                    loading="lazy"
+                                                                                    alt={digitalNomadPosts[1].title}
+                                                                                    className="sc-a34861b-0 efFcac"/>
+                                                                            )
+                                                                        }
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div data-testid="card-text-wrapper"
@@ -726,20 +745,25 @@ const Home = ({
                                                                     <div data-testid="card-media"
                                                                          className="sc-b8778340-2 kUyIkJ">
                                                                         <div className="sc-a34861b-1 jxzoZC">
-                                                                            <LazyLoadImage
-                                                                                title={digitalNomadPosts[1].title}
-                                                                                sizes="(min-width: 768px) 33vw, 96vw"
-                                                                                srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
+                                                                            {
+                                                                                digitalNomadPosts[1].image && (
+                                                                                    <LazyLoadImage
+                                                                                        title={digitalNomadPosts[1].title}
+                                                                                        sizes="(min-width: 768px) 33vw, 96vw"
+                                                                                        srcSet={`${route('storage.images', digitalNomadPosts[1].image)} 240w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 320w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 480w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 640w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 800w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1024w,
                                                                         ${route('storage.images', digitalNomadPosts[1].image)} 1536w`}
-                                                                                src={`${route('storage.images', digitalNomadPosts[1].image)}`}
-                                                                                loading="lazy"
-                                                                                alt={digitalNomadPosts[1].title}
-                                                                                className="sc-a34861b-0 efFcac"/></div>
+                                                                                        src={`${route('storage.images', digitalNomadPosts[1].image)}`}
+                                                                                        loading="lazy"
+                                                                                        alt={digitalNomadPosts[1].title}
+                                                                                        className="sc-a34861b-0 efFcac"/>
+                                                                                )
+                                                                            }
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div data-testid="card-text-wrapper"
@@ -782,20 +806,25 @@ const Home = ({
                                                                     <div data-testid="card-media"
                                                                          className="sc-b8778340-2 kUyIkJ">
                                                                         <div className="sc-a34861b-1 jxzoZC">
-                                                                            <LazyLoadImage
-                                                                                title={post.title}
-                                                                                sizes="(min-width: 768px) 33vw, 96vw"
-                                                                                srcSet={`${route('storage.images', post.image)} 240w,
+                                                                            {
+                                                                                post.image && (
+                                                                                    <LazyLoadImage
+                                                                                        title={post.title}
+                                                                                        sizes="(min-width: 768px) 33vw, 96vw"
+                                                                                        srcSet={`${route('storage.images', post.image)} 240w,
                                                                                 ${route('storage.images', post.image)} 320w,
                                                                                 ${route('storage.images', post.image)} 480w,
                                                                                 ${route('storage.images', post.image)} 640w,
                                                                                 ${route('storage.images', post.image)} 800w,
                                                                                 ${route('storage.images', post.image)} 1024w,
                                                                                 ${route('storage.images', post.image)} 1536w`}
-                                                                                src={`${route('storage.images', post.image)}`}
-                                                                                loading="lazy"
-                                                                                alt={post.title}
-                                                                                className="sc-a34861b-0 efFcac"/></div>
+                                                                                        src={`${route('storage.images', post.image)}`}
+                                                                                        loading="lazy"
+                                                                                        alt={post.title}
+                                                                                        className="sc-a34861b-0 efFcac"/>
+                                                                                )
+                                                                            }
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div data-testid="card-text-wrapper"
@@ -940,19 +969,23 @@ const Home = ({
                                                                 <div data-testid="card-media"
                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                        <LazyLoadImage title={post.title} sizes="96vw"
-                                                                                       srcSet={`${route('storage.images', post.image)} 240w,
+                                                                        {
+                                                                            post.image && (
+                                                                                <LazyLoadImage title={post.title} sizes="96vw"
+                                                                                               srcSet={`${route('storage.images', post.image)} 240w,
                                                                              ${route('storage.images', post.image)} 320w,
                                                                              ${route('storage.images', post.image)} 480w,
                                                                              ${route('storage.images', post.image)} 640w,
                                                                              ${route('storage.images', post.image)} 800w,
                                                                              ${route('storage.images', post.image)} 1024w,
                                                                              ${route('storage.images', post.image)} 1536w`}
-                                                                                       src={`${route('storage.images', post.image)}`}
-                                                                                       loading="lazy"
-                                                                                       alt={post.title}
-                                                                                       className="sc-a34861b-0 efFcac"
-                                                                        />
+                                                                                               src={`${route('storage.images', post.image)}`}
+                                                                                               loading="lazy"
+                                                                                               alt={post.title}
+                                                                                               className="sc-a34861b-0 efFcac"
+                                                                                />
+                                                                            )
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1254,20 +1287,24 @@ const Home = ({
                                                                                 <div data-testid="card-media"
                                                                                      className="sc-b8778340-2 kUyIkJ">
                                                                                     <div className="sc-a34861b-1 jxzoZC">
-                                                                                        <LazyLoadImage
-                                                                                            title={post.title}
-                                                                                            sizes="96vw"
-                                                                                            srcSet={`${route('storage.images', post.image)} 240w,
+                                                                                        {
+                                                                                            post.image && (
+                                                                                                <LazyLoadImage
+                                                                                                    title={post.title}
+                                                                                                    sizes="96vw"
+                                                                                                    srcSet={`${route('storage.images', post.image)} 240w,
                                                                                     ${route('storage.images', post.image)} 320w,
                                                                                     ${route('storage.images', post.image)} 480w,
                                                                                     ${route('storage.images', post.image)} 640w,
                                                                                     ${route('storage.images', post.image)} 800w,
                                                                                     ${route('storage.images', post.image)} 1024w,
                                                                                     ${route('storage.images', post.image)} 1536w`}
-                                                                                            src={`${route('storage.images', post.image)}`}
-                                                                                            loading="lazy"
-                                                                                            alt={post.title}
-                                                                                            className="sc-a34861b-0 efFcac"/>
+                                                                                                    src={`${route('storage.images', post.image)}`}
+                                                                                                    loading="lazy"
+                                                                                                    alt={post.title}
+                                                                                                    className="sc-a34861b-0 efFcac"/>
+                                                                                            )
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

@@ -14,7 +14,6 @@ import {
 import {Link, Head} from "@inertiajs/react";
 import {Button} from "@/Components/ui/button";
 import {ChevronLeft, EyeIcon, Loader2, UploadIcon} from "lucide-react";
-import {Badge} from "@/Components/ui/badge";
 import {
     Card,
     CardContent,
