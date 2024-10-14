@@ -51,7 +51,7 @@ class HomeController extends Controller
             })
             ->whereFeatured(false)
             ->orderBy('created_at', 'DESC')
-            ->take(4)
+            ->take(5)
             ->get();
 
         $digitalNomad = Post::with(['category', 'user'])
