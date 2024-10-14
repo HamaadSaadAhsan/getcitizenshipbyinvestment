@@ -126,6 +126,7 @@ const Post = ({categories = [], post, image}) => {
 
 
     function onSubmit(values) {
+        console.log(values)
         router.patch(route("admin.posts.update", post.id), values, {
             onStart: handleFormProcessing,
             onFinish: handleFormProcessed,
