@@ -17,6 +17,7 @@ class HomeController extends Controller
         $featuredNews = Post::whereFeatured(true)
             ->orderBy('created_at', 'desc')
             ->with(['user', 'category'])
+            ->latest()
             ->first();
         $topStories = Post::with(['category', 'user'])
         ->whereHas('category', function ($q){
