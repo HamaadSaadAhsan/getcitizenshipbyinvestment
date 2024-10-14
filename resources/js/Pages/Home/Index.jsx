@@ -25,12 +25,14 @@ const Home = ({
                       content="Latest News and Informatic Blogs about residenct citizenship by investment. Get latest immigration relevant news."/>
                 <link head-key="canonical" rel="canonical" href={route('home')}/>
                 <meta head-key="og:site_name" property="og:site_name" content={route('home')}/>
+                <meta head-key="robots" name="robots"
+                      content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
             </Head>
 
             <div className="">
                 <article className="block">
                     <section className="sc-2448c165-1 gvnjGp">
-                        <div
+                    <div
                             data-testid="vermont-section"
                             className="sc-2448c165-2 eMVRpx"
                         >
